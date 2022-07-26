@@ -1,4 +1,4 @@
-# aequivalent
+# Aequivalent Demo
 
 ## Project setup
 ```
