@@ -1,12 +1,22 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="common-layout">
+    <el-container>
+      <el-header>
+        <div id="nav">
+          <router-link to="/">Home</router-link> |
+          <router-link to="/about">About</router-link>
+        </div>
+      </el-header>
+      <el-main>
+        <router-view/>
+      </el-main>
+    </el-container>
   </div>
-  <router-view/>
 </template>
 
 <style>
+/* @import "https://element-plus.org/assets/style.7bd15993.css"; */
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
