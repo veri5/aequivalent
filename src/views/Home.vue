@@ -1,18 +1,22 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div id="home">
+    <el-card>
+      <img alt="Aeq logo" src="../assets/aequivalent.webp">
+      <h1>Welcome to Aequivalent Demo</h1>
+    </el-card>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 export default defineComponent({
-  name: 'Home',
-  components: {
-    HelloWorld,
-  },
+  name: 'Home'
 });
 </script>
+
+<style scoped>
+#home {
+  text-align: center;
+}
+</style>
