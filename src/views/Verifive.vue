@@ -2,10 +2,11 @@
   <el-row>
     <el-col>
       <div id="verifive">
-        <h1>This is the Verifive view</h1>
+        <h1>Entity Registry</h1>
       </div>
     </el-col>
   </el-row>
+
   <el-row>
     <el-col>   
       <el-card shadow="never">
@@ -36,6 +37,7 @@
       </el-card>
     </el-col>
   </el-row>
+  
   <el-row>
     <el-col>
       <el-card shadow="never">
@@ -56,6 +58,8 @@
           :header-cell-style="{ background: '#fafafa' }"
           @current-change="handleCurrentChange"
         >
+          <!-- <el-table-column type="selection" width="55" /> -->
+          <el-table-column type="index" width="50" />
           <el-table-column prop="name" label="Company Name"/>
           <el-table-column prop="did" label="Decentralised Identifier" />
           <el-table-column prop="serviceCredential" label="Service Credential" />
@@ -71,7 +75,7 @@
     </el-col>
   </el-row>
 
-  <el-dialog v-model="dialogFormVisible" title="Register a new Issuer">
+  <el-dialog v-model="dialogFormVisible" title="Register a new entity">
     <el-form :model="form"
       :label-position="labelPosition"
     >
@@ -197,7 +201,7 @@ const tableData: User[] = [
 
 const openRegisterBox = () => {
   ElMessageBox.confirm(
-    'A new Issuer will be register. Continue?',
+    'A new entity will be register. Continue?',
     'Warning',
     {
       confirmButtonText: 'Confirm',
@@ -208,7 +212,7 @@ const openRegisterBox = () => {
     .then(() => {
       ElMessage({
         type: 'success',
-        message: 'Issuer registered successfully',
+        message: 'Entity registered successfully',
       })
     })
     .catch(() => {
@@ -230,7 +234,7 @@ const openRevokeBox = () => {
     .then(({ value }) => {
       ElMessage({
         type: 'success',
-        message: `Issuer revoked successfully`,
+        message: `Entity revoked successfully`,
       })
     })
     .catch(() => {
@@ -244,6 +248,6 @@ const openRevokeBox = () => {
 
 <style scoped>
 #verifive {
-  text-align: center;
+  text-align: left;
 }
 </style>
