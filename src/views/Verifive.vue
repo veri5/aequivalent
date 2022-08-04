@@ -2,7 +2,7 @@
   <el-row>
     <el-col>
       <div id="verifive">
-        <h1>Entity Registry</h1>
+        <h1>Legal Entities</h1>
       </div>
     </el-col>
   </el-row>
@@ -16,7 +16,7 @@
             plain
             @click="dialogFormVisible = true"
           >
-            Register
+            New Entity
           </el-button>
           <template v-if="currentRow">
             <el-button
@@ -60,7 +60,7 @@
         >
           <!-- <el-table-column type="selection" width="55" /> -->
           <el-table-column type="index" width="50" />
-          <el-table-column prop="name" label="Company Name"/>
+          <el-table-column prop="name" label="Entity Name"/>
           <el-table-column prop="did" label="Decentralised Identifier" />
           <el-table-column prop="serviceCredential" label="Service Credential" />
           <el-table-column label="Service Endpoint">
@@ -79,7 +79,7 @@
     <el-form :model="form"
       :label-position="labelPosition"
     >
-      <el-form-item label="Company Name">
+      <el-form-item label="Entity Name">
         <el-input v-model="form.name"
           placeholder="Google LLC"
         />
@@ -126,7 +126,7 @@
       </template>
       <el-divider />
       <el-form-item>
-        <el-button type="primary" plain @click="openRegisterBox">Register</el-button>
+        <el-button type="primary" plain @click="openRegisterBox">Submit</el-button>
         <el-button plain @click="dialogFormVisible = false">Cancel</el-button>
       </el-form-item>
     </el-form>    

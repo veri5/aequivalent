@@ -2,7 +2,7 @@
   <el-row>
     <el-col>
       <div id="candidate">
-        <h1>My Verifications</h1>
+        <h1>Verifications</h1>
       </div>
     </el-col>
   </el-row>
@@ -42,7 +42,7 @@
     <el-col>
       <el-card shadow="never">
         <el-input v-model="search" 
-          placeholder="Search all services credentials" 
+          placeholder="Search all credentials types" 
           clearable
           size="default"
         />
