@@ -1,4 +1,6 @@
 module.exports = {
-  publicPath: "aequivalent",
-  outputDir: "docs"
+  publicPath: process.env.NODE_ENV === 'production'
+  ? '/aequivalent/'
+  : '/',
+  outputDir: 'docs',
 };
