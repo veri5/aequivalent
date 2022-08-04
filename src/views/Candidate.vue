@@ -16,7 +16,7 @@
             plain
             @click="dialogFormVisible = true"
           >
-            New Request
+            New Verification
           </el-button>
           <template v-if="currentRow">
             <el-button
@@ -42,7 +42,7 @@
     <el-col>
       <el-card shadow="never">
         <el-input v-model="search" 
-          placeholder="Search all credentials types" 
+          placeholder="Search all credential types" 
           clearable
           size="default"
         />

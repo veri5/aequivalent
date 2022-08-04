@@ -42,7 +42,7 @@
     <el-col>
       <el-card shadow="never">
         <el-input v-model="search" 
-          placeholder="Search all services credentials" 
+          placeholder="Search all service credentials" 
           clearable
           size="default"
         />
