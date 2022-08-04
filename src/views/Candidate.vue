@@ -2,7 +2,7 @@
   <el-row>
     <el-col>
       <div id="candidate">
-        <h1>Verification Request Registry</h1>
+        <h1>My Verifications</h1>
       </div>
     </el-col>
   </el-row>
@@ -16,7 +16,7 @@
             plain
             @click="dialogFormVisible = true"
           >
-            Register
+            New Request
           </el-button>
           <template v-if="currentRow">
             <el-button
@@ -62,7 +62,7 @@
           <el-table-column type="index" width="50" />
           <el-table-column prop="name" label="Candidate Name"/>
           <el-table-column prop="did" label="Decentralised Identifier" />
-          <el-table-column prop="serviceCredential" label="Service Credential" />
+          <el-table-column prop="credentialType" label="Credential Type" />
           <el-table-column prop="requestedDate" label="Requested Date" />
           <el-table-column label="Processing Status">
             <template #default="scope">
@@ -74,7 +74,7 @@
     </el-col>
   </el-row>
 
-  <el-dialog v-model="dialogFormVisible" title="Register a new verification request">
+  <el-dialog v-model="dialogFormVisible" title="Request a new verification">
     <el-form :model="form"
       :label-position="labelPosition"
     >
@@ -89,13 +89,13 @@
           <template #prepend>did:verida:</template>
         </el-input>
       </el-form-item>
-      <el-form-item label="Service Credential">
+      <el-form-item label="Credential Type">
         <el-select v-model="form.credential" 
-          placeholder="Select a service credential" 
+          placeholder="Select a credential type" 
           style="width: 100%"
         >
           <el-option label="University Diploma" value="university_diploma" />
-          <el-option label="Verifiable LEI" value="v_lei" />
+          <el-option label="Credit Score" value="credit_score" />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -119,7 +119,7 @@
       </el-form-item>
       <el-divider />
       <el-form-item>
-        <el-button type="primary" plain @click="openRegisterBox">Register</el-button>
+        <el-button type="primary" plain @click="openRegisterBox">Submit</el-button>
         <el-button plain @click="dialogFormVisible = false">Cancel</el-button>
       </el-form-item>
     </el-form>    
@@ -149,7 +149,7 @@ const form = reactive({
 interface User {
   name: string,
   did: string,
-  serviceCredential: string,
+  credentialType: string,
   requestedDate: string,
   processingStatus: number
 }
@@ -159,7 +159,7 @@ const filterTableData = computed(() =>
   tableData.filter(
     (data) =>
       !search.value ||
-      data.serviceCredential.toLowerCase().includes(search.value.toLowerCase())
+      data.credentialType.toLowerCase().includes(search.value.toLowerCase())
   )
 )
 
@@ -176,7 +176,7 @@ const tableData: User[] = [
   {
     name: 'Alice Doe',
     did: 'did:verida:0x1234...abcd',
-    serviceCredential: 'University Diploma',
+    credentialType: 'University Diploma',
     requestedDate: '2022-01-01',
     processingStatus: 70,
   }
@@ -184,7 +184,7 @@ const tableData: User[] = [
 
 const openRegisterBox = () => {
   ElMessageBox.confirm(
-    'A new verification request will be register. Continue?',
+    'A new verification will be requested. Continue?',
     'Warning',
     {
       confirmButtonText: 'Confirm',
@@ -195,13 +195,13 @@ const openRegisterBox = () => {
     .then(() => {
       ElMessage({
         type: 'success',
-        message: 'Verification request registered successfully',
+        message: 'Verification requested successfully',
       })
     })
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: 'Register action canceled',
+        message: 'New Request action canceled',
       })
     })
 }
