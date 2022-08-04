@@ -64,7 +64,11 @@
           <el-table-column prop="did" label="Decentralised Identifier" />
           <el-table-column prop="serviceCredential" label="Service Credential" />
           <el-table-column prop="requestedDate" label="Requested Date" />
-          <el-table-column prop="processingStatus" label="Processing Status" />
+          <el-table-column label="Processing Status">
+            <template #default="scope">
+              <el-progress :text-inside="true" :stroke-width="20" :percentage="scope.row.processingStatus" />
+            </template>
+          </el-table-column>
         </el-table>
       </el-card>
     </el-col>
@@ -147,7 +151,7 @@ interface User {
   did: string,
   serviceCredential: string,
   requestedDate: string,
-  processingStatus: string
+  processingStatus: number
 }
 
 const search = ref('')
@@ -174,7 +178,7 @@ const tableData: User[] = [
     did: 'did:verida:0x1234...abcd',
     serviceCredential: 'University Diploma',
     requestedDate: '2022-01-01',
-    processingStatus:'received',
+    processingStatus: 70,
   }
 ]
 
