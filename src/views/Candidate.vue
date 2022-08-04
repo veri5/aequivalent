@@ -64,9 +64,10 @@
           <el-table-column prop="did" label="Decentralised Identifier" />
           <el-table-column prop="credentialType" label="Credential Type" />
           <el-table-column prop="requestedDate" label="Requested Date" />
-          <el-table-column label="Processing Status">
+          <el-table-column prop="processStatus" label="Status" />
+          <el-table-column label="Progress">
             <template #default="scope">
-              <el-progress :text-inside="true" :stroke-width="20" :percentage="scope.row.processingStatus" />
+              <el-progress :text-inside="true" :stroke-width="20" :percentage="scope.row.processProgress" />
             </template>
           </el-table-column>
         </el-table>
@@ -151,7 +152,8 @@ interface User {
   did: string,
   credentialType: string,
   requestedDate: string,
-  processingStatus: number
+  processStatus: string,
+  processProgress: number
 }
 
 const search = ref('')
@@ -178,7 +180,16 @@ const tableData: User[] = [
     did: 'did:verida:0x1234...abcd',
     credentialType: 'University Diploma',
     requestedDate: '2022-01-01',
-    processingStatus: 70,
+    processStatus: 'Final-revision',
+    processProgress: 70
+  },
+  {
+    name: 'Alice Doe',
+    did: 'did:verida:0x1234...abcd',
+    credentialType: 'Credit Score',
+    requestedDate: '2022-01-01',
+    processStatus: 'Accepted',
+    processProgress: 30
   }
 ]
 
