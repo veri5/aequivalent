@@ -60,16 +60,11 @@
         >
           <!-- <el-table-column type="selection" width="55" /> -->
           <el-table-column type="index" width="50" />
-          <el-table-column prop="name" label="Company Name"/>
+          <el-table-column prop="name" label="Candidate Name"/>
           <el-table-column prop="did" label="Decentralised Identifier" />
           <el-table-column prop="serviceCredential" label="Service Credential" />
-          <el-table-column label="Service Endpoint">
-            <template #default="scope">
-              <el-link type="primary" :underline="false" href="" target="_blank">{{ scope.row.serviceEndpoint }}</el-link>    
-            </template>
-          </el-table-column>
-          <el-table-column prop="validFrom" label="Valid From" />
-          <el-table-column prop="validUntil" label="Valid Until" />
+          <el-table-column prop="requestedDate" label="Requested Date" />
+          <el-table-column prop="processingStatus" label="Processing Status" />
         </el-table>
       </el-card>
     </el-col>
@@ -151,9 +146,8 @@ interface User {
   name: string,
   did: string,
   serviceCredential: string,
-  serviceEndpoint: string,
-  validFrom: string,
-  validUntil: string
+  requestedDate: string,
+  processingStatus: string
 }
 
 const search = ref('')
@@ -176,21 +170,12 @@ const setCurrent = (row?: User) => {
 
 const tableData: User[] = [
   {
-    name: 'Aequivalent',
+    name: 'Alice Doe',
     did: 'did:verida:0x1234...abcd',
     serviceCredential: 'University Diploma',
-    serviceEndpoint: 'https://aequivalent.ch',
-    validFrom: '2022-01-01',
-    validUntil:'2024-07-01',
-  },
-  {
-    name: 'Gleif',
-    did: 'did:eth:0x1234...abcd',
-    serviceCredential: 'vLEI',
-    serviceEndpoint: 'https://gleif.org',
-    validFrom: '2022-01-01',
-    validUntil:'2024-07-01',
-  },
+    requestedDate: '2022-01-01',
+    processingStatus:'received',
+  }
 ]
 
 const openRegisterBox = () => {

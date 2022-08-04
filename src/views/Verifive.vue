@@ -153,7 +153,7 @@ const form = reactive({
   validity: false,
 })
 
-interface User {
+interface Entity {
   name: string,
   did: string,
   serviceCredential: string,
@@ -173,14 +173,14 @@ const filterTableData = computed(() =>
 
 const currentRow = ref()
 const singleTableRef = ref<InstanceType<typeof ElTable>>()
-const handleCurrentChange = (val: User | undefined) => {
+const handleCurrentChange = (val: Entity | undefined) => {
   currentRow.value = val
 }
-const setCurrent = (row?: User) => {
+const setCurrent = (row?: Entity) => {
   singleTableRef.value!.setCurrentRow(row)
 }
 
-const tableData: User[] = [
+const tableData: Entity[] = [
   {
     name: 'Aequivalent',
     did: 'did:verida:0x1234...abcd',
