@@ -41,7 +41,7 @@ const handleSelect = (key: string, keyPath: string[]) => {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background: url("/background.jpg");
+  background-image: url('~@/assets/background.png');
   height: 100vh;
 }
 </style>
