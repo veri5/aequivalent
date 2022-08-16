@@ -7,21 +7,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/candidate',
-    name: 'Candidate',
-    component: () => import(/* webpackChunkName: "candidate" */ '../views/Candidate.vue')
-  },
-  {
-    path: '/aequivalent',
-    name: 'Aequivalent',
-    component: () => import(/* webpackChunkName: "aequivalent" */ '../views/Aequivalent.vue')
-  },
-  {
-    path: '/verifive',
-    name: 'Verifive',
-    component: () => import(/* webpackChunkName: "verifive" */ '../views/Verifive.vue')
-  }
 ]
 
 const router = createRouter({

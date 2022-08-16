@@ -1,22 +1,62 @@
 <template>
-  <div id="home">
-    <el-card>
-      <img alt="Aeq logo" src="../assets/aequivalent.webp">
-      <h1>Welcome to Aequivalent Demo</h1>
-    </el-card>
-  </div>
+  <el-row>
+    <el-col>
+      <the-stepper />
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :xs="8" :sm="8">
+      <div v-if="isVeriAuth">
+        <the-profile-menu namespace="veri"/>
+
+        <verifications />
+      </div>
+      <div v-else>
+        <welcome namespace="veri" />
+      </div>
+    </el-col>
+    <el-col :xs="8" :sm="8">
+      <div v-if="isAeqAuth">
+        <the-profile-menu namespace="aeq"/>
+
+        <requests />
+      </div>
+      <div v-else>
+        <welcome namespace="aeq" />
+      </div>
+    </el-col>
+    <el-col :xs="8" :sm="8">
+      <div v-if="isTtpAuth">
+        <the-profile-menu namespace="ttp"/>
+
+        <entities />
+      </div>
+      <div v-else>
+        <welcome namespace="ttp" />
+      </div>
+    </el-col>
+  </el-row>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import TheStepper from '@/components/TheStepper.vue';
+import Welcome from '@/components/Welcome.vue'
+import Verifications from '@/views/verifive/Verifications.vue'
+import Requests from '@/views/aequivalent/Requests.vue'
+import Entities from '@/views/ttp/Entities.vue'
+import TheProfileMenu from '@/components/TheProfileMenu.vue';
 
-export default defineComponent({
-  name: 'Home'
-});
+const store = useStore()
+
+const isVeriAuth = computed(() => store.state.veri.user.isAuthenticated)
+const isAeqAuth = computed(() => store.state.aeq.user.isAuthenticated)
+const isTtpAuth = computed(() => store.state.ttp.user.isAuthenticated)
 </script>
 
 <style scoped>
-#home {
-  text-align: center;
+.el-row {
+  margin-bottom: 10px;
 }
 </style>

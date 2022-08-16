@@ -1,9 +1,7 @@
 <template>
   <el-row>
     <el-col>
-      <div id="verifive">
-        <h1>Legal Entities</h1>
-      </div>
+      <h2>Legal Entities</h2>
     </el-col>
   </el-row>
 
@@ -245,9 +243,3 @@ const openRevokeBox = () => {
     })
 }
 </script>
-
-<style scoped>
-#verifive {
-  text-align: left;
-}
-</style>

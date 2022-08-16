@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
+    "allowJs": true,
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -35,7 +36,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/store/index.js", "src/store/modules/veri/user.js", "src/store/modules/veri/company.js", "src/store/modules/ttp/user.js", "src/store/modules/ttp/company.js", "src/store/modules/aeq/company.js", "src/store/modules/aeq/user.js", "src/store/modules/aeq/user.js"  ],
   "exclude": [
     "node_modules"
   ]

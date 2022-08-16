@@ -1,41 +1,36 @@
 <template>
   <el-row>
     <el-col>
-      <div id="aequivalent">
-        <h1>Verification Requests</h1>
-      </div>
+      <h2>Verifications</h2>
     </el-col>
   </el-row>
 
   <el-row>
     <el-col>   
       <el-card shadow="never">
-        <div class="flex" v-if="currentRow">
+        <div class="flex">
           <el-button
             type="primary"
             plain
             @click="dialogFormVisible = true"
           >
-            Review
+            New Verification
           </el-button>
-          <el-button
-            type="danger"
-            plain
-            @click="openRevokeBox"
-          >
-            Revoke
-          </el-button>
-          <el-button
-            plain
-            @click="setCurrent()"
-          >
-            Clear Selection
-          </el-button>
-        </div>
-        <div v-else
-          :style="`font-size: var(--el-font-size-small)`"
-        >
-          Please select a request to start reviewing
+          <template v-if="currentRow">
+            <el-button
+              type="danger"
+              plain
+              @click="openRevokeBox"
+            >
+              Revoke
+            </el-button>
+            <el-button
+              plain
+              @click="setCurrent()"
+            >
+              Clear Selection
+            </el-button>
+          </template>
         </div>
       </el-card>
     </el-col>
@@ -78,7 +73,7 @@
     </el-col>
   </el-row>
 
-  <el-dialog v-model="dialogFormVisible" title="Review a request">
+  <el-dialog v-model="dialogFormVisible" title="Request a new verification">
     <el-form :model="form"
       :label-position="labelPosition"
     >
@@ -93,17 +88,33 @@
           <template #prepend>did:verida:</template>
         </el-input>
       </el-form-item>
-      <el-form-item label="Service Credential">
+      <el-form-item label="Credential Type">
         <el-select v-model="form.credential" 
-          placeholder="Select a service credential" 
+          placeholder="Select a credential type" 
           style="width: 100%"
         >
           <el-option label="University Diploma" value="university_diploma" />
-          <el-option label="Verifiable LEI" value="v_lei" />
+          <el-option label="Credit Score" value="credit_score" />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-empty description="Candidate Documentation" style="width: 100%"/>
+        <el-upload
+          class="upload-demo"
+          drag
+          action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+          multiple
+          style="width: 100%"
+        >
+          <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+          <div class="el-upload__text">
+            Drop file here or <em>click to upload</em>
+          </div>
+          <template #tip>
+            <div class="el-upload__tip">
+              jpg/png files with a size less than 500kb
+            </div>
+          </template>
+        </el-upload>
       </el-form-item>
       <el-divider />
       <el-form-item>
@@ -117,6 +128,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref, computed } from 'vue'
+import { Bell } from '@element-plus/icons-vue'
 import { ElTable } from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { UploadFilled } from '@element-plus/icons-vue'
@@ -148,7 +160,7 @@ const filterTableData = computed(() =>
   tableData.filter(
     (data) =>
       !search.value ||
-      data.serviceCredential.toLowerCase().includes(search.value.toLowerCase())
+      data.credentialType.toLowerCase().includes(search.value.toLowerCase())
   )
 )
 
@@ -174,23 +186,15 @@ const tableData: User[] = [
     name: 'Alice Doe',
     did: 'did:verida:0x1234...abcd',
     credentialType: 'Credit Score',
-    requestedDate: '2022-01-07',
+    requestedDate: '2022-01-01',
     processStatus: 'Accepted',
     processProgress: 30
-  },
-  {
-    name: 'Bob Doyle',
-    did: 'did:verida:0x1234...abcd',
-    credentialType: 'University Diploma',
-    requestedDate: '2022-02-11',
-    processStatus: 'Background-checking',
-    processProgress: 45
   }
 ]
 
 const openRegisterBox = () => {
   ElMessageBox.confirm(
-    'Have you finished reviewing?',
+    'A new verification will be requested. Continue?',
     'Warning',
     {
       confirmButtonText: 'Confirm',
@@ -201,13 +205,13 @@ const openRegisterBox = () => {
     .then(() => {
       ElMessage({
         type: 'success',
-        message: 'Request reviewed successfully',
+        message: 'Verification requested successfully',
       })
     })
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: 'Review action canceled',
+        message: 'New Request action canceled',
       })
     })
 }
@@ -234,9 +238,3 @@ const openRevokeBox = () => {
     })
 }
 </script>
-
-<style scoped>
-#aequivalent {
-  text-align: left;
-}
-</style>

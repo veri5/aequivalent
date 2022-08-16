@@ -12,6 +12,8 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@verida/account-web-vault": "^1.1.12",
+    "@verida/client-ts": "^1.1.15",
     "core-js": "^3.6.5",
     "element-plus": "^2.2.11",
     "vue": "^3.0.0",
