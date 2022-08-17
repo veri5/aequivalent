@@ -1,24 +1,35 @@
+const initProfile = { 
+  name: 'Mr. Robot',
+  did: 'did:vda:0x123...4567',
+  avatar: 'john_doe.png',
+  description: '',
+  country: ''
+}
+
 const state = {
-  profile: { 
-    name: 'John Doe',
-    did: 'did:vda:0x123...4567',
-    avatar: 'john_doe.png'
-  },
-  isAuthenticated: false,
+  profile: initProfile,
+  isConnected: false,
 }
 
 const mutations = {
-  setIsAuthenticated (state, status) {
-    state.isAuthenticated = status
+  setProfile (state, profile) {
+    state.profile = Object.assign(state.profile, profile);
+  },
+  setIsConnected (state, status) {
+    state.isConnected = status
   }
 }
 
 const actions = {
+  setProfile ({ commit }, profile) {
+    commit('setProfile', profile)
+  },
   connect ({ commit }) {
-    commit('setIsAuthenticated', true)
+    commit('setIsConnected', true)
   },
   disconnect ({ commit }) {
-    commit('setIsAuthenticated', false)
+    commit('setProfile', initProfile)
+    commit('setIsConnected', false)
   }
 }
 

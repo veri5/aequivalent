@@ -5,6 +5,7 @@ import aeqUser from './modules/aeq/user'
 import aeqCompany from './modules/aeq/company'
 import veriUser from './modules/veri/user'
 import veriCompany from './modules/veri/company'
+import verida from './modules/vda/verida'
 
 export default createStore({
   modules: {
@@ -12,21 +13,24 @@ export default createStore({
       namespaced: true,
       modules: {
         user: ttpUser,
-        company: ttpCompany
+        company: ttpCompany,
+        verida
       }
     },
     aeq: {
       namespaced: true,
       modules: {
         user: aeqUser,
-        company: aeqCompany
+        company: aeqCompany,
+        verida
       }
     },
     veri: {
       namespaced: true,
       modules: {
         user: veriUser,
-        company: veriCompany
+        company: veriCompany,
+        verida
       }
     }
   }

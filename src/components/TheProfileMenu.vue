@@ -25,18 +25,20 @@
         <el-sub-menu index="0">
           <template #title>
             <el-avatar :size="30">
-              <img :src="require(`../assets/${user.avatar}`)"/>
+              <img :src="getAvatar(user)"/>
             </el-avatar>
           </template>
           <el-menu-item index="0-1" class="submenu-header no-hover">
-            <div>Signed in as</div>
-            <strong>{{ user.name }}</strong>
-            <i>{{ user.did }}</i>
+            <i>Signed in as:</i>
+            <div>{{ user.name }}</div>
+            <strong>{{ hideDid(user.did) }}</strong>
           </el-menu-item>
           <el-divider class="submenu-divider"/>
-          <el-menu-item index="0-2" disabled>Your profile</el-menu-item>
+          <el-tooltip content="Profile not syncing" placement="top">
+            <el-menu-item disabled>Your profile</el-menu-item>
+          </el-tooltip>
           <el-divider class="submenu-divider"/>
-          <el-menu-item  index="0-3" @click="disconnect">Sign out</el-menu-item>
+          <the-disconnect-menu-item :namespace="namespace" />
         </el-sub-menu>
       </el-menu>
     </el-col>
@@ -47,6 +49,7 @@
 import { defineProps, computed } from 'vue'
 import { useStore } from 'vuex'
 import { Bell } from '@element-plus/icons-vue'
+import TheDisconnectMenuItem from '@/components/TheDisconnectMenuItem.vue';
 
 const props = defineProps({
   namespace: {
@@ -56,14 +59,20 @@ const props = defineProps({
   },
 })
 
+function getAvatar(user) {
+  return !user.avatar.uri ? require(`../assets/${user.avatar}`) : user.avatar.uri
+}
+
+function hideDid(str) {
+  return `${str.substring(0, 13)}...${str.slice(-4)}`
+}
+
 const store = useStore()
 
 const storeNamespace = store.state[props.namespace]
 
 const user = computed(() => storeNamespace.user.profile)
 const company = computed(() => storeNamespace.company.profile)
-
-const disconnect = () => store.dispatch(`${props.namespace}/user/disconnect`)
 </script>
 
 <style scoped>

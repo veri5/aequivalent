@@ -4,7 +4,7 @@ const state = {
     logo: 'aequivalent_logo.png', 
     fallbackLogo: 'logo_fallback.png',
   },
-  isAuthenticated: false,  
+  isConnected: false,  
 }
 
 const mutations = {}
