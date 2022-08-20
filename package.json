@@ -12,6 +12,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@verida/account-node": "^1.1.9",
     "@verida/account-web-vault": "^1.1.12",
     "@verida/client-ts": "^1.1.15",
     "core-js": "^3.6.5",

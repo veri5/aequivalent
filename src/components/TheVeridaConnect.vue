@@ -4,7 +4,7 @@
     <el-card style="text-align:center;">
       <img alt="company logo" :src="require(`../assets/${company.logo}`)"/>
       <h2>Welcome to '{{ company.name }}'</h2>
-      <the-connect-button :namespace="namespace"/>
+      <the-verida-connect-button :namespace="namespace"/>
     </el-card>
   </el-col>
 </el-row>
@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { defineProps, computed } from 'vue'
 import { useStore } from 'vuex'
-import TheConnectButton from '@/components/TheConnectButton.vue'
+import TheVeridaConnectButton from '@/components/TheVeridaConnectButton.vue'
 
 const props = defineProps({
   namespace: {

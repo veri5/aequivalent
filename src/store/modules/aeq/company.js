@@ -3,8 +3,7 @@ const state = {
     name: 'Aequivalent',
     logo: 'aequivalent_logo.png', 
     fallbackLogo: 'logo_fallback.png',
-  },
-  isConnected: false,  
+  }
 }
 
 const mutations = {}

@@ -3,8 +3,7 @@ const state = {
     name: 'Verifive',
     logo: 'verifive_logo.png', 
     fallbackLogo: 'logo_fallback.png',
-  },
-  isConnected: false,  
+  }
 }
 
 const mutations = {}

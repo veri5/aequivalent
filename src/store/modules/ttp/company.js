@@ -3,8 +3,7 @@ const state = {
     name: 'The Trust Protocol',
     logo: 'tpt_logo.png', 
     fallbackLogo: 'logo_fallback.png',
-  },
-  isConnected: false,  
+  }
 }
 
 const mutations = {}

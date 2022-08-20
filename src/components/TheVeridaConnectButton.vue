@@ -28,7 +28,6 @@ const props = defineProps({
     default: "ttp"
   },
 })
-
 const store = useStore()
 const storeNamespace = store.state[props.namespace]
 
@@ -36,7 +35,7 @@ const verida = computed(() => storeNamespace.verida)
 
 async function connectProfile(context){
   const client = await context.getClient()
-  const did = context.account.accountDid
+  const did = await context.account.did()
   const profileConnection = await client.openPublicProfile(did, verida.value.contextName, 'basicProfile');
   const { name, avatar, description, country } = await profileConnection.getMany()
   

@@ -3,20 +3,23 @@ const initProfile = {
   did: 'did:vda:0x123...4567',
   avatar: 'micha_roon.jpeg',
   description: '',
-  country: ''
+  country: '',
+  mnemonic: 'shiver demand typical energy range absent rug face federal marine fold sauce'
 }
 
 const state = {
   profile: initProfile,
-  isConnected: false,
+  isAuthenticated: false,
+  localKey:  '_verida_account-node_is-authenticated'
 }
 
 const mutations = {
   setProfile (state, profile) {
     state.profile = Object.assign(state.profile, profile);
   },
-  setIsConnected (state, status) {
-    state.isConnected = status
+  setIsAuthenticated (state, status) {
+    state.isAuthenticated = status
+    localStorage.setItem(state.localKey, status);
   }
 }
 
@@ -24,16 +27,20 @@ const actions = {
   setProfile ({ commit }, profile) {
     commit('setProfile', profile)
   },
-  connect ({ commit }) {
-    commit('setIsConnected', true)
+  signIn ({ commit }) {
+    commit('setIsAuthenticated', true)
   },
-  disconnect ({ commit }) {
+  signOut ({ commit }) {
     commit('setProfile', initProfile)
-    commit('setIsConnected', false)
+    commit('setIsAuthenticated', false)
   }
 }
 
-const getters = {}
+const getters = {
+  isAuthenticated (state) {
+    return localStorage.getItem(state.localKey) === 'true'
+  }
+}
 
 export default {
   namespaced: true,

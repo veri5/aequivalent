@@ -38,7 +38,7 @@
             <el-menu-item disabled>Your profile</el-menu-item>
           </el-tooltip>
           <el-divider class="submenu-divider"/>
-          <the-disconnect-menu-item :namespace="namespace" />
+          <the-verida-disconnect-menu-item :namespace="namespace" />
         </el-sub-menu>
       </el-menu>
     </el-col>
@@ -49,7 +49,7 @@
 import { defineProps, computed } from 'vue'
 import { useStore } from 'vuex'
 import { Bell } from '@element-plus/icons-vue'
-import TheDisconnectMenuItem from '@/components/TheDisconnectMenuItem.vue';
+import TheVeridaDisconnectMenuItem from '@/components/TheVeridaDisconnectMenuItem.vue';
 
 const props = defineProps({
   namespace: {
