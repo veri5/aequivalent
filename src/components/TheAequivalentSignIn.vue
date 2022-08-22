@@ -1,6 +1,6 @@
 <template>
 <el-row>
-  <el-col>
+  <el-col style="background:whitesmoke;">
     <el-row>
       <el-col class="aeq-banner-header">
         <img alt="company logo" :src="require(`../assets/${company.homeLogo}`)"/>
@@ -22,7 +22,7 @@
     </el-row>
     <el-row>
       <el-col class="aeq-footer">
-        <div>© Copyright 2020 - 2022 | All Rights Reserved to Aequivalent SA | Cookie Policy</div>
+        <div>© Copyright 2020 - 2022 | All Rights Reserved to Aequivalent SA</div>
       </el-col>
     </el-row>
   </el-col>
@@ -63,17 +63,17 @@ const company = computed(() => storeNamespace.company.profile)
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  height: 100%;
+  height: 50vh;
 }
 .aeq-title {
   font-family: 'Roobert-Semibold';
-  font-size: 32px;
+  font-size: 36px;
   color: white;
   margin-bottom: 0px;
 }
 .aeq-intro-text {
   font-family: 'Roobert-Regular';
-  font-size: 16px;
+  font-size: 18px;
   color: white;
   text-align: justify;
 }
@@ -98,7 +98,7 @@ const company = computed(() => storeNamespace.company.profile)
   font-weight: 600;
   color: white;
   text-align: justify;
-  height: 30%;
+  height: 25vh;
 }
 .aeq-body-background {
   background-color: #1b2032;
@@ -109,7 +109,7 @@ const company = computed(() => storeNamespace.company.profile)
 .aeq-footer {
   color: white;
   font-family: 'Roobert-Regular';
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   background-color: black;
   padding: 10px;
