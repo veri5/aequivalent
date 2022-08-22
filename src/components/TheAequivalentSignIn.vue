@@ -1,6 +1,6 @@
 <template>
 <el-row>
-  <el-col style="background:whitesmoke;">
+  <el-col>
     <el-row>
       <el-col class="aeq-banner-header">
         <img alt="company logo" :src="require(`../assets/${company.homeLogo}`)"/>
