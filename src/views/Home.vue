@@ -19,12 +19,12 @@
 
     <el-col :xs="8" :sm="8">
       <div v-if="isAeqAuth">
-        <the-verida-disconnect-profile-menu :namespace="'aeq'"/>
+        <the-verida-sign-out-profile-menu :namespace="'aeq'"/>
 
         <requests />
       </div>
       <div v-else>
-        <the-verida-connect :namespace="'aeq'" />
+        <the-aequivalent-sign-in :namespace="'aeq'" />
       </div>
     </el-col>
     
@@ -49,6 +49,7 @@ import TheVeridaConnect from '@/components/TheVeridaConnect.vue'
 import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProfileMenu.vue';
 import TheVeridaSignIn from '@/components/TheVeridaSignIn.vue';
 import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
+import TheAequivalentSignIn from '@/components/TheAequivalentSignIn.vue';
 import Verifications from '@/views/verifive/Verifications.vue'
 import Requests from '@/views/aequivalent/Requests.vue'
 import Entities from '@/views/ttp/Entities.vue'
@@ -56,7 +57,7 @@ import Entities from '@/views/ttp/Entities.vue'
 const store = useStore()
 
 const isVeriAuth = computed(() => store.state.veri.user.isConnected)
-const isAeqAuth = computed(() => store.state.aeq.user.isConnected)
+const isAeqAuth = computed(() => store.state.aeq.user.isAuthenticated)
 const isTtpAuth = computed(() => store.state.ttp.user.isAuthenticated)
 </script>
 

@@ -10,7 +10,7 @@ const initProfile = {
 const state = {
   profile: initProfile,
   isAuthenticated: false,
-  localKey:  '_verida_account-node_is-authenticated'
+  localKey:  '_verida_ttp_is-authenticated'
 }
 
 const mutations = {
