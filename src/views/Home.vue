@@ -10,7 +10,7 @@
       <div v-if="isVeriAuth">
         <the-verida-disconnect-profile-menu :namespace="'veri'"/>
 
-        <verifications />
+        <credentials />
       </div>
       <div v-else>
         <the-verida-connect :namespace="'veri'" />
@@ -50,7 +50,7 @@ import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProf
 import TheVeridaSignIn from '@/components/TheVeridaSignIn.vue';
 import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
 import TheAequivalentSignIn from '@/components/TheAequivalentSignIn.vue';
-import Verifications from '@/views/verifive/Verifications.vue'
+import Credentials from '@/views/verifive/Credentials.vue'
 import Requests from '@/views/aequivalent/Requests.vue'
 import Entities from '@/views/ttp/Entities.vue'
 

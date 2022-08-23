@@ -46,29 +46,56 @@
   <el-row>
     <el-col>
       <el-card shadow="never">
-        <el-input v-model="search" 
-          placeholder="Search all credential types" 
-          clearable
-          size="default"
-        />
-      </el-card>
-      <el-card shadow="never">
-        <el-table
-          ref="singleTableRef"
-          :data="filterTableData"
-          style="width:100%"
-          highlight-current-row
-          border
-          height="250"
-          :header-cell-style="{ background: '#fafafa' }"
-          @current-change="handleCurrentChange"
-        >
-          <!-- <el-table-column type="selection" width="55" /> -->
-          <el-table-column type="index" width="20" />
-          <el-table-column prop="credentialType" label="Type" />
-          <el-table-column prop="credentialIssuer" label="Issuer" />
-          <el-table-column prop="credentialExpiry" label="Expiry" />
-        </el-table>
+        <el-tabs :tab-position="'top'" class="demo-tabs">
+          <el-tab-pane label="Issued">
+            <el-input v-model="search" 
+              placeholder="Search all credential types" 
+              clearable
+              size="default"
+            />
+            <el-table
+              ref="singleTableRef"
+              :data="filterTableData"
+              style="width:100%"
+              highlight-current-row
+              border
+              height="250"
+              :header-cell-style="{ background: '#fafafa' }"
+              @current-change="handleCurrentChange"
+            >
+              <!-- <el-table-column type="selection" width="55" /> -->
+              <el-table-column type="index" width="20" />
+              <el-table-column prop="type" label="Type" />
+              <el-table-column prop="issuer" label="Issuer" />
+              <el-table-column prop="expiry" label="Expiry" />
+            </el-table>
+          </el-tab-pane>
+
+          <el-tab-pane label="Pending">
+            <el-input v-model="search" 
+              placeholder="Search all credential types" 
+              clearable
+              size="default"
+            />
+            <el-table
+              ref="singleTableRef"
+              :data="filterTableData"
+              style="width:100%"
+              highlight-current-row
+              border
+              height="250"
+              :header-cell-style="{ background: '#fafafa' }"
+              @current-change="handleCurrentChange"
+            >
+              <!-- <el-table-column type="selection" width="55" /> -->
+              <el-table-column type="index" width="20" />
+              <el-table-column prop="type" label="Type" />
+              <el-table-column prop="issuer" label="Issuer" />
+              <el-table-column prop="requested" label="Requested" />
+              <el-table-column prop="status" label="Status" />
+            </el-table>
+          </el-tab-pane>
+        </el-tabs>
       </el-card>
     </el-col>
   </el-row>
@@ -90,11 +117,11 @@
           style="width: 100%"
         >
           <el-option label="University diploma - Aequivalent" value="university_diploma" />
-          <el-option label="Credit Report - Experian" value="credit_report" />
-          <el-option label="Pink Slip - NRMA" value="pink_slip" />
+          <el-option label="Credit Report - Experian" value="credit_report"/>
+          <el-option label="Pink Slip - NRMA" value="pink_slip" :disabled="true"/>
         </el-select>
       </el-form-item>
-      <el-form-item>
+      <el-form-item v-if="form.credential === 'university_diploma'">
         <el-alert type="info" show-icon :closable="false">
           <h4>Please upload a scanned or electronic copy of your original university diploma</h4>
         </el-alert>        
@@ -114,6 +141,9 @@
             </div>
           </template>
         </el-upload>
+      </el-form-item>
+      <el-form-item v-else-if="form.credential === 'credit_report'">
+        <el-empty description="Required documentation" style="width: 100%"/>
       </el-form-item>
       <el-divider />
       <el-form-item>
@@ -145,48 +175,52 @@ const form = reactive({
   validity: false,
 })
 
-interface User {
-  name: string,
-  did: string,
-  credentialType: string,
-  requestedDate: string,
-  processStatus: string,
-  processProgress: number
+interface Credential {
+  type: string,
+  issuer: string,
+  requested: string,
+  status: string
 }
-
+              
 const search = ref('')
 const filterTableData = computed(() =>
   tableData.filter(
     (data) =>
       !search.value ||
-      data.credentialType.toLowerCase().includes(search.value.toLowerCase())
+      data.type.toLowerCase().includes(search.value.toLowerCase())
   )
 )
 
 const currentRow = ref()
 const singleTableRef = ref<InstanceType<typeof ElTable>>()
-const handleCurrentChange = (val: User | undefined) => {
+const handleCurrentChange = (val: Credential | undefined) => {
   currentRow.value = val
 }
-const setCurrent = (row?: User) => {
+const setCurrent = (row?: Credential) => {
   singleTableRef.value!.setCurrentRow(row)
 }
 
-const tableData: User[] = [
+const tableData: Credential[] = [
   {
-    credentialType: 'University Diploma',
-    credentialExpiry: '2027-01-01',
-    credentialIssuer: 'Aequivalent'
+    type: 'University Diploma',
+    issuer: 'Aequivalent',
+    requested: '2027-01-01',
+    expiry: '2027-01-01',
+    status: 'Pending'
   },
   {
-    credentialType: 'Credit Report',
-    credentialExpiry: '2023-07-01',
-    credentialIssuer: 'Experian'
+    type: 'Credit Report',
+    issuer: 'Experian',
+    requested: '2027-01-01',
+    expiry: '2027-01-01',
+    status: 'Pending'
   },
   {
-    credentialType: 'Pink Slip',
-    credentialExpiry: '2023-03-01',
-    credentialIssuer: 'NRMA'
+    type: 'Pink Slip',
+    issuer: 'NRMA',
+    requested: '2027-01-01',
+    expiry: '2027-01-01',
+    status: 'Pending'
   }
 ]
 
