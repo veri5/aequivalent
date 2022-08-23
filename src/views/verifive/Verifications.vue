@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <el-col>
-      <h2>Verifications</h2>
+      <h2>Credentials</h2>
     </el-col>
   </el-row>
 
@@ -9,28 +9,35 @@
     <el-col>   
       <el-card shadow="never">
         <div class="flex">
-          <el-button
-            type="primary"
-            plain
-            @click="dialogFormVisible = true"
-          >
-            New Verification
-          </el-button>
           <template v-if="currentRow">
             <el-button
               type="danger"
               plain
-              @click="openRevokeBox"
+              @click="openRemoveBox"
             >
-              Revoke
+              Remove
+            </el-button>
+            <el-button
+              type="primary"
+              plain
+              @click="openRemoveBox"
+            >
+              Share
             </el-button>
             <el-button
               plain
               @click="setCurrent()"
             >
-              Clear Selection
+              Clear selection
             </el-button>
           </template>
+          <el-button v-else
+            type="primary"
+            plain
+            @click="dialogFormVisible = true"
+          >
+            New credential
+          </el-button>
         </div>
       </el-card>
     </el-col>
@@ -57,52 +64,44 @@
           @current-change="handleCurrentChange"
         >
           <!-- <el-table-column type="selection" width="55" /> -->
-          <el-table-column type="index" width="50" />
-          <el-table-column prop="name" label="Candidate Name"/>
-          <el-table-column prop="did" label="Decentralised Identifier" />
-          <el-table-column prop="credentialType" label="Credential Type" />
-          <el-table-column prop="requestedDate" label="Requested Date" />
-          <el-table-column prop="processStatus" label="Status" />
-          <el-table-column label="Progress">
-            <template #default="scope">
-              <el-progress :text-inside="true" :stroke-width="20" :percentage="scope.row.processProgress" />
-            </template>
-          </el-table-column>
+          <el-table-column type="index" width="20" />
+          <el-table-column prop="credentialType" label="Type" />
+          <el-table-column prop="credentialIssuer" label="Issuer" />
+          <el-table-column prop="credentialExpiry" label="Expiry" />
         </el-table>
       </el-card>
     </el-col>
   </el-row>
 
-  <el-dialog v-model="dialogFormVisible" title="Request a new verification">
-    <el-form :model="form"
+  <el-dialog v-model="dialogFormVisible">
+    <template #header>
+      <strong>New credential</strong>
+      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new credential.</p>
+      <el-divider style="margin: 0;"/>
+    </template>
+    <el-form 
+      :model="form"
       :label-position="labelPosition"
+      size="default"
     >
-      <el-form-item label="Candidate Name">
-        <el-input v-model="form.name"
-          placeholder="John Doe"
-        />
-      </el-form-item>
-      <el-form-item label="Decentralised Identifier">
-        <el-input v-model="form.did"
-          placeholder="0x1234...abcd">
-          <template #prepend>did:verida:</template>
-        </el-input>
-      </el-form-item>
-      <el-form-item label="Credential Type">
+      <el-form-item label="Credential type">
         <el-select v-model="form.credential" 
-          placeholder="Select a credential type" 
+          placeholder="Please select a credential type" 
           style="width: 100%"
         >
-          <el-option label="University Diploma" value="university_diploma" />
-          <el-option label="Credit Score" value="credit_score" />
+          <el-option label="University diploma - Aequivalent" value="university_diploma" />
+          <el-option label="Credit Report - Experian" value="credit_report" />
+          <el-option label="Pink Slip - NRMA" value="pink_slip" />
         </el-select>
       </el-form-item>
       <el-form-item>
+        <el-alert type="info" show-icon :closable="false">
+          <h4>Please upload a scanned or electronic copy of your original university diploma</h4>
+        </el-alert>        
         <el-upload
           class="upload-demo"
           drag
           action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-          multiple
           style="width: 100%"
         >
           <el-icon class="el-icon--upload"><upload-filled /></el-icon>
@@ -111,7 +110,7 @@
           </div>
           <template #tip>
             <div class="el-upload__tip">
-              jpg/png files with a size less than 500kb
+              pdf/tiff files with a size less than 500kb
             </div>
           </template>
         </el-upload>
@@ -175,26 +174,25 @@ const setCurrent = (row?: User) => {
 
 const tableData: User[] = [
   {
-    name: 'Alice Doe',
-    did: 'did:verida:0x1234...abcd',
     credentialType: 'University Diploma',
-    requestedDate: '2022-01-01',
-    processStatus: 'Final-revision',
-    processProgress: 70
+    credentialExpiry: '2027-01-01',
+    credentialIssuer: 'Aequivalent'
   },
   {
-    name: 'Alice Doe',
-    did: 'did:verida:0x1234...abcd',
-    credentialType: 'Credit Score',
-    requestedDate: '2022-01-01',
-    processStatus: 'Accepted',
-    processProgress: 30
+    credentialType: 'Credit Report',
+    credentialExpiry: '2023-07-01',
+    credentialIssuer: 'Experian'
+  },
+  {
+    credentialType: 'Pink Slip',
+    credentialExpiry: '2023-03-01',
+    credentialIssuer: 'NRMA'
   }
 ]
 
 const openRegisterBox = () => {
   ElMessageBox.confirm(
-    'A new verification will be requested. Continue?',
+    'A new credential will be requested. Continue?',
     'Warning',
     {
       confirmButtonText: 'Confirm',
@@ -205,7 +203,7 @@ const openRegisterBox = () => {
     .then(() => {
       ElMessage({
         type: 'success',
-        message: 'Verification requested successfully',
+        message: 'Credential requested successfully',
       })
     })
     .catch(() => {
@@ -216,7 +214,7 @@ const openRegisterBox = () => {
     })
 }
 
-const openRevokeBox = () => {
+const openRemoveBox = () => {
   ElMessageBox.prompt('Please input an authorised e-mail', 'Security check', {
     confirmButtonText: 'OK',
     cancelButtonText: 'Cancel',
@@ -227,13 +225,13 @@ const openRevokeBox = () => {
     .then(({ value }) => {
       ElMessage({
         type: 'success',
-        message: `Verification request revoked successfully`,
+        message: `credential removed successfully`,
       })
     })
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: 'Revoke action canceled',
+        message: 'Remove action canceled',
       })
     })
 }

@@ -8,7 +8,7 @@
     class="aeq-button"
     @click="signIn"
   >
-    Sign in as Issuer
+    Sign in as an Issuer
   </el-button>
 </template>
 
@@ -99,6 +99,6 @@ onMounted(() => {
 <style scoped>
 .aeq-button {
   font-weight:600; 
-  padding:0 50px;
+  padding:0 60px;
 }
 </style>
