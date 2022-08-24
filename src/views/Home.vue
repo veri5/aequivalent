@@ -13,7 +13,7 @@
         <credentials />
       </div>
       <div v-else>
-        <the-verida-connect :namespace="'veri'" />
+        <the-verifive-connect :namespace="'veri'" />
       </div>
     </el-col>
 
@@ -50,6 +50,7 @@ import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProf
 import TheVeridaSignIn from '@/components/TheVeridaSignIn.vue';
 import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
 import TheAequivalentSignIn from '@/components/TheAequivalentSignIn.vue';
+import TheVerifiveConnect from '@/components/TheVerifiveConnect.vue';
 import Credentials from '@/views/verifive/Credentials.vue'
 import Requests from '@/views/aequivalent/Requests.vue'
 import Entities from '@/views/ttp/Entities.vue'

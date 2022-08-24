@@ -1,32 +1,32 @@
 <template>
-<el-row>
-  <el-col>
-    <el-row>
-      <el-col class="aeq-banner-header">
-        <img alt="company logo" :src="require(`../assets/${company.homeLogo}`)"/>
-      </el-col>
-    </el-row>
-    <el-row class="aeq-banner-body aeq-banner-background">
-      <el-col :xs="18" :sm="18">
-        <h2 class="aeq-title">Who is {{ company.name }}?</h2>
-        <h2 class="aeq-title" style="margin-top: 15px; height: 1px;"><span class="aeq-underline">Who</span></h2>
-        <p class="aeq-intro-text">Aequivalent is Switzerland’s leading digital platform for employment screening (background checks). Through our secure online solution, our team verifies and delivers relevant information to help employers reduce the risk of inappropriate employment.</p>
-        <el-divider border-style="none"/>
-        <the-aequivalent-sign-in-button :namespace="namespace" />
-      </el-col>
-    </el-row>
-    <el-row class="aeq-body aeq-body-background">
-      <el-col>
-        <!-- Body -->
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col class="aeq-footer">
-        <div>© Copyright 2020 - 2022 | All Rights Reserved to Aequivalent SA</div>
-      </el-col>
-    </el-row>
-  </el-col>
-</el-row>
+  <el-row>
+    <el-col>
+      <el-row>
+        <el-col class="aeq-banner-header">
+          <img alt="company logo" :src="require(`../assets/${company.homeLogo}`)"/>
+        </el-col>
+      </el-row>
+      <el-row class="aeq-banner-body aeq-banner-background">
+        <el-col :xs="18" :sm="18">
+          <h2 class="aeq-title">Who is {{ company.name }}?</h2>
+          <h2 class="aeq-title" style="margin-top: 15px; height: 1px;"><span class="aeq-underline">Who</span></h2>
+          <p class="aeq-intro-text">Aequivalent is Switzerland’s leading digital platform for employment screening (background checks). Through our secure online solution, our team verifies and delivers relevant information to help employers reduce the risk of inappropriate employment.</p>
+          <el-divider border-style="none"/>
+          <the-aequivalent-sign-in-button :namespace="namespace" />
+        </el-col>
+      </el-row>
+      <el-row class="aeq-body aeq-body-background">
+        <el-col>
+          <!-- Body -->
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col class="aeq-footer">
+          <div>© Copyright 2020 - 2022 | All Rights Reserved to Aequivalent SA</div>
+        </el-col>
+      </el-row>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup lang="ts">
@@ -83,7 +83,7 @@ const company = computed(() => storeNamespace.company.profile)
 }
 .aeq-banner-background {
   background-color: rgba(0,0,0,0.47);
-  background-image: url("https://www.aequivalent.ch/wp-content/uploads/2021/12/Home-Banner-Mission-Statement.jpeg");
+  background-image: url("~@/assets/aeq-banner-background.jpeg");
   background-position: center bottom;
   background-repeat: no-repeat;
   background-blend-mode: overlay;
@@ -102,7 +102,7 @@ const company = computed(() => storeNamespace.company.profile)
 }
 .aeq-body-background {
   background-color: #1b2032;
-  background-image: url(https://www.aequivalent.ch/wp-content/uploads/2020/01/IMG_4071-1-scaled-e1579697464721.jpg);
+  background-image: url("~@/assets/aeq-landing-background.jpeg");
   background-position: center top;
   background-repeat: no-repeat;
 }

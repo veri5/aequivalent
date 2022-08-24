@@ -91,7 +91,6 @@
               <el-table-column type="index" width="20" />
               <el-table-column prop="type" label="Type" />
               <el-table-column prop="issuer" label="Issuer" />
-              <el-table-column prop="requested" label="Requested" />
               <el-table-column prop="status" label="Status" />
             </el-table>
           </el-tab-pane>
@@ -178,7 +177,7 @@ const form = reactive({
 interface Credential {
   type: string,
   issuer: string,
-  requested: string,
+  expiry: string,
   status: string
 }
               
@@ -204,23 +203,20 @@ const tableData: Credential[] = [
   {
     type: 'University Diploma',
     issuer: 'Aequivalent',
-    requested: '2027-01-01',
     expiry: '2027-01-01',
     status: 'Pending'
   },
   {
     type: 'Credit Report',
     issuer: 'Experian',
-    requested: '2027-01-01',
     expiry: '2027-01-01',
-    status: 'Pending'
+    status: 'Final-revision'
   },
   {
     type: 'Pink Slip',
     issuer: 'NRMA',
-    requested: '2027-01-01',
     expiry: '2027-01-01',
-    status: 'Pending'
+    status: 'Accepted'
   }
 ]
 
