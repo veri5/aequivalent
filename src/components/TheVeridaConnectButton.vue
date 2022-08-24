@@ -11,7 +11,7 @@
       alt="Connect to Verida"
     /> Connect to Verida
   </el-button>
-</template>
+</template> 
 
 <script setup lang="ts">
 import { ref, defineProps, computed, onMounted } from 'vue'
