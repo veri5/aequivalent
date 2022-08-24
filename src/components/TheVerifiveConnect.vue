@@ -32,7 +32,7 @@
       </el-row>
       <el-row>
         <el-col class="veri-footer">
-          <div>© Copyright 2022 managination - All Rights Reserved</div>
+          <div>© Copyright 2022 | Managination</div>
         </el-col>
       </el-row>
     </el-col>
@@ -122,8 +122,8 @@ const company = computed(() => storeNamespace.company.profile)
   color: whitesmoke;
   font-family: 'Helvetica';
   font-size: 12px;
-  background-color: #1e1f20;
+  background-color: black;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 </style>
