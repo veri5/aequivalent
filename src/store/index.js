@@ -1,10 +1,11 @@
 import { createStore } from 'vuex'
-import ttpUser from './modules/ttp/user'
-import ttpCompany from './modules/ttp/company'
-import aeqUser from './modules/aeq/user'
-import aeqCompany from './modules/aeq/company'
 import veriUser from './modules/veri/user'
 import veriCompany from './modules/veri/company'
+import credentials from './modules/veri/credentials'
+import aeqUser from './modules/aeq/user'
+import aeqCompany from './modules/aeq/company'
+import ttpUser from './modules/ttp/user'
+import ttpCompany from './modules/ttp/company'
 import verida from './modules/vda/verida'
 
 export default createStore({
@@ -14,7 +15,7 @@ export default createStore({
       modules: {
         user: ttpUser,
         company: ttpCompany,
-        verida
+        verida: verida
       }
     },
     aeq: {
@@ -22,7 +23,7 @@ export default createStore({
       modules: {
         user: aeqUser,
         company: aeqCompany,
-        verida
+        verida: verida
       }
     },
     veri: {
@@ -30,7 +31,8 @@ export default createStore({
       modules: {
         user: veriUser,
         company: veriCompany,
-        verida
+        verida: verida,
+        credentials: credentials
       }
     }
   }

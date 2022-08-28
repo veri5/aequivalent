@@ -1,12 +1,12 @@
 <template>
-  <el-row>
+  <!-- <el-row>
     <el-col>
       <the-stepper />
     </el-col>
-  </el-row>
+  </el-row> -->
 
   <el-row :gutter="20">
-    <el-col :xs="8" :sm="8">
+    <el-col :xs="12" :sm="12">
       <div v-if="isVeriAuth">
         <the-verida-disconnect-profile-menu :namespace="'veri'"/>
 
@@ -17,7 +17,7 @@
       </div>
     </el-col>
 
-    <el-col :xs="8" :sm="8">
+    <el-col :xs="12" :sm="12">
       <div v-if="isAeqAuth">
         <the-verida-sign-out-profile-menu :namespace="'aeq'"/>
 
@@ -28,7 +28,7 @@
       </div>
     </el-col>
     
-    <el-col :xs="8" :sm="8">
+    <!-- <el-col :xs="8" :sm="8">
       <div v-if="isTtpAuth">
         <the-verida-sign-out-profile-menu :namespace="'ttp'"/>
 
@@ -37,7 +37,7 @@
       <div v-else>
         <the-verida-sign-in :namespace="'ttp'" />
       </div>
-    </el-col>
+    </el-col> -->
   </el-row>
 </template>
 

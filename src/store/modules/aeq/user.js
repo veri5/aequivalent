@@ -1,7 +1,7 @@
 const initProfile = { 
-  name: 'Mr. Robot',
+  name: 'Pablo Buitrago',
   did: 'did:vda:0x123...4567',
-  avatar: 'john_doe.png',
+  avatar: 'pablo_buitrago.jpeg',
   description: '',
   country: '',
   mnemonic: 'canyon hover bronze mask view muscle notice where purchase save shed symbol'
