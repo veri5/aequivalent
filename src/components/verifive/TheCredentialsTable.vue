@@ -17,7 +17,7 @@
     :height="250"
     @row-click="rowClick"
   >
-    <template #empty style="line-height:unset; color:#2c3e50;">
+    <template #empty style="line-height:15px; color:#2c3e50;">
       <el-icon :size="50"><CreditCard /></el-icon>
       <div>
         <strong>No credentials to show yet</strong>
