@@ -1,35 +1,40 @@
 <template>
-  <div class="flex">
-    <template v-if="isSelected">
-      <el-button
-        type="danger"
-        plain
-        @click="openRemoveBox"
-      >
-        Remove
-      </el-button>
-      <el-button
-        type="primary"
-        plain
-        disabled
-      >
-        Share
-      </el-button>
-      <el-button
-        plain
-        @click="clearSelection"
-      >
-        Clear selection
-      </el-button>
-    </template>
-    <el-button v-else
+  <template v-if="isSelected">
+    <el-button
+      type="danger"
+      plain
+      @click="openRemoveBox"
+    >
+      Remove
+    </el-button>
+    <el-button
       type="primary"
       plain
-      @click="newRequest"
+      disabled
     >
-      New request
+      Share
     </el-button>
-  </div>
+    <el-button
+      type="primary"
+      plain
+      disabled
+    >
+      Review
+    </el-button>
+    <el-button
+      plain
+      @click="clearSelection"
+    >
+      Clear selection
+    </el-button>
+  </template>
+  <el-button v-else
+    type="primary"
+    plain
+    @click="newRequest"
+  >
+    New request
+  </el-button>
 </template>
 
 <script lang="ts" setup>

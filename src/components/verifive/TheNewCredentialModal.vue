@@ -22,7 +22,8 @@
         label="Credential type"
         prop="type"
       >
-        <el-select v-model="form.type" 
+        <el-select 
+          v-model="form.type" 
           placeholder="Please select a credential type"
           :filterable="true"
           style="width: 100%"
@@ -46,7 +47,7 @@
         <el-upload
           drag
           action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-          :on-success="() => fileUploaded = true"
+          :on-success="(response, uploadFile) => { fileUploaded = true }"
           :on-remove="() => fileUploaded = false"
           style="width: 100%"
         >
@@ -98,7 +99,7 @@ function showUpload(){
 const formRef = ref<FormInstance>()
 const form = reactive({
   type: '',
-  upload: '',
+  uploadedFile: '',
 })
 const fileUploaded = ref(false)
 
@@ -163,13 +164,18 @@ const openConfirmBox = () => {
       icon: markRaw(CreditCard),
     }
   )
-    .then(() => {
-      ElNotification({
-        message: 'Credential requested successfully',
-        type: 'success',
-        position: 'top-left'
-      })
-      closeModal()
+  .then(() => {
+    const newRequest = {
+      type: form.type,
+    }
+    store.dispatch(`${namespace}/credentials/confirmRequest`, newRequest)
+
+    ElNotification({
+      message: 'Credential requested successfully',
+      type: 'success',
+      position: 'top-left'
     })
+    closeModal()
+  })
 }
 </script>
