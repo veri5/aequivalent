@@ -67,8 +67,18 @@
 
       <!-- footer -->
       <el-form-item>
-        <el-button type="primary" plain @click="submit">Submit</el-button>
-        <el-button plain @click="closeModal">Cancel</el-button>
+        <el-button 
+          type="primary" 
+          plain 
+          @click="submit"
+        >
+          Submit
+        </el-button>
+        <el-button
+          @click="closeModal"
+        >
+          Cancel
+        </el-button>
       </el-form-item>
     </el-form>    
   </el-dialog>

@@ -3,26 +3,23 @@
     <el-button
       type="danger"
       plain
+      :icon="Delete" 
       @click="openRemoveBox"
     >
       Remove
     </el-button>
     <el-button
-      type="primary"
-      plain
-      disabled
+      :icon="Share" 
     >
       Share
     </el-button>
     <el-button
-      type="primary"
-      plain
-      disabled
+      :icon="View"
     >
       Review
     </el-button>
     <el-button
-      plain
+      :icon="CircleClose"
       @click="clearSelection"
     >
       Clear selection
@@ -31,6 +28,7 @@
   <el-button v-else
     type="primary"
     plain
+    :icon="Edit" 
     @click="newRequest"
   >
     New request
@@ -41,7 +39,7 @@
 import { computed, markRaw } from 'vue'
 import { useStore } from 'vuex'
 import { ElNotification, ElMessageBox } from 'element-plus'
-import { Delete } from '@element-plus/icons-vue'
+import { Edit, Delete, Share, View, CircleClose } from '@element-plus/icons-vue'
 
 const store = useStore()
 const namespace = 'veri'
