@@ -17,12 +17,14 @@
     :height="250"
     @row-click="rowClick"
   >
-    <template #empty style="line-height:15px; color:#2c3e50;">
+    <template #empty>
+    <div style="line-height:15px; color:#2c3e50;">
       <el-icon :size="50"><CreditCard /></el-icon>
       <div>
         <strong>No credentials to show yet</strong>
         <p>Create your first credential by clicking on 'New request'</p>
-      </div>
+      </div>      
+    </div>
     </template>
     <el-table-column prop="type" label="Type" />
     <el-table-column prop="issuer" label="Issuer" />
