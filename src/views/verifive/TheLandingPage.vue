@@ -3,7 +3,7 @@
     <el-col>
       <el-row>
         <el-col class="veri-banner-header">
-          <img alt="company logo" :src="require(`../assets/${company.logo}`)"/>
+          <img alt="company logo" :src="require(`@/assets/${company.logo}`)"/>
         </el-col>
       </el-row>
       <el-row class="veri-banner-body veri-banner-background">
@@ -40,20 +40,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import TheVeridaConnectButton from '@/components/TheVeridaConnectButton.vue'
 
-const props = defineProps({
-  namespace: {
-    type: String,
-    required: true,
-    default: "ttp"
-  },
-})
-
 const store = useStore()
-const storeNamespace = store.state[props.namespace]
+const namespace = 'veri'
+const storeNamespace = store.state[namespace]
 
 const company = computed(() => storeNamespace.company.profile)
 </script>

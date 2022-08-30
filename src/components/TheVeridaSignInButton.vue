@@ -16,8 +16,7 @@
 <script setup lang="ts">
 import { ref, defineProps, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { Network } from '@verida/client-ts'
-import { AutoAccount } from '@verida/account-node'
+import veridaAccount from '@/verida/aeq-account'
 
 const loading = ref(false)
 
@@ -30,58 +29,16 @@ const props = defineProps({
 })
 
 const store = useStore()
-const storeNamespace = store.state[props.namespace]
-
-const verida = computed(() => storeNamespace.verida)
-const user = computed(() => storeNamespace.user.profile)
 const isAuthenticated = computed(() => store.getters[`${props.namespace}/user/isAuthenticated`])
-
-async function connectProfile(context){
-  const client = await context.getClient()
-  const did = await context.account.did()
-  const profileConnection = await client.openPublicProfile(did, verida.value.contextName, 'basicProfile');
-  const { name, avatar, description, country } = await profileConnection.getMany()
-  
-  return {
-    did,
-    name,
-    // avatar,
-    description,
-    country
-  }
-}
 
 async function signIn(){
   loading.value = true
+  
+  await veridaAccount.initialize()
 
-  const account = new AutoAccount(
-    {
-      defaultDatabaseServer: {
-          type: 'VeridaDatabase',
-          endpointUri: verida.value.veridaTestnetDefaultServer
-      },
-      defaultMessageServer: {
-          type: 'VeridaMessage',
-          endpointUri: verida.value.veridaTestnetDefaultServer
-      }
-    }, 
-    {
-      privateKey: user.value.mnemonic, // or Verida mnemonic seed phrase
-      didServerUrl: verida.value.veridaTestnetDidServer
-    })
-
-  const context = await Network.connect({
-    client: {
-      environment: verida.value.environmentType,
-    },
-    account: account,
-    context: {
-      name: verida.value.contextName,
-    }
-  })
-
+  const context = veridaAccount.context
   if(context) {
-    const profile = await connectProfile(context)
+    const profile = veridaAccount.profile
     store.dispatch(`${props.namespace}/user/setProfile`, profile)
 
     store.dispatch(`${props.namespace}/user/signIn`)

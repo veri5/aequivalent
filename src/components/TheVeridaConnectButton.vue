@@ -16,8 +16,8 @@
 <script setup lang="ts">
 import { ref, defineProps, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { Network } from '@verida/client-ts'
-import { VaultAccount, hasSession } from '@verida/account-web-vault'
+import veridaAccount from '@/verida/veri-account'
+import { hasSession } from '@verida/account-web-vault'
 
 const loading = ref(false)
 
@@ -30,45 +30,16 @@ const props = defineProps({
 })
 const store = useStore()
 const storeNamespace = store.state[props.namespace]
-
 const verida = computed(() => storeNamespace.verida)
-
-async function connectProfile(context){
-  const client = await context.getClient()
-  const did = await context.account.did()
-  const profileConnection = await client.openPublicProfile(did, verida.value.contextName, 'basicProfile');
-  const { name, avatar, description, country } = await profileConnection.getMany()
-  
-  return {
-    did,
-    name,
-    // avatar,
-    description,
-    country
-  }
-}
 
 async function connect(){
   loading.value = true
+  
+  await veridaAccount.initialize()
 
-  const account = new VaultAccount({
-    request: {
-      logoUrl: verida.value.logoUrl,
-    },
-  });
-
-  const context = await Network.connect({
-    client: {
-      environment: verida.value.environmentType,
-    },
-    account: account,
-    context: {
-      name: verida.value.contextName,
-    },
-  })
-
+  const context = veridaAccount.context
   if(context) {
-    const profile = await connectProfile(context)
+    const profile = veridaAccount.profile
     store.dispatch(`${props.namespace}/user/setProfile`, profile)
 
     store.dispatch(`${props.namespace}/user/connect`)

@@ -1,5 +1,5 @@
 <template>
-  <template v-if="isSelected">
+  <template v-if="currentRow">
     <el-button
       type="danger"
       plain
@@ -8,15 +8,15 @@
     >
       Remove
     </el-button>
-    <el-button
+    <el-button v-if="currentRow.status !== 'Pending'"
       :icon="Share" 
     >
       Share
     </el-button>
-    <el-button
+    <el-button v-if="currentRow.status !== 'Pending'"
       :icon="View"
     >
-      Review
+      View
     </el-button>
     <el-button
       :icon="CircleClose"
@@ -45,7 +45,7 @@ const store = useStore()
 const namespace = 'veri'
 const storeNamespace = store.state[namespace]
 
-const isSelected = computed(() => store.getters[`${namespace}/credentials/isRowSelected`])
+const currentRow = computed(() => store.getters[`${namespace}/credentials/currentRow`])
 
 
 function newRequest() {
@@ -57,8 +57,7 @@ function removeSelected() {
 function clearSelection() {
   store.dispatch(`${namespace}/credentials/clearSelection`)
 }
-
-const openRemoveBox = () => {
+function openRemoveBox(){
   ElMessageBox.confirm(
     'Credential will permanently be remove. Continue?',
     'Warning',

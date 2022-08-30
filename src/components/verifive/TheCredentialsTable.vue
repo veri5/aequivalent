@@ -22,7 +22,7 @@
       <el-icon :size="50"><CreditCard /></el-icon>
       <div>
         <strong>No credentials to show yet</strong>
-        <p>Create your first credential by clicking on 'New request'</p>
+        <p>Request your first credential by clicking on 'New request'</p>
       </div>      
     </div>
     </template>

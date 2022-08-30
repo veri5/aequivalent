@@ -7,14 +7,7 @@
 
   <el-row :gutter="20">
     <el-col :xs="12" :sm="12">
-      <div v-if="isVeriAuth">
-        <the-verida-disconnect-profile-menu :namespace="'veri'"/>
-
-        <credentials />
-      </div>
-      <div v-else>
-        <the-verifive-connect :namespace="'veri'" />
-      </div>
+      <TheVerifiveHome />
     </el-col>
 
     <el-col :xs="12" :sm="12">
@@ -50,14 +43,12 @@ import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProf
 import TheVeridaSignIn from '@/components/TheVeridaSignIn.vue';
 import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
 import TheAequivalentSignIn from '@/components/TheAequivalentSignIn.vue';
-import TheVerifiveConnect from '@/components/TheVerifiveConnect.vue';
-import Credentials from '@/views/verifive/Credentials.vue'
 import Requests from '@/views/aequivalent/Requests.vue'
 import Entities from '@/views/ttp/Entities.vue'
+// Verifive
+import TheVerifiveHome from '@/views/verifive/TheHome.vue'
 
 const store = useStore()
-
-const isVeriAuth = computed(() => store.state.veri.user.isConnected)
 const isAeqAuth = computed(() => store.state.aeq.user.isAuthenticated)
 const isTtpAuth = computed(() => store.state.ttp.user.isAuthenticated)
 </script>

@@ -90,6 +90,7 @@ import { useStore } from 'vuex'
 import type { FormInstance, FormRules } from 'element-plus'
 import { UploadFilled, CreditCard } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
+import veridaAccount from '@/verida/veri-account'
 
 const store = useStore()
 const namespace = 'veri'
@@ -163,7 +164,7 @@ function submit(){
     }
   })
 }
-const openConfirmBox = () => {
+function openConfirmBox(){
   ElMessageBox.confirm(
     'A new credential will be requested. Continue?',
     'Warning',
@@ -176,9 +177,12 @@ const openConfirmBox = () => {
   )
   .then(() => {
     const newRequest = {
-      type: form.type,
+      element: form.type,
+      uploadedFile: ''
     }
     store.dispatch(`${namespace}/credentials/confirmRequest`, newRequest)
+    
+    sendRequest()
 
     ElNotification({
       message: 'Credential requested successfully',
@@ -187,5 +191,24 @@ const openConfirmBox = () => {
     })
     closeModal()
   })
+}
+
+async function sendRequest() {
+  const did = 'did:vda:0x8D8c24447Ad621f5B258705D741d7B17a6c79AA8'
+  const type = 'inbox/type/dataRequest'
+  const data = {
+    requestSchema: null,
+    userSelect: null,
+    filter: {}
+  }
+  const name = veridaAccount.profile.name
+  const message = `${name} is requesting a new ${form.type} credential`
+  const config = {
+    recipientContextName: "Verida: Vault",
+  }
+
+  const msgInstance = await veridaAccount.context.getMessaging()
+
+  await msgInstance.send(did, type, data, message, config)
 }
 </script>

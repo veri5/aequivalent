@@ -9,7 +9,7 @@ const initProfile = {
 
 const state = {
   profile: initProfile,
-  isAuthenticated: false,
+  isAuthenticated: true,
   localKey:  '_verida_ttp_is-authenticated'
 }
 

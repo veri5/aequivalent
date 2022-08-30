@@ -1,84 +1,79 @@
 const Statuses = {
-  accepted: 'Accepted',
   pending: 'Pending',
-  issued: 'Issued'
+  revoked: 'Revoked',
+  issued: 'Issued',
 }
-
-// const tableData = [
-//   {
-//     type: 'University Diploma',
-//     issuer: 'Aequivalent - aequivalent.ch',
-//     expiry: '2018-03-04',
-//     status: Statuses.issued
-//   },
-//   {
-//     type: 'University Diploma',
-//     issuer: 'Aequivalent - aequivalent.com',
-//     expiry: '2022-07-28',
-//     status: Statuses.accepted
-//   },
-//   {
-//     type: 'Credit Report',
-//     issuer: 'Experian - experian.com',
-//     expiry: '',
-//     status: Statuses.pending
-//   },
-//   {
-//     type: 'Score Report',
-//     issuer: 'Equifax - equifax.com',
-//     expiry: '',
-//     status: Statuses.pending
-//   },
-//   {
-//     type: 'eSafety (or Pink slip)',
-//     issuer: 'NRMA - nrma.com.au',
-//     expiry: '',
-//     status: Statuses.pending
-//   }
-// ]
 
 const tableData = []
 
 const typeOptions = [
   {
-    type: 'University Diploma',
-    issuer: 'Aequivalent - aequivalent.ch',
     value: 'university_diploma',
     label: 'University diploma - Aequivalent - aequivalent.ch',
     upload: true,
     disabled: false,
   },
   {
-    type: 'University Diploma',
-    issuer: 'Aequivalent - aequivalent.com',
     value: 'fake_university_diploma',
     label: 'University diploma - Aequivalent - aequivalent.com',
     upload: true,
     disabled: false
   },
   {
-    type: 'Credit Report',
-    issuer: 'Experian - experian.com',
     value: 'credit_report',
     label: 'Credit report - Experian - experian.com',
     upload: false,
     disabled: false
   },
   {
-    type: 'Score Report',
-    issuer: 'Equifax - equifax.com',
     value: 'score_report',
     label: 'Score report - Equifax - equifax.com',
     upload: false,
     disabled: false
   },
   {
-    type: 'eSafety (or Pink slip)',
-    issuer: 'NRMA - nrma.com.au',
     value: 'pink_slip',
     label: 'eSafety (or Pink slip) - NRMA - nrma.com.au',
     upload: false,
     disabled: false
+  }
+]
+
+const entities = [
+  {
+    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
+    type: 'University Diploma',
+    element: 'university_diploma',
+    name: 'Aequivalent',
+    url: 'aequivalent.ch',
+  },
+  {
+    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
+    type: 'University Diploma (fake)',
+    element: 'university_diploma_fake',
+    name: 'Aequivalent',
+    url: 'aequivalent.com',
+  },
+  {
+    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
+    type: 'Credit Report',
+    element: 'credit_report',
+    name: 'Experian',
+    url: 'experian.com',
+  },
+  {
+    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
+    type: 'Score Report',
+    element: 'score_report',
+    name: 'Equifax',
+    url: 'equifax.com',
+  },
+  {
+    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
+    type: 'eSafety (or Pink Slip)',
+    element: 'pink_slip',
+    name: 'NRMA',
+    url: 'nrma.com.au',
   }
 ]
 
@@ -94,10 +89,10 @@ const mutations = {
     state.isModalVisible = status
   },
   confirmRequest (state, request) {
-    const typeOption = typeOptions.find(({ value }) => value == request.type)
+    const entity = entities.find(({ element }) => element == request.element)
     const row = {
-      type: typeOption.type,
-      issuer: typeOption.issuer,
+      type: entity.type,
+      issuer: entity.name,
       expiry: '',
       status: Statuses.pending
     }
