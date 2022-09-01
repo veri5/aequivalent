@@ -11,14 +11,7 @@
     </el-col>
 
     <el-col :xs="12" :sm="12">
-      <div v-if="isAeqAuth">
-        <the-verida-sign-out-profile-menu :namespace="'aeq'"/>
-
-        <requests />
-      </div>
-      <div v-else>
-        <the-aequivalent-sign-in :namespace="'aeq'" />
-      </div>
+      <TheAequivalentHome />
     </el-col>
     
     <!-- <el-col :xs="8" :sm="8">
@@ -37,19 +30,17 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import TheStepper from '@/components/TheStepper.vue';
-import TheVeridaConnect from '@/components/TheVeridaConnect.vue'
-import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProfileMenu.vue';
-import TheVeridaSignIn from '@/components/TheVeridaSignIn.vue';
-import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
-import TheAequivalentSignIn from '@/components/TheAequivalentSignIn.vue';
-import Requests from '@/views/aequivalent/Requests.vue'
-import Entities from '@/views/ttp/Entities.vue'
+// import TheStepper from '@/components/TheStepper.vue';
+// import TheVeridaSignIn from '@/components/TheVeridaSignIn.vue';
+// import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
+// import Entities from '@/views/ttp/Entities.vue'
+
 // Verifive
 import TheVerifiveHome from '@/views/verifive/TheHome.vue'
+// Aequivalent
+import TheAequivalentHome from '@/views/aequivalent/TheHome.vue'
 
 const store = useStore()
-const isAeqAuth = computed(() => store.state.aeq.user.isAuthenticated)
 const isTtpAuth = computed(() => store.state.ttp.user.isAuthenticated)
 </script>
 

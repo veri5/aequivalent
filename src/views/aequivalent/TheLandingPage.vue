@@ -3,7 +3,7 @@
     <el-col>
       <el-row>
         <el-col class="aeq-banner-header">
-          <img alt="company logo" :src="require(`../assets/${company.homeLogo}`)"/>
+          <img alt="company logo" :src="require(`@/assets/${company.homeLogo}`)"/>
         </el-col>
       </el-row>
       <el-row class="aeq-banner-body aeq-banner-background">
@@ -12,7 +12,7 @@
           <h2 class="aeq-title" style="margin-top: 15px; height: 1px;"><span class="aeq-underline">Who</span></h2>
           <p class="aeq-intro-text">Aequivalent is Switzerland’s leading digital platform for employment screening (background checks). Through our secure online solution, our team verifies and delivers relevant information to help employers reduce the risk of inappropriate employment.</p>
           <el-divider border-style="none"/>
-          <the-aequivalent-sign-in-button :namespace="namespace" />
+          <TheSignInButton />
         </el-col>
       </el-row>
       <el-row class="aeq-body aeq-body-background">
@@ -30,20 +30,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
-import TheAequivalentSignInButton from './TheAequivalentSignInButton.vue';
-
-const props = defineProps({
-  namespace: {
-    type: String,
-    required: true,
-    default: "ttp"
-  },
-})
+import TheSignInButton from '@/components/aequivalent/TheSignInButton.vue';
 
 const store = useStore()
-const storeNamespace = store.state[props.namespace]
+const namespace = 'aeq'
+const storeNamespace = store.state[namespace]
 
 const company = computed(() => storeNamespace.company.profile)
 </script>

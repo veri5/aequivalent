@@ -21,13 +21,13 @@
     </el-col>
   </el-row>
 
-  <TheNewCredentialModal />
+  <TheNewRequestModal />
 </template>
 
 <script lang="ts" setup>
 import TheCredentialsToolbar from '@/components/verifive/TheCredentialsToolbar.vue'
 import TheCredentialsTable from '@/components/verifive/TheCredentialsTable.vue'
-import TheNewCredentialModal from '@/components/verifive/TheNewCredentialModal.vue'
+import TheNewRequestModal from '@/components/verifive/TheNewRequestModal.vue'
 
 const heading = 'Credentials'
 </script>

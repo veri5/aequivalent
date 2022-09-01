@@ -14,7 +14,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProfileMenu.vue';
 import TheLandingPage from '@/views/verifive/TheLandingPage.vue';
-import TheCredentials from '@/views/verifive/TheCredentials.vue'
+import TheCredentials from '@/views/verifive/TheCredentials.vue';
 
 const store = useStore()
 const namespace = 'veri'

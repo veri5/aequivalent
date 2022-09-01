@@ -21,8 +21,8 @@
     <div style="line-height:15px; color:#2c3e50;">
       <el-icon :size="50"><CreditCard /></el-icon>
       <div>
-        <strong>No credentials to show yet</strong>
-        <p>Request your first credential by clicking on 'New request'</p>
+        <strong>No requests to show yet</strong>
+        <p>Review your first request by clicking on 'New credential'</p>
       </div>      
     </div>
     </template>
@@ -40,20 +40,20 @@ import { ElTable } from 'element-plus'
 import { CreditCard } from '@element-plus/icons-vue'
 
 const store = useStore()
-const namespace = 'veri'
+const namespace = 'aeq'
 const storeNamespace = store.state[namespace]
 
-const tableData = computed(() => storeNamespace.credentials.tableData)
+const tableData = computed(() => storeNamespace.requests.tableData)
 
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
-const currentRow = computed(() => store.getters[`${namespace}/credentials/currentRow`])
+const currentRow = computed(() => store.getters[`${namespace}/requests/currentRow`])
 watch(currentRow, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
 
 function rowClick(row){
-  store.dispatch(`${namespace}/credentials/setCurrentRow`, row)
+  store.dispatch(`${namespace}/requests/setCurrentRow`, row)
 }
 
 
