@@ -54,7 +54,18 @@
     </template>
 
     <el-table-column prop="type" label="Type" sortable />
-    <el-table-column prop="issuer" label="Issuer"/>
+    <el-table-column prop="issuer" label="Issuer">
+      <template #default="scope">
+        <el-link
+          type="primary"
+          :underline="false" 
+          href="https://aequivalent.ch" 
+          target="_blank"
+          >
+            {{ scope.row.issuer}}
+          </el-link>
+      </template>
+    </el-table-column>
     <el-table-column prop="status" label="Status">
       <template #default="scope">
         <el-tag
