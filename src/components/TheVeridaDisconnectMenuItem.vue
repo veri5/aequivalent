@@ -1,5 +1,7 @@
 <template>
-  <el-menu-item @click="disconnect">Disconnect</el-menu-item>
+  <el-menu-item @click="disconnect">
+    <el-icon><Back /></el-icon>Disconnect
+  </el-menu-item>
 </template>
 
 <script setup lang="ts">
@@ -7,6 +9,7 @@ import { defineProps, computed } from 'vue'
 import { useStore } from 'vuex'
 import { Network } from '@verida/client-ts'
 import { VaultAccount } from '@verida/account-web-vault'
+import { Back } from '@element-plus/icons-vue'
 
 const props = defineProps({
   namespace: {

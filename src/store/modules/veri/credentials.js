@@ -1,41 +1,47 @@
 const Statuses = {
-  pending: 'Pending',
+  processing: 'Processing',
   revoked: 'Revoked',
   issued: 'Issued',
 }
 
-const tableData = []
+const tableData = [
+  {
+    type: 'Credit Report',
+    issuer: 'Experian',
+    status: Statuses.issued
+  },
+  {
+    type: 'Score Report',
+    issuer: 'Equifax',
+    status: Statuses.processing
+  },
+  {
+    type: 'eSafety (or Pink Slip)',
+    issuer: 'NRMA',
+    status: Statuses.revoked
+  }
+]
 
 const typeOptions = [
   {
     value: 'university_diploma',
     label: 'University diploma - Aequivalent - aequivalent.ch',
-    upload: true,
-    disabled: false,
-  },
-  {
-    value: 'fake_university_diploma',
-    label: 'University diploma - Aequivalent - aequivalent.com',
-    upload: true,
-    disabled: false
+    upload: true
   },
   {
     value: 'credit_report',
     label: 'Credit report - Experian - experian.com',
-    upload: false,
-    disabled: false
+    upload: false
   },
   {
     value: 'score_report',
     label: 'Score report - Equifax - equifax.com',
-    upload: false,
-    disabled: false
+    upload: false
   },
   {
     value: 'pink_slip',
     label: 'eSafety (or Pink slip) - NRMA - nrma.com.au',
-    upload: false,
-    disabled: false
+    upload: false
   }
 ]
 
@@ -81,6 +87,7 @@ const state = {
   tableData: tableData,
   typeOptions: typeOptions,
   isModalVisible: false,
+  isViewModalVisible: false,
   currentRow: null
 }
 
@@ -88,13 +95,15 @@ const mutations = {
   setIsModalVisible (state, status) {
     state.isModalVisible = status
   },
+  setIsViewModalVisible (state, status) {
+    state.isViewModalVisible = status
+  },
   confirmRequest (state, request) {
     const entity = entities.find(({ element }) => element == request.element)
     const row = {
       type: entity.type,
       issuer: entity.name,
-      expiry: '',
-      status: Statuses.pending
+      status: Statuses.processing
     }
     state.tableData.push(row)
   },
@@ -126,17 +135,29 @@ const actions = {
   clearSelection ({ commit }) {
     commit('setCurrentRow', null)
   },
+  viewRequest ({ commit }) {
+    commit('setIsViewModalVisible', true)
+  },
+  closeViewModal ({ commit }) {
+    commit('setIsViewModalVisible', false)
+  },
 }
 
 const getters = {
   isModalVisible (state) {
     return state.isModalVisible === true
   },
+  isViewModalVisible (state) {
+    return state.isViewModalVisible === true
+  },
   currentRow (state) {
     return state.currentRow
   },
   isRowSelected (state) {
     return state.currentRow != null
+  },
+  statuses (state) {
+    return Statuses
   }
 }
 

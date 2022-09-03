@@ -5,20 +5,20 @@
         mode="horizontal"
         :ellipsis="false"
         style="align-items: center; padding: 5px;"
-        background-color="#FAFAFA"
+        background-color="#d3e4fd"
         text-color="#2c3e50"
       >
-        <el-avatar :size="50" style="margin-left:10px;">
-          <img :src="require(`../assets/${company.logo}`)"/>
+        <el-avatar :size="40" style="margin-left:10px;">
+          <img :src="require(`@/assets/${company.logo}`)"/>
         </el-avatar>
 
         <div class="flex-grow" />
         
-        <el-tooltip content="You have unread notifications" placement="bottom">
+        <!-- <el-tooltip content="You have unread notifications" placement="bottom">
           <el-badge is-dot class="bell-badge">
             <el-button link circle :icon="Bell" class="bell-icon" />
           </el-badge>
-        </el-tooltip>
+        </el-tooltip> -->
 
         <el-divider direction="vertical" class="menu-divider"/>
 
@@ -29,14 +29,14 @@
             </el-avatar>
           </template>
           <el-menu-item index="0-1" class="submenu-header no-hover">
-            <i>Signed in as:</i>
-            <div>{{ user.name }}</div>
-            <strong>{{ hideDid(user.did) }}</strong>
+            <div>Signed in as:</div>
+            <strong>{{ user.name }}</strong>
+            <i>{{ hideDid(user.did) }}</i>
           </el-menu-item>
-          <el-divider class="submenu-divider"/>
+          <!-- <el-divider class="submenu-divider"/>
           <el-tooltip content="Profile not syncing" placement="top">
             <el-menu-item disabled>Your profile</el-menu-item>
-          </el-tooltip>
+          </el-tooltip> -->
           <el-divider class="submenu-divider"/>
           <the-verida-disconnect-menu-item :namespace="namespace" />
         </el-sub-menu>

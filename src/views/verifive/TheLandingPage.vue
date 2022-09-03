@@ -54,12 +54,12 @@ const company = computed(() => storeNamespace.company.profile)
 <style scoped>
 .veri-banner-header {
   display: flex;
-  justify-content: flex-end;
-  background: white;
+  justify-content: flex-start;
+  background: black;
 }
 .veri-banner-header > img {
   height: 30px;
-  padding: 10px;
+  padding: 15px;
 }
 .veri-banner-body {
   display: flex;

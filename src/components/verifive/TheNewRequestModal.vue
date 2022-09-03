@@ -2,23 +2,22 @@
   <el-dialog
       v-model="showModel"
       :before-close="beforeClose"
+      :width="'35%'"
     >
-    <!-- header -->
     <template #header>
-      <strong>New credential request</strong>
-      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new credential.</p>
+      <strong>New request</strong>
+      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new credential</p>
       <el-divider style="margin: 0;"/>
     </template>
-    
-    <!-- body -->
+
     <el-form 
       ref="formRef"
       :model="form"
       :rules="rules"
       :label-position="'top'"
-      size="default"
+      :size="'default'"
     >
-      <el-form-item 
+      <el-form-item
         label="Credential type"
         prop="type"
       >
@@ -26,6 +25,7 @@
           v-model="form.type" 
           placeholder="Please select a credential type"
           :filterable="true"
+          :clearable="true"
           style="width: 100%"
         >
           <el-option
@@ -33,7 +33,6 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
-              :disabled="item.disabled"
           />
         </el-select>
       </el-form-item>
@@ -62,25 +61,24 @@
           </template>
         </el-upload>
       </el-form-item>
+    </el-form>
 
-      <el-divider />
+    <template #footer>
+      <el-divider style="margin: 0px; margin-bottom: 15px"/>
+      <el-button
+        @click="closeModal"
+      >
+        Cancel
+      </el-button>
+      <el-button 
+        type="primary"
+        plain 
+        @click="submit"
+      >
+        Submit
+      </el-button>
+    </template>
 
-      <!-- footer -->
-      <el-form-item>
-        <el-button 
-          type="primary" 
-          plain 
-          @click="submit"
-        >
-          Submit
-        </el-button>
-        <el-button
-          @click="closeModal"
-        >
-          Cancel
-        </el-button>
-      </el-form-item>
-    </el-form>    
   </el-dialog>
 </template>
 
@@ -88,7 +86,7 @@
 import { ref, reactive, computed, watch, markRaw } from 'vue'
 import { useStore } from 'vuex'
 import type { FormInstance, FormRules } from 'element-plus'
-import { UploadFilled, CreditCard } from '@element-plus/icons-vue'
+import { UploadFilled, Key, SuccessFilled } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
 import veridaAccount from '@/verida/veri-account'
 
@@ -166,13 +164,13 @@ function submit(){
 }
 function openConfirmBox(){
   ElMessageBox.confirm(
-    'A new credential will be requested. Continue?',
-    'Warning',
+    'Your signature is being requested. Continue?',
+    'Signature request',
     {
-      confirmButtonText: 'Confirm',
+      confirmButtonText: 'Sign',
       cancelButtonText: 'Cancel',
       type: 'warning',
-      icon: markRaw(CreditCard),
+      icon: markRaw(Key),
     }
   )
   .then(() => {
@@ -186,8 +184,9 @@ function openConfirmBox(){
 
     ElNotification({
       message: 'Credential requested successfully',
-      type: 'success',
-      position: 'top-left'
+      icon: markRaw(SuccessFilled),
+      position: 'top-left',
+      duration: 3000
     })
     closeModal()
   })

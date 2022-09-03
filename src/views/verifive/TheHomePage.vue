@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVeriAuth">
+  <div id="home" v-if="isVeriAuth">
     <TheVeridaDisconnectProfileMenu :namespace="namespace"/>
 
     <TheCredentials />
@@ -21,3 +21,11 @@ const namespace = 'veri'
 const storeNamespace = store.state[namespace]
 const isVeriAuth = computed(() => storeNamespace.user.isConnected)
 </script>
+
+<style scoped>
+#home {
+  box-shadow: inset 0 0 0 1000px rgb(234 241 251 / 30%);
+  background-image: url('~@/assets/background.png');
+  height: 100vh;
+}
+</style>

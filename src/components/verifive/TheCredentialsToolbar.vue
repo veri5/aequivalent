@@ -1,51 +1,72 @@
 <template>
-  <template v-if="currentRow">
-    <el-button
-      type="danger"
-      plain
-      :icon="Delete" 
-      @click="openRemoveBox"
+  <div id="toolbar">
+    <div v-if="currentRow">
+      <el-tooltip v-if="currentRow.status !== Statuses.processing"
+        content="Remove" 
+        placement="bottom"
+      >
+        <el-button
+          type="danger"
+          :size="'default'"
+          circle
+          plain
+          :icon="Delete" 
+          @click="openRemoveBox"
+        />
+      </el-tooltip>
+      <el-tooltip 
+        content="View" 
+        placement="bottom"
+      >
+        <el-button
+          :size="'default'"
+          circle
+          plain
+          :icon="View"
+          @click="viewRequest"
+        />
+      </el-tooltip>
+      <el-tooltip 
+        content="Clear selection" 
+        placement="bottom"
+      >
+        <el-button
+          :size="'default'"
+          circle
+          plain
+          :icon="Close"
+          @click="clearSelection"
+        />
+      </el-tooltip>
+    </div>
+    <el-tooltip v-else
+      content="New request" 
+      placement="bottom"
     >
-      Remove
-    </el-button>
-    <el-button v-if="currentRow.status !== 'Pending'"
-      :icon="Share" 
-    >
-      Share
-    </el-button>
-    <el-button v-if="currentRow.status !== 'Pending'"
-      :icon="View"
-    >
-      View
-    </el-button>
-    <el-button
-      :icon="CircleClose"
-      @click="clearSelection"
-    >
-      Clear selection
-    </el-button>
-  </template>
-  <el-button v-else
-    type="primary"
-    plain
-    :icon="Edit" 
-    @click="newRequest"
-  >
-    New request
-  </el-button>
+      <el-button
+        type="primary"
+        :size="'default'"
+        circle
+        plain
+        :icon="Edit" 
+        @click="newRequest"
+      />
+    </el-tooltip>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, markRaw } from 'vue'
 import { useStore } from 'vuex'
 import { ElNotification, ElMessageBox } from 'element-plus'
-import { Edit, Delete, Share, View, CircleClose } from '@element-plus/icons-vue'
+import { Edit, Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
 
 const store = useStore()
 const namespace = 'veri'
 const storeNamespace = store.state[namespace]
 
 const currentRow = computed(() => store.getters[`${namespace}/credentials/currentRow`])
+const Statuses = computed(() => store.getters[`${namespace}/credentials/statuses`])
 
 
 function newRequest() {
@@ -54,27 +75,38 @@ function newRequest() {
 function removeSelected() {
   store.dispatch(`${namespace}/credentials/removeCurrentRow`)
 }
+function viewRequest() {
+  store.dispatch(`${namespace}/credentials/viewRequest`)
+}
 function clearSelection() {
   store.dispatch(`${namespace}/credentials/clearSelection`)
 }
 function openRemoveBox(){
   ElMessageBox.confirm(
     'Credential will permanently be remove. Continue?',
-    'Warning',
+    'Remove credential',
     {
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
-      type: 'warning',
+      type: 'error',
       icon: markRaw(Delete),
     }
   )
   .then(() => {
     ElNotification({
       message: 'Credential removed successfully',
-      type: 'success',
-      position: 'top-left'
+      icon: markRaw(RemoveFilled),
+      position: 'top-left',
+      duration: 3000
     })
     removeSelected()
   })
 }
 </script>
+
+<style scoped>
+#toolbar {
+  padding: 10px;
+  background-color: white;
+}
+</style>

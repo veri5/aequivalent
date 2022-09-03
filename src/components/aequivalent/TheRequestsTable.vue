@@ -21,14 +21,13 @@
     <div style="line-height:15px; color:#2c3e50;">
       <el-icon :size="50"><CreditCard /></el-icon>
       <div>
-        <strong>No requests to show yet</strong>
-        <p>Review your first request by clicking on 'New credential'</p>
+        <strong>No issuance to show yet</strong>
+        <p>Review your first request by clicking on 'New issuance'</p>
       </div>      
     </div>
     </template>
     <el-table-column prop="type" label="Type" />
-    <el-table-column prop="issuer" label="Issuer" />
-    <el-table-column prop="expiry" label="Expiry" width="100"/>
+    <el-table-column prop="requester" label="Requester" />
     <el-table-column prop="status" label="Status" width="100"/>
   </el-table>
 </template>

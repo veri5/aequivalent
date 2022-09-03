@@ -5,14 +5,14 @@
     </el-col>
   </el-row> -->
 
-  <el-row :gutter="20">
-    <el-col :xs="12" :sm="12">
+  <el-row :gutter="10">
+    <el-col :xs="8" :sm="8">
       <TheVerifiveHome />
     </el-col>
 
-    <el-col :xs="12" :sm="12">
+    <!-- <el-col :xs="8" :sm="8">
       <TheAequivalentHome />
-    </el-col>
+    </el-col> -->
     
     <!-- <el-col :xs="8" :sm="8">
       <div v-if="isTtpAuth">
@@ -36,7 +36,7 @@ import { useStore } from 'vuex'
 // import Entities from '@/views/ttp/Entities.vue'
 
 // Verifive
-import TheVerifiveHome from '@/views/verifive/TheHome.vue'
+import TheVerifiveHome from '@/views/verifive/TheHomePage.vue'
 // Aequivalent
 import TheAequivalentHome from '@/views/aequivalent/TheHome.vue'
 

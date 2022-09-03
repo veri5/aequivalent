@@ -8,13 +8,9 @@
     >
       Remove
     </el-button>
-    <el-button v-if="currentRow.status !== 'Pending'"
-      :icon="Share" 
-    >
-      Share
-    </el-button>
-    <el-button v-if="currentRow.status !== 'Pending'"
+    <el-button v-if="currentRow.status !== 'Processing'"
       :icon="View"
+      @click="viewSelected"
     >
       View
     </el-button>
@@ -25,14 +21,11 @@
       Clear selection
     </el-button>
   </template>
-  <el-button v-else
-    type="primary"
-    plain
-    :icon="Edit" 
-    @click="newCredential"
+  <div v-else
+    :style="`font-size: var(--el-font-size-small)`"
   >
-    New credential
-  </el-button>
+    Please select a request to start reviewing
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -48,18 +41,18 @@ const storeNamespace = store.state[namespace]
 const currentRow = computed(() => store.getters[`${namespace}/requests/currentRow`])
 
 
-function newCredential() {
-  store.dispatch(`${namespace}/requests/newCredential`)
-}
 function removeSelected() {
   store.dispatch(`${namespace}/requests/removeCurrentRow`)
+}
+function viewSelected() {
+  store.dispatch(`${namespace}/requests/viewCurrentRow`)
 }
 function clearSelection() {
   store.dispatch(`${namespace}/requests/clearSelection`)
 }
 function openRemoveBox(){
   ElMessageBox.confirm(
-    'Credential will permanently be remove. Continue?',
+    'Issuance will permanently be remove. Continue?',
     'Warning',
     {
       confirmButtonText: 'Confirm',
@@ -70,7 +63,7 @@ function openRemoveBox(){
   )
   .then(() => {
     ElNotification({
-      message: 'Credential removed successfully',
+      message: 'Issuance removed successfully',
       type: 'success',
       position: 'top-left'
     })

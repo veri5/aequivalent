@@ -1,10 +1,14 @@
 const Statuses = {
-  pending: 'Pending',
-  revoked: 'Revoked',
+  processing: 'Processing',
+  rejected: 'Rejected',
   issued: 'Issued',
 }
 
-const tableData = []
+const tableData = [{
+  type: 'University Diploma',
+  requester: 'John Doe',
+  status: Statuses.processing
+}]
 
 const typeOptions = [
   {
@@ -88,13 +92,13 @@ const mutations = {
   setIsModalVisible (state, status) {
     state.isModalVisible = status
   },
-  confirmCredential (state, request) {
+  confirmIssuance (state, request) {
     const entity = entities.find(({ element }) => element == request.element)
     const row = {
       type: entity.type,
       issuer: entity.name,
       expiry: '',
-      status: Statuses.pending
+      status: Statuses.issued
     }
     state.tableData.push(row)
   },
@@ -108,14 +112,14 @@ const mutations = {
 }
 
 const actions = {
-  newCredential ({ commit }) {
+  viewCurrentRow ({ commit }) {
     commit('setIsModalVisible', true)
   },
   closeModal ({ commit }) {
     commit('setIsModalVisible', false)
   },
-  confirmCredential ({ commit }, request) {
-    commit('confirmCredential', request)
+  confirmIssuance ({ commit }, request) {
+    commit('confirmIssuance', request)
   },
   setCurrentRow ({ commit }, row) {
     commit('setCurrentRow', row)
