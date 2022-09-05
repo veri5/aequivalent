@@ -24,7 +24,6 @@
     :height="350"
     @row-click="rowClick"
     @row-dblclick="rowDblClick"
-    v-click-outside:[tableRef]="clearSelection"
   >
     <template v-if="tableData.length" #empty>
       <div style="line-height: 20px; color: #2c3e50;">
@@ -56,8 +55,8 @@
     </template>
 
     <el-table-column prop="type" label="Type" sortable />
-    <el-table-column prop="issuer" label="Issuer" />
-    <el-table-column prop="status" label="Status">
+    <el-table-column prop="issuer" label="Issuer" sortable/>
+    <el-table-column prop="status" label="Status" sortable>
       <template #default="scope">
         <el-tag
           :type="tagType(scope.row.status)"
@@ -76,7 +75,6 @@ import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
 import { CreditCard, Search, Edit, Operation } from '@element-plus/icons-vue'
-import {ClickOutside as vClickOutside} from 'element-plus'
 
 const store = useStore()
 const namespace = 'veri'
@@ -124,8 +122,5 @@ function rowDblClick() {
 }
 function newRequest() {
   store.dispatch(`${namespace}/credentials/newRequest`)
-}
-function clearSelection() {
-  // store.dispatch(`${namespace}/credentials/clearSelection`)
 }
 </script>

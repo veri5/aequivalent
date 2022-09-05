@@ -29,6 +29,5 @@ const isVeriAuth = computed(() => storeNamespace.user.isConnected)
 #home {
   box-shadow: inset 0 0 0 1000px rgb(234 241 251 / 20%);
   background-image: url('~@/assets/background.png');
-  height: 100vh;
 }
 </style>
