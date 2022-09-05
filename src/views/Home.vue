@@ -1,7 +1,7 @@
 <template>
   <!-- <el-row>
     <el-col>
-      <the-stepper />
+      <TheStepper />
     </el-col>
   </el-row> -->
 

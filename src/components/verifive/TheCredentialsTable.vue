@@ -23,6 +23,8 @@
     }"
     :height="350"
     @row-click="rowClick"
+    @row-dblclick="rowDblClick"
+    v-click-outside:[tableRef]="clearSelection"
   >
     <template v-if="tableData.length" #empty>
       <div style="line-height: 20px; color: #2c3e50;">
@@ -54,18 +56,7 @@
     </template>
 
     <el-table-column prop="type" label="Type" sortable />
-    <el-table-column prop="issuer" label="Issuer">
-      <template #default="scope">
-        <el-link
-          type="primary"
-          :underline="false" 
-          href="https://aequivalent.ch" 
-          target="_blank"
-          >
-            {{ scope.row.issuer}}
-          </el-link>
-      </template>
-    </el-table-column>
+    <el-table-column prop="issuer" label="Issuer" />
     <el-table-column prop="status" label="Status">
       <template #default="scope">
         <el-tag
@@ -85,6 +76,7 @@ import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
 import { CreditCard, Search, Edit, Operation } from '@element-plus/icons-vue'
+import {ClickOutside as vClickOutside} from 'element-plus'
 
 const store = useStore()
 const namespace = 'veri'
@@ -104,23 +96,36 @@ const currentRow = computed(() => store.getters[`${namespace}/credentials/curren
 watch(currentRow, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
-function tagType(status){
+function tagType(status: string) {
+  let tag = ''
   switch (status) {
     case 'Issued':
-      return 'success'
+      tag = 'success'
+      break
     case 'Revoked':
-      return 'error'
+      tag = 'danger'
+      break
     case 'Processing':
-      return 'info'
+      tag = 'info'
+      break
     default:
-      return 'info'
+      tag = 'info'
+      break
   }
+
+  return tag
 }
 
 function rowClick(row){
   store.dispatch(`${namespace}/credentials/setCurrentRow`, row)
 }
+function rowDblClick() {
+  store.dispatch(`${namespace}/credentials/viewRequest`)
+}
 function newRequest() {
   store.dispatch(`${namespace}/credentials/newRequest`)
+}
+function clearSelection() {
+  // store.dispatch(`${namespace}/credentials/clearSelection`)
 }
 </script>

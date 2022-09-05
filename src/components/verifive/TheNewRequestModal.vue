@@ -2,7 +2,7 @@
   <el-dialog
       v-model="showModel"
       :before-close="beforeClose"
-      :width="'35%'"
+      :width="'40%'"
     >
     <template #header>
       <strong>New request</strong>

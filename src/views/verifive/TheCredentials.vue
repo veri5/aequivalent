@@ -31,14 +31,14 @@
 
   <!-- modals -->
   <TheNewRequestModal />
-  <TheViewRequestModal />
+  <TheViewCredentialModal />
 </template>
 
 <script lang="ts" setup>
 import TheCredentialsToolbar from '@/components/verifive/TheCredentialsToolbar.vue'
 import TheCredentialsTable from '@/components/verifive/TheCredentialsTable.vue'
 import TheNewRequestModal from '@/components/verifive/TheNewRequestModal.vue'
-import TheViewRequestModal from '@/components/verifive/TheViewRequestModal.vue'
+import TheViewCredentialModal from '@/components/verifive/TheViewCredentialModal.vue'
 
 const heading = 'Credentials'
 </script>

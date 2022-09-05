@@ -1,7 +1,7 @@
 <template>
   <div id="toolbar">
     <div v-if="currentRow">
-      <el-tooltip v-if="currentRow.status !== Statuses.processing"
+      <el-tooltip
         content="Remove" 
         placement="bottom"
       >
@@ -14,7 +14,7 @@
           @click="openRemoveBox"
         />
       </el-tooltip>
-      <el-tooltip 
+      <el-tooltip
         content="View" 
         placement="bottom"
       >

@@ -8,16 +8,19 @@ const tableData = [
   {
     type: 'Credit Report',
     issuer: 'Experian',
+    url: 'https://www.experian.com/',
     status: Statuses.issued
   },
   {
     type: 'Score Report',
     issuer: 'Equifax',
+    url: 'https://www.equifax.com/',
     status: Statuses.processing
   },
   {
     type: 'eSafety (or Pink Slip)',
     issuer: 'NRMA',
+    url: 'https://www.nrma.com.au/',
     status: Statuses.revoked
   }
 ]
@@ -25,22 +28,22 @@ const tableData = [
 const typeOptions = [
   {
     value: 'university_diploma',
-    label: 'University diploma - Aequivalent - aequivalent.ch',
+    label: 'University diploma - Aequivalent',
     upload: true
   },
   {
     value: 'credit_report',
-    label: 'Credit report - Experian - experian.com',
+    label: 'Credit report - Experian',
     upload: false
   },
   {
     value: 'score_report',
-    label: 'Score report - Equifax - equifax.com',
+    label: 'Score report - Equifax',
     upload: false
   },
   {
     value: 'pink_slip',
-    label: 'eSafety (or Pink slip) - NRMA - nrma.com.au',
+    label: 'eSafety (or Pink slip) - NRMA',
     upload: false
   }
 ]
@@ -51,35 +54,35 @@ const entities = [
     type: 'University Diploma',
     element: 'university_diploma',
     name: 'Aequivalent',
-    url: 'aequivalent.ch',
+    url: 'https://www.aequivalent.ch',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'University Diploma (fake)',
     element: 'university_diploma_fake',
     name: 'Aequivalent',
-    url: 'aequivalent.com',
+    url: 'https://www.aequivalent.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'Credit Report',
     element: 'credit_report',
     name: 'Experian',
-    url: 'experian.com',
+    url: 'https://www.experian.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'Score Report',
     element: 'score_report',
     name: 'Equifax',
-    url: 'equifax.com',
+    url: 'https://www.equifax.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'eSafety (or Pink Slip)',
     element: 'pink_slip',
     name: 'NRMA',
-    url: 'nrma.com.au',
+    url: 'https://www.nrma.com.au',
   }
 ]
 
@@ -103,6 +106,7 @@ const mutations = {
     const row = {
       type: entity.type,
       issuer: entity.name,
+      url: entity.url,
       status: Statuses.processing
     }
     state.tableData.push(row)
