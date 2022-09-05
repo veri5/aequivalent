@@ -46,6 +46,7 @@
         <el-upload
           ref="upload"
           action="https://run.mocky.io/v3/d30b7e5f-47ec-463b-ba8e-700e574b3992"
+          :auto-upload="false"
           :drag="true"
           :limit="1"
           :on-success="(response, uploadFile) => { fileUploaded = true }"
@@ -131,7 +132,8 @@ const rules = reactive<FormRules>({
   ],
   upload: [
     {
-      validator: validateUpload,
+      // validator: validateUpload,
+      required: false, 
       message: 'A original certificate is required',
       trigger: ['blur', 'change']
     },
