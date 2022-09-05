@@ -10,7 +10,7 @@
       <el-card 
         shadow="never"
         class="veri-card"
-        :body-style="{ padding: '0px' }"
+        :body-style="{ padding: '5px' }"
         >
         <TheCredentialsToolbar />
       </el-card>

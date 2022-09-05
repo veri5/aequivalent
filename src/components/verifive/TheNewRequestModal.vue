@@ -184,7 +184,7 @@ function openConfirmBox(){
     }
     store.dispatch(`${namespace}/credentials/confirmRequest`, newRequest)
     
-    sendRequest()
+    // sendRequest()
 
     ElNotification({
       message: 'Credential requested successfully',
