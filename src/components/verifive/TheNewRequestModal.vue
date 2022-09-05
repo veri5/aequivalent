@@ -44,8 +44,10 @@
           <h4>Please upload a scanned or electronic copy of your original certificate</h4>
         </el-alert>        
         <el-upload
-          drag
-          action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+          ref="upload"
+          action="https://run.mocky.io/v3/d30b7e5f-47ec-463b-ba8e-700e574b3992"
+          :drag="true"
+          :limit="1"
           :on-success="(response, uploadFile) => { fileUploaded = true }"
           :on-remove="() => fileUploaded = false"
           style="width: 100%"

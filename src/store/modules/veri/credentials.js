@@ -5,24 +5,24 @@ const Statuses = {
 }
 
 const tableData = [
-  {
-    type: 'Credit Report',
-    issuer: 'Experian',
-    url: 'https://www.experian.com/',
-    status: Statuses.issued
-  },
-  {
-    type: 'Score Report',
-    issuer: 'Equifax',
-    url: 'https://www.equifax.com/',
-    status: Statuses.processing
-  },
-  {
-    type: 'eSafety (or Pink Slip)',
-    issuer: 'NRMA',
-    url: 'https://www.nrma.com.au/',
-    status: Statuses.revoked
-  }
+  // {
+  //   type: 'Credit Report',
+  //   issuer: 'Experian',
+  //   url: 'https://www.experian.com/',
+  //   status: Statuses.issued
+  // },
+  // {
+  //   type: 'Score Report',
+  //   issuer: 'Equifax',
+  //   url: 'https://www.equifax.com/',
+  //   status: Statuses.processing
+  // },
+  // {
+  //   type: 'eSafety (or Pink Slip)',
+  //   issuer: 'NRMA',
+  //   url: 'https://www.nrma.com.au/',
+  //   status: Statuses.revoked
+  // }
 ]
 
 const typeOptions = [
@@ -107,7 +107,7 @@ const mutations = {
       type: entity.type,
       issuer: entity.name,
       url: entity.url,
-      status: Statuses.processing
+      status: randomProperty(Statuses)
     }
     state.tableData.push(row)
   },
@@ -164,6 +164,12 @@ const getters = {
     return Statuses
   }
 }
+
+// Helpers
+const randomProperty = (obj) => {
+  var keys = Object.keys(obj);
+  return obj[keys[ keys.length * Math.random() << 0]];
+};
 
 export default {
   namespaced: true,

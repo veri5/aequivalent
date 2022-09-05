@@ -3,6 +3,8 @@
     <TheVeridaDisconnectProfileMenu :namespace="namespace"/>
 
     <TheCredentials />
+
+    <TheFooter />
   </div>
   <div v-else>
     <TheLandingPage/>
@@ -15,6 +17,7 @@ import { useStore } from 'vuex'
 import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProfileMenu.vue';
 import TheLandingPage from '@/views/verifive/TheLandingPage.vue';
 import TheCredentials from '@/views/verifive/TheCredentials.vue';
+import TheFooter from '@/components/verifive/TheFooter.vue';
 
 const store = useStore()
 const namespace = 'veri'
@@ -24,7 +27,7 @@ const isVeriAuth = computed(() => storeNamespace.user.isConnected)
 
 <style scoped>
 #home {
-  box-shadow: inset 0 0 0 1000px rgb(234 241 251 / 30%);
+  box-shadow: inset 0 0 0 1000px rgb(234 241 251 / 20%);
   background-image: url('~@/assets/background.png');
   height: 100vh;
 }
