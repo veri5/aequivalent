@@ -14,7 +14,15 @@
       :column="2"
       border
     >
-      <el-descriptions-item label="Type" :span="2">{{ credential.type }}</el-descriptions-item>
+      <el-descriptions-item label="Type">{{ credential.type }}</el-descriptions-item>
+      <el-descriptions-item label="Status">
+        <el-tag
+          :type="tagType(credential.status)"
+          :effect="'plain'"
+        >
+          {{ credential.status }}
+        </el-tag>
+      </el-descriptions-item>
       <el-descriptions-item label="Issuer">{{ credential.issuer }}</el-descriptions-item>
       <el-descriptions-item label="Website">
         <el-link
@@ -54,13 +62,32 @@ const isModalVisible = computed(() => store.getters[`${namespace}/credentials/is
 watch(isModalVisible, (value) => {
   showModel.value = value
 })
-
-
 function closeModal(){
   store.dispatch(`${namespace}/credentials/closeViewModal`)
 }
 function beforeClose(done){
   closeModal()
   done()
+}
+
+
+function tagType(status: string) {
+  let tag = ''
+  switch (status) {
+    case 'Issued':
+      tag = 'success'
+      break
+    case 'Revoked':
+      tag = 'danger'
+      break
+    case 'Processing':
+      tag = 'info'
+      break
+    default:
+      tag = 'info'
+      break
+  }
+
+  return tag
 }
 </script>
