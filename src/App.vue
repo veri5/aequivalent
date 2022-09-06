@@ -1,6 +1,25 @@
 <template>
-  <router-view/>
+  <!-- <el-row>
+    <el-col>
+      <TheStepper />
+    </el-col>
+  </el-row> -->
+  <el-row>
+    <el-col :xs="8" :sm="8">
+      <router-view name="veriApp"/>
+    </el-col>
+    <el-col :xs="8" :sm="8">
+      <router-view name="aeqApp"/>
+    </el-col>
+    <!-- <el-col :xs="8" :sm="8">
+      <router-view name="ttpApp"/>
+    </el-col> -->
+  </el-row>
 </template>
+
+<script lang="ts" setup>
+import TheStepper from '@/components/TheStepper.vue';
+</script>
 
 <style>
 body {
@@ -9,7 +28,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   /* background-image: url('~@/assets/background.png'); */
-  height: 100vh;
 }
 .el-dialog__body {
   padding: 0px 20px;

@@ -1,45 +1,47 @@
 const Statuses = {
   processing: 'Processing',
   rejected: 'Rejected',
-  issued: 'Issued',
+  approved: 'Approved',
 }
 
-const tableData = [{
-  type: 'University Diploma',
-  requester: 'John Doe',
-  status: Statuses.processing
-}]
+const tableData = [
+  {
+    type: 'University diploma',
+    requester: 'John Doe',
+    status: Statuses.approved
+  },
+  {
+    type: 'University diploma',
+    requester: 'Pablo Buitrago',
+    status: Statuses.processing
+  },
+  {
+    type: 'University diploma',
+    requester: 'Micha Roon',
+    status: Statuses.rejected
+  }
+]
 
 const typeOptions = [
   {
     value: 'university_diploma',
-    label: 'University diploma - Aequivalent - aequivalent.ch',
-    upload: true,
-    disabled: false,
-  },
-  {
-    value: 'fake_university_diploma',
-    label: 'University diploma - Aequivalent - aequivalent.com',
-    upload: true,
-    disabled: false
+    label: 'University diploma - Aequivalent',
+    upload: true
   },
   {
     value: 'credit_report',
-    label: 'Credit report - Experian - experian.com',
-    upload: false,
-    disabled: false
+    label: 'Credit report - Experian',
+    upload: false
   },
   {
     value: 'score_report',
-    label: 'Score report - Equifax - equifax.com',
-    upload: false,
-    disabled: false
+    label: 'Score report - Equifax',
+    upload: false
   },
   {
     value: 'pink_slip',
-    label: 'eSafety (or Pink slip) - NRMA - nrma.com.au',
-    upload: false,
-    disabled: false
+    label: 'eSafety (or Pink slip) - NRMA',
+    upload: false
   }
 ]
 
@@ -49,35 +51,35 @@ const entities = [
     type: 'University Diploma',
     element: 'university_diploma',
     name: 'Aequivalent',
-    url: 'aequivalent.ch',
+    url: 'https://www.aequivalent.ch',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'University Diploma (fake)',
     element: 'university_diploma_fake',
     name: 'Aequivalent',
-    url: 'aequivalent.com',
+    url: 'https://www.aequivalent.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'Credit Report',
     element: 'credit_report',
     name: 'Experian',
-    url: 'experian.com',
+    url: 'https://www.experian.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'Score Report',
     element: 'score_report',
     name: 'Equifax',
-    url: 'equifax.com',
+    url: 'https://www.equifax.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'eSafety (or Pink Slip)',
     element: 'pink_slip',
     name: 'NRMA',
-    url: 'nrma.com.au',
+    url: 'https://www.nrma.com.au',
   }
 ]
 
@@ -85,64 +87,58 @@ const state = {
   tableData: tableData,
   typeOptions: typeOptions,
   isModalVisible: false,
-  currentRow: null
+  isViewModalVisible: false,
+  selected: null
 }
 
 const mutations = {
-  setIsModalVisible (state, status) {
-    state.isModalVisible = status
+  setIsViewModalVisible (state, status) {
+    state.isViewModalVisible = status
   },
-  confirmIssuance (state, request) {
-    const entity = entities.find(({ element }) => element == request.element)
-    const row = {
-      type: entity.type,
-      issuer: entity.name,
-      expiry: '',
-      status: Statuses.issued
-    }
-    state.tableData.push(row)
+  setSelected (state, row) {
+    state.selected = row
   },
-  setCurrentRow (state, row) {
-    state.currentRow = row
-  },
-  removeCurrentRow (state) {
-    state.tableData.splice(state.tableData.indexOf(state.currentRow), 1)
-    state.currentRow = null
+  removeSelected (state) {
+    state.tableData.splice(state.tableData.indexOf(state.selected), 1)
+    state.selected = null
   }
 }
 
 const actions = {
-  viewCurrentRow ({ commit }) {
-    commit('setIsModalVisible', true)
+  setSelected ({ commit }, row) {
+    commit('setSelected', row)
   },
-  closeModal ({ commit }) {
-    commit('setIsModalVisible', false)
+  remove ({ commit }) {
+    commit('removeSelected')
   },
-  confirmIssuance ({ commit }, request) {
-    commit('confirmIssuance', request)
+  clear ({ commit }) {
+    commit('setSelected', null)
   },
-  setCurrentRow ({ commit }, row) {
-    commit('setCurrentRow', row)
+  view ({ commit }) {
+    commit('setIsViewModalVisible', true)
   },
-  removeCurrentRow ({ commit }) {
-    commit('removeCurrentRow')
-  },
-  clearSelection ({ commit }) {
-    commit('setCurrentRow', null)
+  closeViewModal ({ commit }) {
+    commit('setIsViewModalVisible', false)
   },
 }
 
 const getters = {
-  isModalVisible (state) {
-    return state.isModalVisible === true
+  isViewModalVisible (state) {
+    return state.isViewModalVisible === true
   },
-  currentRow (state) {
-    return state.currentRow
+  selected (state) {
+    return state.selected
   },
-  isRowSelected (state) {
-    return state.currentRow != null
+  statuses (state) {
+    return Statuses
   }
 }
+
+// Helpers
+const randomProperty = (obj) => {
+  var keys = Object.keys(obj);
+  return obj[keys[ keys.length * Math.random() << 0]];
+};
 
 export default {
   namespaced: true,

@@ -1,6 +1,6 @@
 <template>
   <div id="toolbar">
-    <div v-if="currentRow">
+    <div v-if="selected">
       <el-tooltip
         content="Remove" 
         placement="bottom"
@@ -11,7 +11,7 @@
           circle
           plain
           :icon="Delete" 
-          @click="openRemoveBox"
+          @click="showRemoveSelectedBox"
         />
       </el-tooltip>
       <el-tooltip
@@ -23,11 +23,11 @@
           circle
           plain
           :icon="View"
-          @click="viewRequest"
+          @click="viewSelected"
         />
       </el-tooltip>
       <el-tooltip 
-        content="Clear selection" 
+        content="Clear" 
         placement="bottom"
       >
         <el-button
@@ -35,7 +35,7 @@
           circle
           plain
           :icon="Close"
-          @click="clearSelection"
+          @click="clearSelected"
         />
       </el-tooltip>
     </div>
@@ -65,23 +65,23 @@ const store = useStore()
 const namespace = 'veri'
 const storeNamespace = store.state[namespace]
 
-const currentRow = computed(() => store.getters[`${namespace}/credentials/currentRow`])
+const selected = computed(() => store.getters[`${namespace}/credentials/selected`])
 const Statuses = computed(() => store.getters[`${namespace}/credentials/statuses`])
 
 
 function newRequest() {
-  store.dispatch(`${namespace}/credentials/newRequest`)
+  store.dispatch(`${namespace}/credentials/showNewRequestModal`)
 }
 function removeSelected() {
-  store.dispatch(`${namespace}/credentials/removeCurrentRow`)
+  store.dispatch(`${namespace}/credentials/remove`)
 }
-function viewRequest() {
-  store.dispatch(`${namespace}/credentials/viewRequest`)
+function viewSelected() {
+  store.dispatch(`${namespace}/credentials/showViewModal`)
 }
-function clearSelection() {
-  store.dispatch(`${namespace}/credentials/clearSelection`)
+function clearSelected() {
+  store.dispatch(`${namespace}/credentials/clear`)
 }
-function openRemoveBox(){
+function showRemoveSelectedBox(){
   ElMessageBox.confirm(
     'Credential will permanently be remove. Continue?',
     'Remove credential',

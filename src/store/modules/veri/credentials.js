@@ -1,52 +1,8 @@
-const Statuses = {
-  processing: 'Processing',
-  revoked: 'Revoked',
-  issued: 'Issued',
+// - Helpers
+const randomProperty = (obj) => {
+  var keys = Object.keys(obj);
+  return obj[keys[ keys.length * Math.random() << 0]];
 }
-
-const tableData = [
-  // {
-  //   type: 'Credit Report',
-  //   issuer: 'Experian',
-  //   url: 'https://www.experian.com/',
-  //   status: Statuses.issued
-  // },
-  // {
-  //   type: 'Score Report',
-  //   issuer: 'Equifax',
-  //   url: 'https://www.equifax.com/',
-  //   status: Statuses.processing
-  // },
-  // {
-  //   type: 'eSafety (or Pink Slip)',
-  //   issuer: 'NRMA',
-  //   url: 'https://www.nrma.com.au/',
-  //   status: Statuses.revoked
-  // }
-]
-
-const typeOptions = [
-  {
-    value: 'university_diploma',
-    label: 'University diploma - Aequivalent',
-    upload: true
-  },
-  {
-    value: 'credit_report',
-    label: 'Credit report - Experian',
-    upload: false
-  },
-  {
-    value: 'score_report',
-    label: 'Score report - Equifax',
-    upload: false
-  },
-  {
-    value: 'pink_slip',
-    label: 'eSafety (or Pink slip) - NRMA',
-    upload: false
-  }
-]
 
 const entities = [
   {
@@ -86,22 +42,62 @@ const entities = [
   }
 ]
 
+const tableData = entities.map(entity => ({
+  type: entity.type,
+  issuer: entity.name,
+  url: entity.url,
+  status: randomProperty({
+    revoked: 'Revoked',
+    issued: 'Issued',
+  })
+}))
+///
+
+const Statuses = {
+  processing: 'Processing',
+  revoked: 'Revoked',
+  issued: 'Issued',
+}
+
+const typeOptions = [
+  {
+    value: 'university_diploma',
+    label: 'University diploma - Aequivalent',
+    upload: true
+  },
+  {
+    value: 'credit_report',
+    label: 'Credit report - Experian',
+    upload: false
+  },
+  {
+    value: 'score_report',
+    label: 'Score report - Equifax',
+    upload: false
+  },
+  {
+    value: 'pink_slip',
+    label: 'eSafety (or Pink slip) - NRMA',
+    upload: false
+  }
+]
+
 const state = {
   tableData: tableData,
   typeOptions: typeOptions,
-  isModalVisible: false,
+  isNewRequestModalVisible: false,
   isViewModalVisible: false,
-  currentRow: null
+  selected: null
 }
 
 const mutations = {
-  setIsModalVisible (state, status) {
-    state.isModalVisible = status
+  setIsNewRequestModalVisible (state, status) {
+    state.isNewRequestModalVisible = status
   },
   setIsViewModalVisible (state, status) {
     state.isViewModalVisible = status
   },
-  confirmRequest (state, request) {
+  confirmNewRequest (state, request) {
     const entity = entities.find(({ element }) => element == request.element)
     const row = {
       type: entity.type,
@@ -111,35 +107,35 @@ const mutations = {
     }
     state.tableData.push(row)
   },
-  setCurrentRow (state, row) {
-    state.currentRow = row
+  setSelected (state, row) {
+    state.selected = row
   },
-  removeCurrentRow (state) {
-    state.tableData.splice(state.tableData.indexOf(state.currentRow), 1)
-    state.currentRow = null
+  removeSelected (state) {
+    state.tableData.splice(state.tableData.indexOf(state.selected), 1)
+    state.selected = null
   }
 }
 
 const actions = {
-  newRequest ({ commit }) {
-    commit('setIsModalVisible', true)
+  showNewRequestModal ({ commit }) {
+    commit('setIsNewRequestModalVisible', true)
   },
-  closeModal ({ commit }) {
-    commit('setIsModalVisible', false)
+  closeNewRequestModal ({ commit }) {
+    commit('setIsNewRequestModalVisible', false)
   },
-  confirmRequest ({ commit }, request) {
-    commit('confirmRequest', request)
+  confirmNewRequest ({ commit }, request) {
+    commit('confirmNewRequest', request)
   },
-  setCurrentRow ({ commit }, row) {
-    commit('setCurrentRow', row)
+  setSelected ({ commit }, row) {
+    commit('setSelected', row)
   },
-  removeCurrentRow ({ commit }) {
-    commit('removeCurrentRow')
+  remove ({ commit }) {
+    commit('removeSelected')
   },
-  clearSelection ({ commit }) {
-    commit('setCurrentRow', null)
+  clear ({ commit }) {
+    commit('setSelected', null)
   },
-  viewRequest ({ commit }) {
+  showViewModal ({ commit }) {
     commit('setIsViewModalVisible', true)
   },
   closeViewModal ({ commit }) {
@@ -148,28 +144,19 @@ const actions = {
 }
 
 const getters = {
-  isModalVisible (state) {
-    return state.isModalVisible === true
+  isNewRequestModalVisible (state) {
+    return state.isNewRequestModalVisible === true
   },
   isViewModalVisible (state) {
     return state.isViewModalVisible === true
   },
-  currentRow (state) {
-    return state.currentRow
-  },
-  isRowSelected (state) {
-    return state.currentRow != null
+  selected (state) {
+    return state.selected
   },
   statuses (state) {
     return Statuses
   }
 }
-
-// Helpers
-const randomProperty = (obj) => {
-  var keys = Object.keys(obj);
-  return obj[keys[ keys.length * Math.random() << 0]];
-};
 
 export default {
   namespaced: true,

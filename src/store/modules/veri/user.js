@@ -8,7 +8,7 @@ const initProfile = {
 
 const state = {
   profile: initProfile,
-  isConnected: false,
+  isConnected: true,
 }
 
 const mutations = {

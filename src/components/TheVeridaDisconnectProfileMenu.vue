@@ -8,9 +8,11 @@
         background-color="#d3e4fd"
         text-color="#2c3e50"
       >
-        <el-avatar :size="40" style="margin-left:10px;">
-          <img :src="require(`@/assets/${company.logo}`)"/>
-        </el-avatar>
+        <div
+          style="margin-left:10px"
+        >
+          <img width="30" :src="require(`@/assets/${company.logo}`)"/>
+        </div>
 
         <div class="flex-grow" />
         
@@ -18,9 +20,9 @@
           <el-badge is-dot class="bell-badge">
             <el-button link circle :icon="Bell" class="bell-icon" />
           </el-badge>
-        </el-tooltip> -->
+        </el-tooltip>
 
-        <el-divider direction="vertical" class="menu-divider"/>
+        <el-divider direction="vertical" class="menu-divider"/> -->
 
         <el-sub-menu index="0">
           <template #title>

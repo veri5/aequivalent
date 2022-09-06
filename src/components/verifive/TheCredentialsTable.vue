@@ -29,17 +29,17 @@
       <div style="line-height: 20px; color: #2c3e50;">
         <el-icon :size="50"><Operation /></el-icon>
         <div>
-          <p>No credential matching your search criteria was found</p>
+          <p>{{ noMatchingCriteriaText }}</p>
         </div>
       </div>
     </template>
     <template v-else #empty>
-      <div style="line-height: 15px; color: #2c3e50;">
+      <div style="line-height: 20px; color: #2c3e50;">
         <el-icon :size="50"><CreditCard /></el-icon>
         <div>
-          <strong>No credential to show yet</strong>
-          <p style="margin: 5px;">
-            Request your first credential by clicking 
+          <strong>{{ noItemToShowYetText }}</strong>
+          <p style="margin: 0px;">
+            {{ firstTourStepText }}
             <el-button
               type="primary"
               :size="'default'"
@@ -76,6 +76,10 @@ import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
 import { CreditCard, Search, Edit, Operation } from '@element-plus/icons-vue'
 
+const noMatchingCriteriaText = 'No credential matching your search criteria was found'
+const noItemToShowYetText = 'No credential to show yet'
+const firstTourStepText = 'Request your first credential by clicking'
+
 const store = useStore()
 const namespace = 'veri'
 const storeNamespace = store.state[namespace]
@@ -90,8 +94,8 @@ const filterType = computed(() =>
 
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
-const currentRow = computed(() => store.getters[`${namespace}/credentials/currentRow`])
-watch(currentRow, (value) => {
+const selected = computed(() => store.getters[`${namespace}/credentials/selected`])
+watch(selected, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
 function tagType(status: string) {
@@ -114,13 +118,13 @@ function tagType(status: string) {
   return tag
 }
 
-function rowClick(row){
-  store.dispatch(`${namespace}/credentials/setCurrentRow`, row)
+function rowClick(selected){
+  store.dispatch(`${namespace}/credentials/setSelected`, selected)
 }
 function rowDblClick() {
-  store.dispatch(`${namespace}/credentials/viewRequest`)
+  store.dispatch(`${namespace}/credentials/view`)
 }
 function newRequest() {
-  store.dispatch(`${namespace}/credentials/newRequest`)
+  store.dispatch(`${namespace}/credentials/showNewRequestModal`)
 }
 </script>

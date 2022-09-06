@@ -5,22 +5,24 @@
         mode="horizontal"
         :ellipsis="false"
         style="align-items: center; padding: 5px;"
-        background-color="#FAFAFA"
-        text-color="#2c3e50"
+        background-color="white"
+        text-color="black"
       >
-        <el-avatar :size="50" style="margin-left:10px;">
-          <img :src="require(`../assets/${company.logo}`)"/>
-        </el-avatar>
+        <div
+          style="margin-left:10px"
+        >
+          <img width="30" :src="require(`@/assets/${company.logo}`)"/>
+        </div>
 
         <div class="flex-grow" />
         
-        <el-tooltip content="You have unread notifications" placement="bottom">
+        <!-- <el-tooltip content="You have unread notifications" placement="bottom">
           <el-badge is-dot class="bell-badge">
             <el-button link circle :icon="Bell" class="bell-icon" />
           </el-badge>
         </el-tooltip>
 
-        <el-divider direction="vertical" class="menu-divider"/>
+        <el-divider direction="vertical" class="menu-divider"/> -->
 
         <el-sub-menu index="0">
           <template #title>
@@ -29,14 +31,14 @@
             </el-avatar>
           </template>
           <el-menu-item index="0-1" class="submenu-header no-hover">
-            <i>Signed in as:</i>
-            <div>{{ user.name }}</div>
-            <strong>{{ hideDid(user.did) }}</strong>
+            <div>Signed in as:</div>
+            <strong>{{ user.name }}</strong>
+            <i>{{ hideDid(user.did) }}</i>
           </el-menu-item>
-          <el-divider class="submenu-divider"/>
+          <!-- <el-divider class="submenu-divider"/>
           <el-tooltip content="Profile not syncing" placement="top">
             <el-menu-item disabled>Your profile</el-menu-item>
-          </el-tooltip>
+          </el-tooltip> -->
           <el-divider class="submenu-divider"/>
           <the-verida-sign-out-menu-item :namespace="namespace" />
         </el-sub-menu>
@@ -49,7 +51,7 @@
 import { defineProps, computed } from 'vue'
 import { useStore } from 'vuex'
 import { Bell } from '@element-plus/icons-vue'
-import TheVeridaSignOutMenuItem from './TheVeridaSignOutMenuItem.vue';
+import TheVeridaSignOutMenuItem from '@/components/TheVeridaSignOutMenuItem.vue';
 
 const props = defineProps({
   namespace: {

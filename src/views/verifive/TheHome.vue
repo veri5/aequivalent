@@ -7,7 +7,7 @@
     <TheFooter />
   </div>
   <div v-else>
-    <TheLandingPage/>
+    <TheLanding/>
   </div>
 </template>
 
@@ -15,7 +15,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProfileMenu.vue';
-import TheLandingPage from '@/views/verifive/TheLandingPage.vue';
+import TheLanding from '@/views/verifive/TheLanding.vue';
 import TheCredentials from '@/views/verifive/TheCredentials.vue';
 import TheFooter from '@/components/verifive/TheFooter.vue';
 

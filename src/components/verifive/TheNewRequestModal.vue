@@ -98,8 +98,8 @@ const namespace = 'veri'
 const storeNamespace = store.state[namespace]
 
 const showModel = ref(false)
-const isModalVisible = computed(() => store.getters[`${namespace}/credentials/isModalVisible`])
-watch(isModalVisible, (value) => {
+const isNewModalVisible = computed(() => store.getters[`${namespace}/credentials/isNewRequestModalVisible`])
+watch(isNewModalVisible, (value) => {
   showModel.value = value
 })
 const typeOptions = computed(() => storeNamespace.credentials.typeOptions)
@@ -148,7 +148,7 @@ function resetForm(){
 function closeModal(){
   fileUploaded.value = false
   resetForm(formRef.value)
-  store.dispatch(`${namespace}/credentials/closeModal`)
+  store.dispatch(`${namespace}/credentials/closeNewRequestModal`)
 }
 function beforeClose(done){
   closeModal()
@@ -182,7 +182,7 @@ function openConfirmBox(){
       element: form.type,
       uploadedFile: ''
     }
-    store.dispatch(`${namespace}/credentials/confirmRequest`, newRequest)
+    store.dispatch(`${namespace}/credentials/confirmNewRequest`, newRequest)
     
     // sendRequest()
 

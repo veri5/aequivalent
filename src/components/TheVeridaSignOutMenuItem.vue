@@ -1,10 +1,13 @@
 <template>
-  <el-menu-item @click="signOut">Sign out</el-menu-item>
+  <el-menu-item @click="signOut">
+    <el-icon><Back /></el-icon>Sign out
+  </el-menu-item>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useStore } from 'vuex'
+import { Back } from '@element-plus/icons-vue'
 
 const props = defineProps({
   namespace: {
