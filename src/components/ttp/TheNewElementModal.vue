@@ -5,8 +5,8 @@
       :width="'40%'"
     >
     <template #header>
-      <strong>New entity</strong>
-      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new entity</p>
+      <strong>New element</strong>
+      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new element</p>
       <el-divider style="margin: 0;"/>
     </template>
 
@@ -18,12 +18,12 @@
       :size="'default'"
     >
       <el-form-item
-        label="Entity type"
+        label="Element type"
         prop="type"
       >
         <el-select 
           v-model="form.type" 
-          placeholder="Please select a entity type"
+          placeholder="Please select a element type"
           :filterable="true"
           :clearable="true"
           style="width: 100%"
@@ -98,11 +98,11 @@ const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
 const showModel = ref(false)
-const isNewModalVisible = computed(() => store.getters[`${namespace}/entities/isNewEntityModalVisible`])
+const isNewModalVisible = computed(() => store.getters[`${namespace}/elements/isNewElementModalVisible`])
 watch(isNewModalVisible, (value) => {
   showModel.value = value
 })
-const typeOptions = computed(() => storeNamespace.entities.typeOptions)
+const typeOptions = computed(() => storeNamespace.elements.typeOptions)
 function showUpload(){
   return form.type ? typeOptions.value.find(({ value }) => value === form.type).upload : false
 }
@@ -126,7 +126,7 @@ const rules = reactive<FormRules>({
   type: [
     { 
       required: true, 
-      message: 'A entity type is required', 
+      message: 'A element type is required', 
       trigger: ['blur', 'change']
     },
   ],
@@ -148,7 +148,7 @@ function resetForm(){
 function closeModal(){
   fileUploaded.value = false
   resetForm(formRef.value)
-  store.dispatch(`${namespace}/entities/closeNewEntityModal`)
+  store.dispatch(`${namespace}/elements/closeNewElementModal`)
 }
 function beforeClose(done){
   closeModal()
@@ -182,12 +182,12 @@ function openConfirmBox(){
       element: form.type,
       uploadedFile: ''
     }
-    store.dispatch(`${namespace}/entities/confirmNewEntity`, newRequest)
+    store.dispatch(`${namespace}/elements/confirmNewElement`, newRequest)
     
     // sendRequest()
 
     ElNotification({
-      message: 'Entity requested successfully',
+      message: 'Element requested successfully',
       icon: markRaw(SuccessFilled),
       position: 'top-left',
       duration: 3000
@@ -205,7 +205,7 @@ async function sendRequest() {
     filter: {}
   }
   const name = veridaAccount.profile.name
-  const message = `${name} is requesting a new ${form.type} entity`
+  const message = `${name} is requesting a new ${form.type} element`
   const config = {
     recipientContextName: "Verida: Vault",
   }

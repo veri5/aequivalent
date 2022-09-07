@@ -1,7 +1,7 @@
 <template>
   <el-input v-if="tableData.length"
     v-model="search" 
-    placeholder="Search all credential types" 
+    placeholder="Search all elements" 
     clearable
     :prefix-icon="Search"
     size="default"
@@ -13,7 +13,7 @@
     :show-header="!!tableData.length && !search"
     :table-layout="'auto'"
     :highlight-current-row="true"
-    :default-sort="{ prop: 'type', order: 'ascending' }"
+    :default-sort="{ prop: 'element', order: 'ascending' }"
     :header-cell-style="{ 
       background: '#f0f9eb', 
       color: '#2c3e50'
@@ -46,7 +46,7 @@
               circle
               plain
               :icon="Edit" 
-              @click="newRequest"
+              @click="newElement"
               style="margin: 5px;"
             />
           </p>
@@ -76,25 +76,25 @@ import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
 import { CreditCard, Search, Edit, Operation } from '@element-plus/icons-vue'
 
-const noMatchingCriteriaText = 'No credential matching your search criteria was found'
-const noItemToShowYetText = 'No credential to show yet'
-const firstTourStepText = 'Request your first credential by clicking'
+const noMatchingCriteriaText = 'No element matching your search criteria was found'
+const noItemToShowYetText = 'No element to show yet'
+const firstTourStepText = 'Add your first element by clicking'
 
 const store = useStore()
 const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
-const tableData = computed(() => storeNamespace.entities.tableData)
+const tableData = computed(() => storeNamespace.elements.tableData)
 const search = ref('')
 const filterType = computed(() =>
   tableData.value.filter((row) =>
       !search.value || 
-      row.type.toLowerCase().includes(search.value.toLowerCase()))
+      row.element.toLowerCase().includes(search.value.toLowerCase()))
 )
 
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
-const selected = computed(() => store.getters[`${namespace}/entities/selected`])
+const selected = computed(() => store.getters[`${namespace}/elements/selected`])
 watch(selected, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
@@ -119,12 +119,12 @@ function tagType(status: string) {
 }
 
 function rowClick(selected){
-  store.dispatch(`${namespace}/entities/setSelected`, selected)
+  store.dispatch(`${namespace}/elements/setSelected`, selected)
 }
 function rowDblClick() {
-  store.dispatch(`${namespace}/entities/view`)
+  store.dispatch(`${namespace}/elements/view`)
 }
-function newRequest() {
-  store.dispatch(`${namespace}/entities/showNewRequestModal`)
+function newElement() {
+  store.dispatch(`${namespace}/elements/showNewElementModal`)
 }
 </script>

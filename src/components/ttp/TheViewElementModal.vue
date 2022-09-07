@@ -5,25 +5,25 @@
       :width="'40%'"
     >
     <template #header>
-      <strong>View entity</strong>
-      <p style="font-size: var(--el-font-size-small);">Please find your entity details below</p>
+      <strong>View element</strong>
+      <p style="font-size: var(--el-font-size-small);">Please find your element details below</p>
     </template>
 
-    <el-descriptions v-if="entity !== null"
+    <el-descriptions v-if="element !== null"
       direction="vertical"
       :column="2"
       border
     >
-      <el-descriptions-item label="Element">{{ entity.element }}</el-descriptions-item>
+      <el-descriptions-item label="Element">{{ element.element }}</el-descriptions-item>
       <el-descriptions-item label="Status">
         <el-tag
-          :type="tagType(entity.status)"
+          :type="tagType(element.status)"
           :effect="'plain'"
         >
-          {{ entity.status }}
+          {{ element.status }}
         </el-tag>
       </el-descriptions-item>
-      <el-descriptions-item label="Entity">{{ entity.name }}</el-descriptions-item>
+      <el-descriptions-item label="Element">{{ element.name }}</el-descriptions-item>
       <el-descriptions-item label="Website">
         <el-link
           type="primary"
@@ -31,7 +31,7 @@
           href="https://aequivalent.ch" 
           target="_blank"
         >
-          {{ entity.url }}
+          {{ element.url }}
         </el-link>
       </el-descriptions-item>
       <el-descriptions-item label="Expiry">2027-09-04</el-descriptions-item>
@@ -55,15 +55,15 @@ import { useStore } from 'vuex'
 const store = useStore()
 const namespace = 'ttp'
 
-const entity = computed(() => store.getters[`${namespace}/entities/selected`])
+const element = computed(() => store.getters[`${namespace}/elements/selected`])
 
 const showModel = ref(false)
-const isViewModalVisible = computed(() => store.getters[`${namespace}/entities/isViewModalVisible`])
+const isViewModalVisible = computed(() => store.getters[`${namespace}/elements/isViewModalVisible`])
 watch(isViewModalVisible, (value) => {
   showModel.value = value
 })
 function closeModal(){
-  store.dispatch(`${namespace}/entities/closeViewModal`)
+  store.dispatch(`${namespace}/elements/closeViewModal`)
 }
 function beforeClose(done){
   closeModal()

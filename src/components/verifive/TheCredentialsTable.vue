@@ -1,7 +1,7 @@
 <template>
   <el-input v-if="tableData.length"
     v-model="search" 
-    placeholder="Search all credential types" 
+    placeholder="Search all types" 
     clearable
     :prefix-icon="Search"
     size="default"

@@ -5,7 +5,7 @@
       :background-color="'#e1f3d8'"
     />
 
-    <TheEntities />
+    <TheElements />
 
     <TheFooter />
   </div>
@@ -19,7 +19,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
 import TheLanding from '@/views/ttp/TheLanding.vue';
-import TheEntities from '@/views/ttp/TheEntities.vue';
+import TheElements from '@/views/ttp/TheElements.vue';
 import TheFooter from '@/components/ttp/TheFooter.vue';
 
 const store = useStore()

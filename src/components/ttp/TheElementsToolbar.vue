@@ -40,7 +40,7 @@
       </el-tooltip>
     </div>
     <el-tooltip v-else
-      content="New entity" 
+      content="New element" 
       placement="bottom"
     >
       <el-button
@@ -49,7 +49,7 @@
         circle
         plain
         :icon="Edit" 
-        @click="newEntity"
+        @click="newElement"
       />
     </el-tooltip>
   </div>
@@ -65,26 +65,26 @@ const store = useStore()
 const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
-const selected = computed(() => store.getters[`${namespace}/entities/selected`])
-const Statuses = computed(() => store.getters[`${namespace}/entities/statuses`])
+const selected = computed(() => store.getters[`${namespace}/elements/selected`])
+const Statuses = computed(() => store.getters[`${namespace}/elements/statuses`])
 
 
-function newEntity() {
-  store.dispatch(`${namespace}/entities/showNewEntityModal`)
+function newElement() {
+  store.dispatch(`${namespace}/elements/showNewElementModal`)
 }
 function removeSelected() {
-  store.dispatch(`${namespace}/entities/remove`)
+  store.dispatch(`${namespace}/elements/remove`)
 }
 function viewSelected() {
-  store.dispatch(`${namespace}/entities/showViewModal`)
+  store.dispatch(`${namespace}/elements/showViewModal`)
 }
 function clearSelected() {
-  store.dispatch(`${namespace}/entities/clear`)
+  store.dispatch(`${namespace}/elements/clear`)
 }
 function showRemoveSelectedBox(){
   ElMessageBox.confirm(
-    'Entity will permanently be remove. Continue?',
-    'Remove entity',
+    'Element will permanently be remove. Continue?',
+    'Remove element',
     {
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
@@ -94,7 +94,7 @@ function showRemoveSelectedBox(){
   )
   .then(() => {
     ElNotification({
-      message: 'Entity removed successfully',
+      message: 'Element removed successfully',
       icon: markRaw(RemoveFilled),
       position: 'top-left',
       duration: 3000

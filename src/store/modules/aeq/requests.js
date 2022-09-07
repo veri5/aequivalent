@@ -45,7 +45,7 @@ const typeOptions = [
   }
 ]
 
-const entities = [
+const elements = [
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'University Diploma',

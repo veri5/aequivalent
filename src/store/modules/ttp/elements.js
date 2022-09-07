@@ -4,7 +4,7 @@ const randomProperty = (obj) => {
   return obj[keys[ keys.length * Math.random() << 0]];
 }
 
-const entities = [
+const elements = [
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'University Diploma',
@@ -42,10 +42,10 @@ const entities = [
   }
 ]
 
-const tableData = entities.map(entity => ({
-  element: entity.type,
-  name: entity.name,
-  url: entity.url,
+const tableData = elements.map(element => ({
+  element: element.type,
+  name: element.name,
+  url: element.url,
   status: randomProperty({
     revoked: 'Revoked',
     legit: 'Legit',
@@ -85,24 +85,24 @@ const typeOptions = [
 const state = {
   tableData: tableData,
   typeOptions: typeOptions,
-  isNewEntityModalVisible: false,
+  isNewElementModalVisible: false,
   isViewModalVisible: false,
   selected: null
 }
 
 const mutations = {
-  setIsNewEntityModalVisible (state, status) {
-    state.isNewEntityModalVisible = status
+  setIsNewElementModalVisible (state, status) {
+    state.isNewElementModalVisible = status
   },
   setIsViewModalVisible (state, status) {
     state.isViewModalVisible = status
   },
-  confirmNewEntity (state, request) {
-    const entity = entities.find(({ element }) => element == request.element)
+  confirmNewElement (state, request) {
+    const element = elements.find(({ element }) => element == request.element)
     const row = {
-      element: entity.type,
-      name: entity.name,
-      url: entity.url,
+      element: element.type,
+      name: element.name,
+      url: element.url,
       status: randomProperty(Statuses)
     }
     state.tableData.push(row)
@@ -117,14 +117,14 @@ const mutations = {
 }
 
 const actions = {
-  showNewEntityModal ({ commit }) {
-    commit('setIsNewEntityModalVisible', true)
+  showNewElementModal ({ commit }) {
+    commit('setIsNewElementModalVisible', true)
   },
-  closeNewEntityModal ({ commit }) {
-    commit('setIsNewEntityModalVisible', false)
+  closeNewElementModal ({ commit }) {
+    commit('setIsNewElementModalVisible', false)
   },
-  confirmNewEntity ({ commit }, request) {
-    commit('confirmNewEntity', request)
+  confirmNewElement ({ commit }, element) {
+    commit('confirmNewElement', element)
   },
   setSelected ({ commit }, row) {
     commit('setSelected', row)
@@ -144,8 +144,8 @@ const actions = {
 }
 
 const getters = {
-  isNewEntityModalVisible (state) {
-    return state.isNewEntityModalVisible === true
+  isNewElementModalVisible (state) {
+    return state.isNewElementModalVisible === true
   },
   isViewModalVisible (state) {
     return state.isViewModalVisible === true

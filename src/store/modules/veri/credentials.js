@@ -4,7 +4,7 @@ const randomProperty = (obj) => {
   return obj[keys[ keys.length * Math.random() << 0]];
 }
 
-const entities = [
+const elements = [
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'University Diploma',
@@ -42,10 +42,10 @@ const entities = [
   }
 ]
 
-const tableData = entities.map(entity => ({
-  type: entity.type,
-  issuer: entity.name,
-  url: entity.url,
+const tableData = elements.map(element => ({
+  type: element.type,
+  issuer: element.name,
+  url: element.url,
   status: randomProperty({
     revoked: 'Revoked',
     issued: 'Issued',
@@ -98,11 +98,11 @@ const mutations = {
     state.isViewModalVisible = status
   },
   confirmNewRequest (state, request) {
-    const entity = entities.find(({ element }) => element == request.element)
+    const element = elements.find(({ element }) => element == request.element)
     const row = {
-      type: entity.type,
-      issuer: entity.name,
-      url: entity.url,
+      type: element.type,
+      issuer: element.name,
+      url: element.url,
       status: randomProperty(Statuses)
     }
     state.tableData.push(row)

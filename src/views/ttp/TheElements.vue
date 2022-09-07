@@ -12,7 +12,7 @@
         class="veri-card"
         :body-style="{ padding: '5px' }"
         >
-        <TheEntitiesToolbar />
+        <TheElementsToolbar />
       </el-card>
     </el-col>
   </el-row>
@@ -24,23 +24,23 @@
         class="veri-card"
         :body-style="{ padding: '5px' }"
         >
-        <TheEntitiesTable />
+        <TheElementsTable />
       </el-card>
     </el-col>
   </el-row>
 
   <!-- modals -->
-  <TheNewEntityModal />
-  <TheViewEntityModal />
+  <TheNewElementModal />
+  <TheViewElementModal />
 </template>
 
 <script lang="ts" setup>
-import TheEntitiesToolbar from '@/components/ttp/TheEntitiesToolbar.vue'
-import TheEntitiesTable from '@/components/ttp/TheEntitiesTable.vue'
-import TheNewEntityModal from '@/components/ttp/TheNewEntityModal.vue'
-import TheViewEntityModal from '@/components/ttp/TheViewEntityModal.vue'
+import TheElementsToolbar from '@/components/ttp/TheElementsToolbar.vue'
+import TheElementsTable from '@/components/ttp/TheElementsTable.vue'
+import TheNewElementModal from '@/components/ttp/TheNewElementModal.vue'
+import TheViewElementModal from '@/components/ttp/TheViewElementModal.vue'
 
-const heading = 'Entities'
+const heading = 'Elements'
 </script>
 
 <style scoped>
