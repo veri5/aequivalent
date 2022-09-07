@@ -1,7 +1,7 @@
 const state = {
   profile: { 
     name: 'The Trust Protocol',
-    logo: 'tpt_logo.png', 
+    logo: 'verifive_logo.png', 
     fallbackLogo: 'logo_fallback.png',
   }
 }

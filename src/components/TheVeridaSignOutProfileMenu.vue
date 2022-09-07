@@ -5,7 +5,7 @@
         mode="horizontal"
         :ellipsis="false"
         style="align-items: center; padding: 5px;"
-        background-color="white"
+        :background-color="props.backgroundColor"
         text-color="black"
       >
         <div
@@ -58,6 +58,11 @@ const props = defineProps({
     type: String,
     required: true,
     default: "ttp"
+  },
+  backgroundColor: {
+    type: String,
+    required: true,
+    default: "white"
   },
 })
 

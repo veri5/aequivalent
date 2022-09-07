@@ -37,7 +37,6 @@
 import TheRequestsToolbar from '@/components/aequivalent/TheRequestsToolbar.vue'
 import TheRequestsTable from '@/components/aequivalent/TheRequestsTable.vue'
 import TheViewRequestModal from '@/components/aequivalent/TheViewRequestModal.vue'
-import TheFooter from '@/components/verifive/TheFooter.vue';
 
 const heading = 'Requests'
 </script>
@@ -46,9 +45,11 @@ const heading = 'Requests'
 .heading {
   padding: 5px;
   padding-left: 15px;
+  color: black;
+  font-family: 'Roobert-Semibold';
 }
 .aeq-card {
-  background-color: #f6f8fc; 
+  background-color: #f3f2f3; 
   padding: 0px; 
   border: none; 
   margin: 0px 10px 0px 10px; 

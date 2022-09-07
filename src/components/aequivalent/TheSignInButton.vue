@@ -47,12 +47,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.vda-button {
-  max-width: 25px;
-  padding:0 7px;
-}
-</style>
-
 
 <style scoped>
 .aeq-button {

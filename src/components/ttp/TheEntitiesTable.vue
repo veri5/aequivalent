@@ -15,7 +15,7 @@
     :highlight-current-row="true"
     :default-sort="{ prop: 'type', order: 'ascending' }"
     :header-cell-style="{ 
-      background: '#ecf5ff', 
+      background: '#f0f9eb', 
       color: '#2c3e50'
     }"
     :row-style="{
@@ -54,8 +54,8 @@
       </div>
     </template>
 
-    <el-table-column prop="type" label="Type" sortable />
-    <el-table-column prop="issuer" label="Issuer" sortable/>
+    <el-table-column prop="element" label="Element" sortable />
+    <el-table-column prop="entity" label="Entity" sortable/>
     <el-table-column prop="status" label="Status" sortable>
       <template #default="scope">
         <el-tag
@@ -81,10 +81,10 @@ const noItemToShowYetText = 'No credential to show yet'
 const firstTourStepText = 'Request your first credential by clicking'
 
 const store = useStore()
-const namespace = 'veri'
+const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
-const tableData = computed(() => storeNamespace.credentials.tableData)
+const tableData = computed(() => storeNamespace.entities.tableData)
 const search = ref('')
 const filterType = computed(() =>
   tableData.value.filter((row) =>
@@ -94,14 +94,14 @@ const filterType = computed(() =>
 
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
-const selected = computed(() => store.getters[`${namespace}/credentials/selected`])
+const selected = computed(() => store.getters[`${namespace}/entities/selected`])
 watch(selected, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
 function tagType(status: string) {
   let tag = ''
   switch (status) {
-    case 'Issued':
+    case 'Legit':
       tag = 'success'
       break
     case 'Revoked':
@@ -119,12 +119,12 @@ function tagType(status: string) {
 }
 
 function rowClick(selected){
-  store.dispatch(`${namespace}/credentials/setSelected`, selected)
+  store.dispatch(`${namespace}/entities/setSelected`, selected)
 }
 function rowDblClick() {
-  store.dispatch(`${namespace}/credentials/view`)
+  store.dispatch(`${namespace}/entities/view`)
 }
 function newRequest() {
-  store.dispatch(`${namespace}/credentials/showNewRequestModal`)
+  store.dispatch(`${namespace}/entities/showNewRequestModal`)
 }
 </script>

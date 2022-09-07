@@ -12,7 +12,7 @@
         class="veri-card"
         :body-style="{ padding: '5px' }"
         >
-        <TheCredentialsToolbar />
+        <TheEntitiesToolbar />
       </el-card>
     </el-col>
   </el-row>
@@ -24,7 +24,7 @@
         class="veri-card"
         :body-style="{ padding: '5px' }"
         >
-        <TheCredentialsTable />
+        <TheEntitiesTable />
       </el-card>
     </el-col>
   </el-row>
@@ -35,12 +35,12 @@
 </template>
 
 <script lang="ts" setup>
-import TheCredentialsToolbar from '@/components/verifive/TheCredentialsToolbar.vue'
-import TheCredentialsTable from '@/components/verifive/TheCredentialsTable.vue'
+import TheEntitiesToolbar from '@/components/ttp/TheEntitiesToolbar.vue'
+import TheEntitiesTable from '@/components/ttp/TheEntitiesTable.vue'
 import TheNewRequestModal from '@/components/verifive/TheNewRequestModal.vue'
 import TheViewCredentialModal from '@/components/verifive/TheViewCredentialModal.vue'
 
-const heading = 'Credentials'
+const heading = 'Entities'
 </script>
 
 <style scoped>
@@ -50,7 +50,7 @@ const heading = 'Credentials'
   color: black;
 }
 .veri-card {
-  background-color: #ecf5ff; 
+  background-color: #f0f9eb; 
   padding: 0px; 
   border: none; 
   margin: 0px 10px 0px 10px; 

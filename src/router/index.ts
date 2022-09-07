@@ -7,7 +7,7 @@ const routes: Array<RouteRecordRaw> = [
     components: {
       veriApp: () => import('@/views/verifive/TheHome.vue'),
       aeqApp: () => import('@/views/aequivalent/TheHome.vue'),
-      // ttpApp: () => import('@/views/ttp/TheHome.vue')
+      ttpApp: () => import('@/views/ttp/TheHome.vue')
     }
   },
 ]

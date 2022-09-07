@@ -1,5 +1,5 @@
 <template>
-  <div id="toolbar" v-if="tableData.length">
+  <div id="toolbar">
     <div v-if="selected">
       <el-tooltip
         content="Remove" 
@@ -39,9 +39,19 @@
         />
       </el-tooltip>
     </div>
-    <div v-else class="not-selected-text">
-      {{ notSelectedYetText}}
-    </div>
+    <el-tooltip v-else
+      content="New request" 
+      placement="bottom"
+    >
+      <el-button
+        type="primary"
+        :size="'default'"
+        circle
+        plain
+        :icon="Edit" 
+        @click="newRequest"
+      />
+    </el-tooltip>
   </div>
 </template>
 
@@ -49,32 +59,32 @@
 import { computed, markRaw } from 'vue'
 import { useStore } from 'vuex'
 import { ElNotification, ElMessageBox } from 'element-plus'
-import { Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
-
-const notSelectedYetText = 'Please select a request to start reviewing'
+import { Edit, Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
-const selected = computed(() => store.getters[`${namespace}/requests/selected`])
-const Statuses = computed(() => store.getters[`${namespace}/requests/statuses`])
-const tableData = computed(() => storeNamespace.requests.tableData)
+const selected = computed(() => store.getters[`${namespace}/entities/selected`])
+const Statuses = computed(() => store.getters[`${namespace}/entities/statuses`])
 
 
+function newRequest() {
+  store.dispatch(`${namespace}/entities/showNewRequestModal`)
+}
 function removeSelected() {
-  store.dispatch(`${namespace}/requests/remove`)
+  store.dispatch(`${namespace}/entities/remove`)
 }
 function viewSelected() {
-  store.dispatch(`${namespace}/requests/view`)
+  store.dispatch(`${namespace}/entities/showViewModal`)
 }
 function clearSelected() {
-  store.dispatch(`${namespace}/requests/clear`)
+  store.dispatch(`${namespace}/entities/clear`)
 }
 function showRemoveSelectedBox(){
   ElMessageBox.confirm(
-    'Request will permanently be remove. Continue?',
-    'Remove request',
+    'Credential will permanently be remove. Continue?',
+    'Remove credential',
     {
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
@@ -84,7 +94,7 @@ function showRemoveSelectedBox(){
   )
   .then(() => {
     ElNotification({
-      message: 'Request removed successfully',
+      message: 'Credential removed successfully',
       icon: markRaw(RemoveFilled),
       position: 'top-left',
       duration: 3000
@@ -96,14 +106,7 @@ function showRemoveSelectedBox(){
 
 <style scoped>
 #toolbar {
-  min-height: 32px;
   padding: 10px;
   background-color: white;
-}
-.not-selected-text {
-  font-family: 'Roobert-Semibold';
-  font-size: 14px;
-  color: black;
-  padding: 8px 0px;
 }
 </style>

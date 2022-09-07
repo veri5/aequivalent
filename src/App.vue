@@ -11,9 +11,9 @@
     <el-col :xs="8" :sm="8">
       <router-view name="aeqApp"/>
     </el-col>
-    <!-- <el-col :xs="8" :sm="8">
+    <el-col :xs="8" :sm="8">
       <router-view name="ttpApp"/>
-    </el-col> -->
+    </el-col>
   </el-row>
 </template>
 
@@ -27,7 +27,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  /* background-image: url('~@/assets/background.png'); */
 }
 .el-dialog__body {
   padding: 0px 20px;

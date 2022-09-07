@@ -9,6 +9,7 @@ import requests from './modules/aeq/requests'
 
 import ttpUser from './modules/ttp/user'
 import ttpCompany from './modules/ttp/company'
+import entities from './modules/ttp/entities'
 import verida from './modules/vda/verida'
 
 export default createStore({
@@ -18,7 +19,8 @@ export default createStore({
       modules: {
         user: ttpUser,
         company: ttpCompany,
-        verida: verida
+        verida,
+        entities
       }
     },
     aeq: {
@@ -26,8 +28,8 @@ export default createStore({
       modules: {
         user: aeqUser,
         company: aeqCompany,
-        verida: verida,
-        requests: requests
+        verida,
+        requests
       }
     },
     veri: {
@@ -35,8 +37,8 @@ export default createStore({
       modules: {
         user: veriUser,
         company: veriCompany,
-        verida: verida,
-        credentials: credentials
+        verida,
+        credentials
       }
     }
   }

@@ -5,7 +5,7 @@
         mode="horizontal"
         :ellipsis="false"
         style="align-items: center; padding: 5px;"
-        background-color="#d3e4fd"
+        :background-color="props.backgroundColor"
         text-color="#2c3e50"
       >
         <div
@@ -59,6 +59,11 @@ const props = defineProps({
     required: true,
     default: "ttp"
   },
+  backgroundColor: {
+    type: String,
+    required: true,
+    default: "white"
+  }
 })
 
 function getAvatar(user) {

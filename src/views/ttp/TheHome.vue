@@ -2,9 +2,10 @@
   <div id="home" v-if="isVeriAuth">
     <TheVeridaSignOutProfileMenu
       :namespace="namespace"
+      :background-color="'#e1f3d8'"
     />
 
-    <TheRequests />
+    <TheEntities />
 
     <TheFooter />
   </div>
@@ -17,18 +18,19 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
-import TheLanding from '@/views/aequivalent/TheLanding.vue';
-import TheRequests from '@/views/aequivalent/TheRequests.vue';
-import TheFooter from '@/components/aequivalent/TheFooter.vue';
+import TheLanding from '@/views/ttp/TheLanding.vue';
+import TheEntities from '@/views/ttp/TheEntities.vue';
+import TheFooter from '@/components/ttp/TheFooter.vue';
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 const isVeriAuth = computed(() => storeNamespace.user.isAuthenticated)
 </script>
 
 <style scoped>
 #home {
-  background-color:#e4e4e4;
+  box-shadow: inset 0 0 0 1000px rgb(240 249 235 / 20%);
+  background-image: url('~@/assets/background.png');
 }
 </style>
