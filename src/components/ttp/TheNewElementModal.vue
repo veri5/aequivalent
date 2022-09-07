@@ -6,7 +6,7 @@
     >
     <template #header>
       <strong>New element</strong>
-      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new element</p>
+      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to add a new element</p>
       <el-divider style="margin: 0;"/>
     </template>
 

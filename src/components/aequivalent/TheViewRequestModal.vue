@@ -6,7 +6,7 @@
     >
     <template #header>
       <strong>View request</strong>
-      <p style="font-size: var(--el-font-size-small);">Please find your request details below</p>
+      <p style="font-size: var(--el-font-size-small);">Please find the request details below</p>
     </template>
 
     <el-descriptions v-if="request !== null"

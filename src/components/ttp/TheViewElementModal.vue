@@ -6,7 +6,7 @@
     >
     <template #header>
       <strong>View element</strong>
-      <p style="font-size: var(--el-font-size-small);">Please find your element details below</p>
+      <p style="font-size: var(--el-font-size-small);">Please find the element details below</p>
     </template>
 
     <el-descriptions v-if="element !== null"
@@ -14,7 +14,7 @@
       :column="2"
       border
     >
-      <el-descriptions-item label="Element">{{ element.element }}</el-descriptions-item>
+      <el-descriptions-item label="Name">{{ element.name }}</el-descriptions-item>
       <el-descriptions-item label="Status">
         <el-tag
           :type="tagType(element.status)"
@@ -23,7 +23,7 @@
           {{ element.status }}
         </el-tag>
       </el-descriptions-item>
-      <el-descriptions-item label="Element">{{ element.name }}</el-descriptions-item>
+      <el-descriptions-item label="Owner">{{ element.owner }}</el-descriptions-item>
       <el-descriptions-item label="Website">
         <el-link
           type="primary"

@@ -6,7 +6,7 @@
     >
     <template #header>
       <strong>View credential</strong>
-      <p style="font-size: var(--el-font-size-small);">Please find your credential details below</p>
+      <p style="font-size: var(--el-font-size-small);">Please find the credential details below</p>
     </template>
 
     <el-descriptions v-if="credential !== null"
