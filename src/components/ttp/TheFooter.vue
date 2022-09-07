@@ -12,7 +12,7 @@
   color: #2c3e50;
   font-family: 'Helvetica';
   font-size: 12px;
-  background-color: #68c6a4;
+  background-color: #e1f3d8;
   padding: 10px;
   text-align: center;
 }
