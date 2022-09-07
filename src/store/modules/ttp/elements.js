@@ -7,44 +7,50 @@ const randomProperty = (obj) => {
 const elements = [
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'University Diploma',
-    element: 'university_diploma',
-    name: 'Aequivalent',
+    name: 'University Diploma',
+    elementId: 'university_diploma',
+    owner: 'Aequivalent',
+    expiry: '28-07-01',
     url: 'https://www.aequivalent.ch',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'University Diploma (fake)',
-    element: 'university_diploma_fake',
-    name: 'Aequivalent',
+    name: 'University Diploma',
+    elementId: 'university_diploma_fake',
+    owner: 'Aequivalent',
+    expiry: '28-07-01',
     url: 'https://www.aequivalent.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'Credit Report',
-    element: 'credit_report',
-    name: 'Experian',
+    name: 'Credit Report',
+    elementId: 'credit_report',
+    owner: 'Experian',
+    expiry: '28-07-01',
     url: 'https://www.experian.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'Score Report',
-    element: 'score_report',
-    name: 'Equifax',
+    name: 'Score Report',
+    elementId: 'score_report',
+    owner: 'Equifax',
+    expiry: '28-07-01',
     url: 'https://www.equifax.com',
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'eSafety (or Pink Slip)',
-    element: 'pink_slip',
-    name: 'NRMA',
+    name: 'eSafety (or Pink Slip)',
+    elementId: 'pink_slip',
+    owner: 'NRMA',
+    expiry: '28-07-01',
     url: 'https://www.nrma.com.au',
   }
 ]
 
 const tableData = elements.map(element => ({
-  element: element.type,
   name: element.name,
+  owner: element.owner,
+  expiry: element.expiry,
   url: element.url,
   status: randomProperty({
     revoked: 'Revoked',
@@ -98,10 +104,11 @@ const mutations = {
     state.isViewModalVisible = status
   },
   confirmNewElement (state, request) {
-    const element = elements.find(({ element }) => element == request.element)
+    const element = elements.find(({ elementId }) => elementId == request.elementId)
     const row = {
-      element: element.type,
       name: element.name,
+      owner: element.owner,
+      expiry: element.expiry,
       url: element.url,
       status: randomProperty(Statuses)
     }

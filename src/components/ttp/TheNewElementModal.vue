@@ -179,7 +179,7 @@ function openConfirmBox(){
   )
   .then(() => {
     const newRequest = {
-      element: form.type,
+      elementId: form.type,
       uploadedFile: ''
     }
     store.dispatch(`${namespace}/elements/confirmNewElement`, newRequest)

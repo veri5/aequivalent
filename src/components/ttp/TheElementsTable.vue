@@ -35,7 +35,7 @@
     </template>
     <template v-else #empty>
       <div style="line-height: 20px; color: #2c3e50;">
-        <el-icon :size="50"><CreditCard /></el-icon>
+        <el-icon :size="50"><Connection /></el-icon>
         <div>
           <strong>{{ noItemToShowYetText }}</strong>
           <p style="margin: 0px;">
@@ -54,8 +54,9 @@
       </div>
     </template>
 
-    <el-table-column prop="element" label="Element" sortable />
-    <el-table-column prop="name" label="Name" sortable/>
+    <el-table-column prop="name" label="Name" sortable />
+    <el-table-column prop="owner" label="Owner" sortable/>
+    <el-table-column prop="expiry" label="Expiry" />
     <el-table-column prop="status" label="Status" sortable>
       <template #default="scope">
         <el-tag
@@ -74,7 +75,7 @@
 import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
-import { CreditCard, Search, Edit, Operation } from '@element-plus/icons-vue'
+import { Connection, Search, Edit, Operation } from '@element-plus/icons-vue'
 
 const noMatchingCriteriaText = 'No element matching your search criteria was found'
 const noItemToShowYetText = 'No element to show yet'
