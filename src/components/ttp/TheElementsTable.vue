@@ -56,18 +56,7 @@
 
     <el-table-column prop="name" label="Name" sortable />
     <el-table-column prop="owner" label="Owner" sortable/>
-    <el-table-column prop="expiry" label="Expiry" />
-    <el-table-column prop="status" label="Status" sortable>
-      <template #default="scope">
-        <el-tag
-          :type="tagType(scope.row.status)"
-          :effect="'light'"
-          style="width: 80px;"
-        >
-          {{ scope.row.status }}
-        </el-tag>
-      </template>
-    </el-table-column>
+    <el-table-column prop="expiry" label="Expiry" sortable/>
   </el-table>
 </template>
 
@@ -99,25 +88,7 @@ const selected = computed(() => store.getters[`${namespace}/elements/selected`])
 watch(selected, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
-function tagType(status: string) {
-  let tag = ''
-  switch (status) {
-    case 'Legit':
-      tag = 'success'
-      break
-    case 'Revoked':
-      tag = 'danger'
-      break
-    case 'Processing':
-      tag = 'info'
-      break
-    default:
-      tag = 'info'
-      break
-  }
 
-  return tag
-}
 
 function rowClick(selected){
   store.dispatch(`${namespace}/elements/setSelected`, selected)

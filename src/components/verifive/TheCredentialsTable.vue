@@ -60,7 +60,7 @@
       <template #default="scope">
         <el-tag
           :type="tagType(scope.row.status)"
-          :effect="'light'"
+          :effect="'plain'"
           style="width: 80px;"
         >
           {{ scope.row.status }}

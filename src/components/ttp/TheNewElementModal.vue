@@ -18,12 +18,12 @@
       :size="'default'"
     >
       <el-form-item
-        label="Element type"
-        prop="type"
+        label="Element"
+        prop="element"
       >
         <el-select 
-          v-model="form.type" 
-          placeholder="Please select a element type"
+          v-model="form.element" 
+          placeholder="Click to select a element name"
           :filterable="true"
           :clearable="true"
           style="width: 100%"
@@ -32,37 +32,41 @@
             v-for="item in typeOptions"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item"
           />
         </el-select>
       </el-form-item>
       <el-form-item 
-        v-if="showUpload()"
-        prop="upload"
+        label="Owner"
+        prop="owner"
       >
-        <el-alert type="info" show-icon :closable="false">
-          <h4>Please upload a scanned or electronic copy of your original certificate</h4>
-        </el-alert>        
-        <el-upload
-          ref="upload"
-          action="https://run.mocky.io/v3/d30b7e5f-47ec-463b-ba8e-700e574b3992"
-          :auto-upload="false"
-          :drag="true"
-          :limit="1"
-          :on-success="(response, uploadFile) => { fileUploaded = true }"
-          :on-remove="() => fileUploaded = false"
-          style="width: 100%"
+        <el-input 
+          v-model="form.owner"
+          placeholder="Google LLC"
+        />
+      </el-form-item>
+      <el-form-item
+        label="DID"
+        prop="did"
+      >
+        <el-input 
+          v-model="form.did"
+          placeholder="0x1234...abcd"
         >
-          <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-          <div class="el-upload__text">
-            Drop file here or <em>click to upload</em>
-          </div>
-          <template #tip>
-            <div class="el-upload__tip">
-              pdf/tiff files with a size less than 500kb
-            </div>
-          </template>
-        </el-upload>
+        </el-input>
+      </el-form-item>
+      <el-form-item 
+        label="Expiry"
+        prop="expiry"
+      >
+        <el-date-picker
+          v-model="form.expiry"
+          type="date"
+          :clearable="true"
+          placeholder="Click to select a expiry date"
+          format="YYYY/MM/DD"
+          value-format="YYYY-MM-DD"
+        />
       </el-form-item>
     </el-form>
 
@@ -89,7 +93,7 @@
 import { ref, reactive, computed, watch, markRaw } from 'vue'
 import { useStore } from 'vuex'
 import type { FormInstance, FormRules } from 'element-plus'
-import { UploadFilled, Key, SuccessFilled } from '@element-plus/icons-vue'
+import { Key, SuccessFilled } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
 import veridaAccount from '@/verida/veri-account'
 
@@ -103,41 +107,48 @@ watch(isNewModalVisible, (value) => {
   showModel.value = value
 })
 const typeOptions = computed(() => storeNamespace.elements.typeOptions)
-function showUpload(){
-  return form.type ? typeOptions.value.find(({ value }) => value === form.type).upload : false
-}
 
 
 const formRef = ref<FormInstance>()
 const form = reactive({
-  type: '',
-  uploadedFile: '',
+  element: {
+    label: '',
+    value: '',
+  },
+  owner: '',
+  did: '',
+  expiry: ''
 })
-const fileUploaded = ref(false)
 
-function validateUpload(rule: any, value: any, callback: any){
-  if (fileUploaded.value) {
-    callback()
-  } else {
-    callback(new Error("Something went wrong uploading your file"))
-  }
-}
 const rules = reactive<FormRules>({
-  type: [
+  element: [
     { 
       required: true, 
-      message: 'A element type is required', 
+      message: 'A element is required', 
       trigger: ['blur', 'change']
     },
   ],
-  upload: [
-    {
-      // validator: validateUpload,
-      required: false, 
-      message: 'A original certificate is required',
-      trigger: ['blur', 'change']
+  owner: [
+    { 
+      required: true, 
+      message: 'A owner is required', 
+      trigger: ['blur']
     },
   ],
+  did: [
+    { 
+      required: true, 
+      message: 'A did is required', 
+      trigger: ['blur']
+    },
+  ],
+  expiry: [
+    { 
+      required: true, 
+      message: 'A expiry date is required', 
+      trigger: ['blur', 'change']
+    }
+  ]
 })
 
 
@@ -146,7 +157,6 @@ function resetForm(){
   formRef.value.resetFields()
 }
 function closeModal(){
-  fileUploaded.value = false
   resetForm(formRef.value)
   store.dispatch(`${namespace}/elements/closeNewElementModal`)
 }
@@ -178,16 +188,18 @@ function openConfirmBox(){
     }
   )
   .then(() => {
-    const newRequest = {
-      elementId: form.type,
-      uploadedFile: ''
+    const element = {
+      name: form.element.label,
+      owner: form.owner,
+      did: form.did,
+      expiry: form.expiry
     }
-    store.dispatch(`${namespace}/elements/confirmNewElement`, newRequest)
+    store.dispatch(`${namespace}/elements/confirmNewElement`, element)
     
-    // sendRequest()
+    // issueCredential()
 
     ElNotification({
-      message: 'Element requested successfully',
+      message: 'Element created successfully',
       icon: markRaw(SuccessFilled),
       position: 'top-left',
       duration: 3000
@@ -196,7 +208,7 @@ function openConfirmBox(){
   })
 }
 
-async function sendRequest() {
+async function issueCredential() {
   const did = 'did:vda:0x8D8c24447Ad621f5B258705D741d7B17a6c79AA8'
   const type = 'inbox/type/dataRequest'
   const data = {

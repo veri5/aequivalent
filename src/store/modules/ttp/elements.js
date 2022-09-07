@@ -7,55 +7,46 @@ const randomProperty = (obj) => {
 const elements = [
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    name: 'University Diploma',
-    elementId: 'university_diploma',
+    label: 'University Diploma',
+    name: 'university_diploma',
     owner: 'Aequivalent',
-    expiry: '28-07-01',
-    url: 'https://www.aequivalent.ch',
+    expiry: '2028-07-01'
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    name: 'University Diploma',
-    elementId: 'university_diploma_fake',
+    label: 'University Diploma',
+    name: 'university_diploma_fake',
     owner: 'Aequivalent',
-    expiry: '28-07-01',
-    url: 'https://www.aequivalent.com',
+    expiry: '2028-07-01'
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    name: 'Credit Report',
-    elementId: 'credit_report',
+    label: 'Credit Report',
+    name: 'credit_report',
     owner: 'Experian',
-    expiry: '28-07-01',
-    url: 'https://www.experian.com',
+    expiry: '2028-07-01'
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    name: 'Score Report',
-    elementId: 'score_report',
+    label: 'Score Report',
+    name: 'score_report',
     owner: 'Equifax',
-    expiry: '28-07-01',
-    url: 'https://www.equifax.com',
+    expiry: '2028-07-01'
   },
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    name: 'eSafety (or Pink Slip)',
-    elementId: 'pink_slip',
+    label: 'eSafety (or Pink Slip)',
+    name: 'pink_slip',
     owner: 'NRMA',
-    expiry: '28-07-01',
-    url: 'https://www.nrma.com.au',
+    expiry: '2028-07-01'
   }
 ]
 
 const tableData = elements.map(element => ({
-  name: element.name,
+  name: element.label,
   owner: element.owner,
+  did: element.did,
   expiry: element.expiry,
-  url: element.url,
-  status: randomProperty({
-    revoked: 'Revoked',
-    legit: 'Legit',
-  })
 }))
 ///
 
@@ -68,23 +59,19 @@ const Statuses = {
 const typeOptions = [
   {
     value: 'university_diploma',
-    label: 'University diploma - Aequivalent',
-    upload: true
+    label: 'University Diploma '
   },
   {
     value: 'credit_report',
-    label: 'Credit report - Experian',
-    upload: false
+    label: 'Credit Report'
   },
   {
     value: 'score_report',
-    label: 'Score report - Equifax',
-    upload: false
+    label: 'Score Report'
   },
   {
     value: 'pink_slip',
-    label: 'eSafety (or Pink slip) - NRMA',
-    upload: false
+    label: 'eSafety (or Pink slip) - NRMA'
   }
 ]
 
@@ -103,16 +90,8 @@ const mutations = {
   setIsViewModalVisible (state, status) {
     state.isViewModalVisible = status
   },
-  confirmNewElement (state, request) {
-    const element = elements.find(({ elementId }) => elementId == request.elementId)
-    const row = {
-      name: element.name,
-      owner: element.owner,
-      expiry: element.expiry,
-      url: element.url,
-      status: randomProperty(Statuses)
-    }
-    state.tableData.push(row)
+  confirmNewElement (state, element) {
+    state.tableData.push(element)
   },
   setSelected (state, row) {
     state.selected = row

@@ -66,7 +66,6 @@ const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
 const selected = computed(() => store.getters[`${namespace}/elements/selected`])
-const Statuses = computed(() => store.getters[`${namespace}/elements/statuses`])
 
 
 function newElement() {

@@ -15,8 +15,8 @@
     :highlight-current-row="true"
     :default-sort="{ prop: 'type', order: 'ascending' }"
     :header-cell-style="{ 
-      background: '#9e1510', 
-      color: 'white'
+      background: '#f3f2f3', 
+      color: '#2c3e50'
     }"
     :row-style="{
       cursor: 'pointer'
@@ -48,7 +48,7 @@
       <template #default="scope">
         <el-tag
           :type="tagType(scope.row.status)"
-          :effect="'light'"
+          :effect="'plain'"
           style="width: 80px;"
         >
           {{ scope.row.status }}

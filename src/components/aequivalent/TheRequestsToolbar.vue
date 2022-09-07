@@ -58,7 +58,6 @@ const namespace = 'aeq'
 const storeNamespace = store.state[namespace]
 
 const selected = computed(() => store.getters[`${namespace}/requests/selected`])
-const Statuses = computed(() => store.getters[`${namespace}/requests/statuses`])
 const tableData = computed(() => storeNamespace.requests.tableData)
 
 

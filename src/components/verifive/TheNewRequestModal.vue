@@ -23,7 +23,7 @@
       >
         <el-select 
           v-model="form.type" 
-          placeholder="Please select a credential type"
+          placeholder="Click to select a credential type"
           :filterable="true"
           :clearable="true"
           style="width: 100%"

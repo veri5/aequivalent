@@ -15,26 +15,9 @@
       border
     >
       <el-descriptions-item label="Name">{{ element.name }}</el-descriptions-item>
-      <el-descriptions-item label="Status">
-        <el-tag
-          :type="tagType(element.status)"
-          :effect="'plain'"
-        >
-          {{ element.status }}
-        </el-tag>
-      </el-descriptions-item>
       <el-descriptions-item label="Owner">{{ element.owner }}</el-descriptions-item>
-      <el-descriptions-item label="Website">
-        <el-link
-          type="primary"
-          :underline="false" 
-          href="https://aequivalent.ch" 
-          target="_blank"
-        >
-          {{ element.url }}
-        </el-link>
-      </el-descriptions-item>
-      <el-descriptions-item label="Expiry">2027-09-04</el-descriptions-item>
+      <el-descriptions-item label="DID" :span="2">{{ element.did }}</el-descriptions-item>
+      <el-descriptions-item label="Expiry">{{ element.expiry }}</el-descriptions-item>
     </el-descriptions>
     
     <template #footer>
@@ -68,26 +51,5 @@ function closeModal(){
 function beforeClose(done){
   closeModal()
   done()
-}
-
-
-function tagType(status: string) {
-  let tag = ''
-  switch (status) {
-    case 'Issued':
-      tag = 'success'
-      break
-    case 'Revoked':
-      tag = 'danger'
-      break
-    case 'Processing':
-      tag = 'info'
-      break
-    default:
-      tag = 'info'
-      break
-  }
-
-  return tag
 }
 </script>

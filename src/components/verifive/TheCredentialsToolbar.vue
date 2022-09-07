@@ -66,7 +66,6 @@ const namespace = 'veri'
 const storeNamespace = store.state[namespace]
 
 const selected = computed(() => store.getters[`${namespace}/credentials/selected`])
-const Statuses = computed(() => store.getters[`${namespace}/credentials/statuses`])
 
 
 function newRequest() {
