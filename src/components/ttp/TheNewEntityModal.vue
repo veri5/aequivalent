@@ -5,8 +5,8 @@
       :width="'40%'"
     >
     <template #header>
-      <strong>New request</strong>
-      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new credential</p>
+      <strong>New entity</strong>
+      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new entity</p>
       <el-divider style="margin: 0;"/>
     </template>
 
@@ -18,12 +18,12 @@
       :size="'default'"
     >
       <el-form-item
-        label="Credential type"
+        label="Entity type"
         prop="type"
       >
         <el-select 
           v-model="form.type" 
-          placeholder="Please select a credential type"
+          placeholder="Please select a entity type"
           :filterable="true"
           :clearable="true"
           style="width: 100%"
@@ -94,15 +94,15 @@ import { ElNotification, ElMessageBox } from 'element-plus'
 import veridaAccount from '@/verida/veri-account'
 
 const store = useStore()
-const namespace = 'veri'
+const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
 const showModel = ref(false)
-const isNewModalVisible = computed(() => store.getters[`${namespace}/credentials/isNewRequestModalVisible`])
+const isNewModalVisible = computed(() => store.getters[`${namespace}/entities/isNewEntityModalVisible`])
 watch(isNewModalVisible, (value) => {
   showModel.value = value
 })
-const typeOptions = computed(() => storeNamespace.credentials.typeOptions)
+const typeOptions = computed(() => storeNamespace.entities.typeOptions)
 function showUpload(){
   return form.type ? typeOptions.value.find(({ value }) => value === form.type).upload : false
 }
@@ -126,7 +126,7 @@ const rules = reactive<FormRules>({
   type: [
     { 
       required: true, 
-      message: 'A credential type is required', 
+      message: 'A entity type is required', 
       trigger: ['blur', 'change']
     },
   ],
@@ -148,7 +148,7 @@ function resetForm(){
 function closeModal(){
   fileUploaded.value = false
   resetForm(formRef.value)
-  store.dispatch(`${namespace}/credentials/closeNewRequestModal`)
+  store.dispatch(`${namespace}/entities/closeNewEntityModal`)
 }
 function beforeClose(done){
   closeModal()
@@ -182,12 +182,12 @@ function openConfirmBox(){
       element: form.type,
       uploadedFile: ''
     }
-    store.dispatch(`${namespace}/credentials/confirmNewRequest`, newRequest)
+    store.dispatch(`${namespace}/entities/confirmNewEntity`, newRequest)
     
     // sendRequest()
 
     ElNotification({
-      message: 'Credential requested successfully',
+      message: 'Entity requested successfully',
       icon: markRaw(SuccessFilled),
       position: 'top-left',
       duration: 3000
@@ -205,7 +205,7 @@ async function sendRequest() {
     filter: {}
   }
   const name = veridaAccount.profile.name
-  const message = `${name} is requesting a new ${form.type} credential`
+  const message = `${name} is requesting a new ${form.type} entity`
   const config = {
     recipientContextName: "Verida: Vault",
   }

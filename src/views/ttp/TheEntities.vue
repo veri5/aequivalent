@@ -30,15 +30,15 @@
   </el-row>
 
   <!-- modals -->
-  <TheNewRequestModal />
-  <TheViewCredentialModal />
+  <TheNewEntityModal />
+  <TheViewEntityModal />
 </template>
 
 <script lang="ts" setup>
 import TheEntitiesToolbar from '@/components/ttp/TheEntitiesToolbar.vue'
 import TheEntitiesTable from '@/components/ttp/TheEntitiesTable.vue'
-import TheNewRequestModal from '@/components/verifive/TheNewRequestModal.vue'
-import TheViewCredentialModal from '@/components/verifive/TheViewCredentialModal.vue'
+import TheNewEntityModal from '@/components/ttp/TheNewEntityModal.vue'
+import TheViewEntityModal from '@/components/ttp/TheViewEntityModal.vue'
 
 const heading = 'Entities'
 </script>

@@ -55,7 +55,7 @@
     </template>
 
     <el-table-column prop="element" label="Element" sortable />
-    <el-table-column prop="entity" label="Entity" sortable/>
+    <el-table-column prop="name" label="Name" sortable/>
     <el-table-column prop="status" label="Status" sortable>
       <template #default="scope">
         <el-tag

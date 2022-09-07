@@ -40,7 +40,7 @@
       </el-tooltip>
     </div>
     <el-tooltip v-else
-      content="New request" 
+      content="New entity" 
       placement="bottom"
     >
       <el-button
@@ -49,7 +49,7 @@
         circle
         plain
         :icon="Edit" 
-        @click="newRequest"
+        @click="newEntity"
       />
     </el-tooltip>
   </div>
@@ -69,8 +69,8 @@ const selected = computed(() => store.getters[`${namespace}/entities/selected`])
 const Statuses = computed(() => store.getters[`${namespace}/entities/statuses`])
 
 
-function newRequest() {
-  store.dispatch(`${namespace}/entities/showNewRequestModal`)
+function newEntity() {
+  store.dispatch(`${namespace}/entities/showNewEntityModal`)
 }
 function removeSelected() {
   store.dispatch(`${namespace}/entities/remove`)
@@ -83,8 +83,8 @@ function clearSelected() {
 }
 function showRemoveSelectedBox(){
   ElMessageBox.confirm(
-    'Credential will permanently be remove. Continue?',
-    'Remove credential',
+    'Entity will permanently be remove. Continue?',
+    'Remove entity',
     {
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
@@ -94,7 +94,7 @@ function showRemoveSelectedBox(){
   )
   .then(() => {
     ElNotification({
-      message: 'Credential removed successfully',
+      message: 'Entity removed successfully',
       icon: markRaw(RemoveFilled),
       position: 'top-left',
       duration: 3000

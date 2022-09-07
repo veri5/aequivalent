@@ -44,7 +44,7 @@ const entities = [
 
 const tableData = entities.map(entity => ({
   element: entity.type,
-  entity: entity.name,
+  name: entity.name,
   url: entity.url,
   status: randomProperty({
     revoked: 'Revoked',
@@ -85,23 +85,23 @@ const typeOptions = [
 const state = {
   tableData: tableData,
   typeOptions: typeOptions,
-  isNewRequestModalVisible: false,
+  isNewEntityModalVisible: false,
   isViewModalVisible: false,
   selected: null
 }
 
 const mutations = {
-  setIsNewRequestModalVisible (state, status) {
-    state.isNewRequestModalVisible = status
+  setIsNewEntityModalVisible (state, status) {
+    state.isNewEntityModalVisible = status
   },
   setIsViewModalVisible (state, status) {
     state.isViewModalVisible = status
   },
-  confirmNewRequest (state, request) {
+  confirmNewEntity (state, request) {
     const entity = entities.find(({ element }) => element == request.element)
     const row = {
-      type: entity.type,
-      issuer: entity.name,
+      element: entity.type,
+      name: entity.name,
       url: entity.url,
       status: randomProperty(Statuses)
     }
@@ -117,14 +117,14 @@ const mutations = {
 }
 
 const actions = {
-  showNewRequestModal ({ commit }) {
-    commit('setIsNewRequestModalVisible', true)
+  showNewEntityModal ({ commit }) {
+    commit('setIsNewEntityModalVisible', true)
   },
-  closeNewRequestModal ({ commit }) {
-    commit('setIsNewRequestModalVisible', false)
+  closeNewEntityModal ({ commit }) {
+    commit('setIsNewEntityModalVisible', false)
   },
-  confirmNewRequest ({ commit }, request) {
-    commit('confirmNewRequest', request)
+  confirmNewEntity ({ commit }, request) {
+    commit('confirmNewEntity', request)
   },
   setSelected ({ commit }, row) {
     commit('setSelected', row)
@@ -144,8 +144,8 @@ const actions = {
 }
 
 const getters = {
-  isNewRequestModalVisible (state) {
-    return state.isNewRequestModalVisible === true
+  isNewEntityModalVisible (state) {
+    return state.isNewEntityModalVisible === true
   },
   isViewModalVisible (state) {
     return state.isViewModalVisible === true
