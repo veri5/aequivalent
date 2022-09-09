@@ -118,13 +118,14 @@ function tagType(status: string) {
   return tag
 }
 
+
+function newRequest() {
+  store.dispatch(`${namespace}/credentials/showNewRequestModal`)
+}
 function rowClick(selected){
   store.dispatch(`${namespace}/credentials/setSelected`, selected)
 }
 function rowDblClick() {
-  store.dispatch(`${namespace}/credentials/view`)
-}
-function newRequest() {
-  store.dispatch(`${namespace}/credentials/showNewRequestModal`)
+  store.dispatch(`${namespace}/credentials/showViewModal`)
 }
 </script>

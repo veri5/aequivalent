@@ -1,8 +1,8 @@
 <template>
-  <div id="home" v-if="isVeriAuth">
+  <div id="home" v-if="isConnected">
     <TheVeridaDisconnectProfileMenu
       :namespace="namespace"
-      :background-color="'#d9ecff'"
+      :background-color="bgColor"
     />
 
     <TheCredentials />
@@ -22,10 +22,12 @@ import TheLanding from '@/views/verifive/TheLanding.vue';
 import TheCredentials from '@/views/verifive/TheCredentials.vue';
 import TheFooter from '@/components/verifive/TheFooter.vue';
 
+const bgColor = '#d9ecff'
+
 const store = useStore()
 const namespace = 'veri'
 const storeNamespace = store.state[namespace]
-const isVeriAuth = computed(() => storeNamespace.user.isConnected)
+const isConnected = computed(() => storeNamespace.user.isConnected)
 </script>
 
 <style scoped>

@@ -1,9 +1,4 @@
 <template>
-  <!-- <el-row>
-    <el-col>
-      <TheStepper />
-    </el-col>
-  </el-row> -->
   <el-row>
     <el-col :xs="8" :sm="8">
       <router-view name="veriApp"/>
@@ -16,10 +11,6 @@
     </el-col>
   </el-row>
 </template>
-
-<script lang="ts" setup>
-import TheStepper from '@/components/TheStepper.vue';
-</script>
 
 <style>
 body {

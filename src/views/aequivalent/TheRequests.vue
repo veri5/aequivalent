@@ -1,33 +1,23 @@
 <template>
-  <el-row>
-    <el-col>
-      <h2 class="heading">{{ heading }}</h2>
-    </el-col>
-  </el-row>
+  <div id="requests">
+    <el-row>
+      <el-col>
+        <h2 class="heading">{{ heading }}</h2>
+      </el-col>
+    </el-row>
 
-  <el-row>
-    <el-col>   
-      <el-card 
-        shadow="never"
-        class="aeq-card"
-        :body-style="{ padding: '5px' }"
-        >
+    <el-row>
+      <el-col>   
         <TheRequestsToolbar />
-      </el-card>
-    </el-col>
-  </el-row>
-  
-  <el-row>
-    <el-col>
-      <el-card 
-        shadow="never"
-        class="aeq-card"
-        :body-style="{ padding: '5px' }"
-        >
+      </el-col>
+    </el-row>
+    
+    <el-row>
+      <el-col>
         <TheRequestsTable />
-      </el-card>
-    </el-col>
-  </el-row>
+      </el-col>
+    </el-row>
+  </div>
 
   <!-- modals -->
   <TheViewRequestModal />
@@ -42,17 +32,13 @@ const heading = 'Requests'
 </script>
 
 <style scoped>
+#requests {
+  min-height: calc(100vh - 140px);
+}
 .heading {
   padding: 5px;
   padding-left: 15px;
   color: black;
   font-family: 'Roobert-Semibold';
-}
-.aeq-card {
-  background-color: #f3f2f3; 
-  padding: 0px; 
-  border: none; 
-  margin: 0px 10px 0px 10px; 
-  border-radius: 0px;
 }
 </style>

@@ -40,7 +40,7 @@
       </el-tooltip>
     </div>
     <el-tooltip v-else
-      content="New request" 
+      content="New credential" 
       placement="bottom"
     >
       <el-button

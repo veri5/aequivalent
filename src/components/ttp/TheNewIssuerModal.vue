@@ -5,8 +5,8 @@
       :width="'40%'"
     >
     <template #header>
-      <strong>New element</strong>
-      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to add a new element</p>
+      <strong>New issuer</strong>
+      <p style="font-size: var(--el-font-size-small);">Please fill out the following form to add a new issuer</p>
       <el-divider style="margin: 0;"/>
     </template>
 
@@ -17,31 +17,12 @@
       :label-position="'top'"
       :size="'default'"
     >
-      <el-form-item
-        label="Element"
-        prop="element"
-      >
-        <el-select 
-          v-model="form.element" 
-          placeholder="Click to select a element name"
-          :filterable="true"
-          :clearable="true"
-          style="width: 100%"
-        >
-          <el-option
-            v-for="item in typeOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item"
-          />
-        </el-select>
-      </el-form-item>
       <el-form-item 
-        label="Owner"
-        prop="owner"
+        label="Name"
+        prop="name"
       >
         <el-input 
-          v-model="form.owner"
+          v-model="form.name"
           placeholder="Google LLC"
         />
       </el-form-item>
@@ -53,7 +34,29 @@
           v-model="form.did"
           placeholder="0x1234...abcd"
         >
+          <template #prepend>
+            <strong>did:vda:</strong>
+          </template>
         </el-input>
+      </el-form-item>
+      <el-form-item
+        label="Element"
+        prop="element"
+      >
+        <el-select 
+          v-model="form.element" 
+          placeholder="Click to select a element"
+          :filterable="true"
+          :clearable="true"
+          style="width: 100%"
+        >
+          <el-option
+            v-for="item in elementOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item 
         label="Expiry"
@@ -66,6 +69,7 @@
           placeholder="Click to select a expiry date"
           format="YYYY/MM/DD"
           value-format="YYYY-MM-DD"
+          style="width: 50%;"
         />
       </el-form-item>
     </el-form>
@@ -95,51 +99,47 @@ import { useStore } from 'vuex'
 import type { FormInstance, FormRules } from 'element-plus'
 import { Key, SuccessFilled } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
-import veridaAccount from '@/verida/veri-account'
 
 const store = useStore()
 const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
 const showModel = ref(false)
-const isNewModalVisible = computed(() => store.getters[`${namespace}/elements/isNewElementModalVisible`])
+const isNewModalVisible = computed(() => store.getters[`${namespace}/issuers/isNewIssuerModalVisible`])
 watch(isNewModalVisible, (value) => {
   showModel.value = value
 })
-const typeOptions = computed(() => storeNamespace.elements.typeOptions)
+const elementOptions = computed(() => storeNamespace.issuers.elementOptions)
 
 
 const formRef = ref<FormInstance>()
 const form = reactive({
-  element: {
-    label: '',
-    value: '',
-  },
-  owner: '',
+  name: '',
   did: '',
+  element: '',
   expiry: ''
 })
 
 const rules = reactive<FormRules>({
-  element: [
+  name: [
     { 
       required: true, 
-      message: 'A element is required', 
+      message: 'A name is required', 
       trigger: ['blur', 'change']
-    },
-  ],
-  owner: [
-    { 
-      required: true, 
-      message: 'A owner is required', 
-      trigger: ['blur']
     },
   ],
   did: [
     { 
       required: true, 
       message: 'A did is required', 
-      trigger: ['blur']
+      trigger: ['blur', 'change']
+    },
+  ],
+  element: [
+    { 
+      required: true,
+      message: 'A element is required', 
+      trigger: ['blur', 'change']
     },
   ],
   expiry: [
@@ -158,7 +158,7 @@ function resetForm(){
 }
 function closeModal(){
   resetForm(formRef.value)
-  store.dispatch(`${namespace}/elements/closeNewElementModal`)
+  store.dispatch(`${namespace}/issuers/closeNewIssuerModal`)
 }
 function beforeClose(done){
   closeModal()
@@ -188,42 +188,21 @@ function openConfirmBox(){
     }
   )
   .then(() => {
-    const element = {
-      name: form.element.label,
-      owner: form.owner,
+    const issuer = {
+      name: form.name,
       did: form.did,
+      element: form.element,
       expiry: form.expiry
     }
-    store.dispatch(`${namespace}/elements/confirmNewElement`, element)
+    store.dispatch(`${namespace}/issuers/confirmNewIssuer`, issuer)
     
-    // issueCredential()
-
     ElNotification({
-      message: 'Element created successfully',
+      message: 'Issuer created successfully',
       icon: markRaw(SuccessFilled),
       position: 'top-left',
       duration: 3000
     })
     closeModal()
   })
-}
-
-async function issueCredential() {
-  const did = 'did:vda:0x8D8c24447Ad621f5B258705D741d7B17a6c79AA8'
-  const type = 'inbox/type/dataRequest'
-  const data = {
-    requestSchema: null,
-    userSelect: null,
-    filter: {}
-  }
-  const name = veridaAccount.profile.name
-  const message = `${name} is requesting a new ${form.type} element`
-  const config = {
-    recipientContextName: "Verida: Vault",
-  }
-
-  const msgInstance = await veridaAccount.context.getMessaging()
-
-  await msgInstance.send(did, type, data, message, config)
 }
 </script>

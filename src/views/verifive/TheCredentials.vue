@@ -1,33 +1,35 @@
 <template>
-  <el-row>
-    <el-col>
-      <h2 class="heading">{{ heading }}</h2>
-    </el-col>
-  </el-row>
+  <div id="credentials">
+    <el-row>
+      <el-col>
+        <h2 class="heading">{{ heading }}</h2>
+      </el-col>
+    </el-row>
 
-  <el-row>
-    <el-col>   
-      <el-card 
-        shadow="never"
-        class="veri-card"
-        :body-style="{ padding: '5px' }"
-        >
-        <TheCredentialsToolbar />
-      </el-card>
-    </el-col>
-  </el-row>
-  
-  <el-row>
-    <el-col>
-      <el-card 
-        shadow="never"
-        class="veri-card"
-        :body-style="{ padding: '5px' }"
-        >
-        <TheCredentialsTable />
-      </el-card>
-    </el-col>
-  </el-row>
+    <el-row>
+      <el-col>   
+        <el-card 
+          shadow="never"
+          class="veri-card"
+          :body-style="{ padding: '5px' }"
+          >
+          <TheCredentialsToolbar />
+        </el-card>
+      </el-col>
+    </el-row>
+    
+    <el-row>
+      <el-col>
+        <el-card 
+          shadow="never"
+          class="veri-card"
+          :body-style="{ padding: '5px' }"
+          >
+          <TheCredentialsTable />
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
 
   <!-- modals -->
   <TheNewRequestModal />
@@ -44,6 +46,9 @@ const heading = 'Credentials'
 </script>
 
 <style scoped>
+#credentials {
+  min-height: calc(100vh - 140px);
+}
 .heading {
   padding: 5px;
   padding-left: 15px;

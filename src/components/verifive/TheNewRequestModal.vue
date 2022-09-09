@@ -5,7 +5,7 @@
       :width="'40%'"
     >
     <template #header>
-      <strong>New request</strong>
+      <strong>New credential</strong>
       <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new credential</p>
       <el-divider style="margin: 0;"/>
     </template>
@@ -18,7 +18,26 @@
       :size="'default'"
     >
       <el-form-item
-        label="Credential type"
+        label="Issuer"
+        prop="issuer"
+      >
+        <el-select 
+          v-model="form.issuer" 
+          placeholder="Click to select a credential issuer"
+          :filterable="true"
+          :clearable="true"
+          style="width: 100%"
+        >
+          <el-option
+            v-for="item in issuerOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item
+        label="Type"
         prop="type"
       >
         <el-select 
@@ -103,6 +122,7 @@ watch(isNewModalVisible, (value) => {
   showModel.value = value
 })
 const typeOptions = computed(() => storeNamespace.credentials.typeOptions)
+const issuerOptions = computed(() => storeNamespace.credentials.issuerOptions)
 function showUpload(){
   return form.type ? typeOptions.value.find(({ value }) => value === form.type).upload : false
 }
@@ -110,6 +130,7 @@ function showUpload(){
 
 const formRef = ref<FormInstance>()
 const form = reactive({
+  issuer: '',
   type: '',
   uploadedFile: '',
 })
@@ -123,10 +144,17 @@ function validateUpload(rule: any, value: any, callback: any){
   }
 }
 const rules = reactive<FormRules>({
+  issuer: [
+    { 
+      required: true, 
+      message: 'An issuer is required', 
+      trigger: ['blur', 'change']
+    },
+  ],
   type: [
     { 
       required: true, 
-      message: 'A credential type is required', 
+      message: 'A type is required', 
       trigger: ['blur', 'change']
     },
   ],

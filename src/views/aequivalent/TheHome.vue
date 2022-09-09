@@ -1,5 +1,5 @@
 <template>
-  <div id="home" v-if="isVeriAuth">
+  <div id="home" v-if="isAuthenticated">
     <TheVeridaSignOutProfileMenu
       :namespace="namespace"
     />
@@ -24,7 +24,7 @@ import TheFooter from '@/components/aequivalent/TheFooter.vue';
 const store = useStore()
 const namespace = 'aeq'
 const storeNamespace = store.state[namespace]
-const isVeriAuth = computed(() => storeNamespace.user.isAuthenticated)
+const isAuthenticated = computed(() => storeNamespace.user.isAuthenticated)
 </script>
 
 <style scoped>

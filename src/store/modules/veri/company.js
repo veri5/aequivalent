@@ -1,7 +1,7 @@
 const state = {
   profile: { 
-    name: 'Verifive',
-    logo: 'verifive_logo.png', 
+    name: 'Acme',
+    logo: 'acme_logo.png', 
     fallbackLogo: 'logo_fallback.png',
   }
 }

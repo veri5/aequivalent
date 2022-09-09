@@ -1,5 +1,5 @@
 const Statuses = {
-  processing: 'Processing',
+  ureview: 'Under review',
   rejected: 'Rejected',
   approved: 'Approved',
 }
@@ -13,7 +13,7 @@ const tableData = [
   {
     type: 'University diploma',
     requester: 'Pablo Buitrago',
-    status: Statuses.processing
+    status: Statuses.ureview
   },
   {
     type: 'University diploma',
@@ -84,7 +84,7 @@ const elements = [
 ]
 
 const state = {
-  tableData: tableData,
+  tableData: [],
   typeOptions: typeOptions,
   isModalVisible: false,
   isViewModalVisible: false,
@@ -114,7 +114,7 @@ const actions = {
   clear ({ commit }) {
     commit('setSelected', null)
   },
-  view ({ commit }) {
+  showViewModal ({ commit }) {
     commit('setIsViewModalVisible', true)
   },
   closeViewModal ({ commit }) {

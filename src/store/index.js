@@ -9,7 +9,7 @@ import requests from './modules/aeq/requests'
 
 import ttpUser from './modules/ttp/user'
 import ttpCompany from './modules/ttp/company'
-import elements from './modules/ttp/elements'
+import issuers from './modules/ttp/issuers'
 import verida from './modules/vda/verida'
 
 export default createStore({
@@ -20,7 +20,7 @@ export default createStore({
         user: ttpUser,
         company: ttpCompany,
         verida,
-        elements
+        issuers
       }
     },
     aeq: {

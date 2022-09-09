@@ -8,10 +8,10 @@
         :background-color="props.backgroundColor"
         text-color="#2c3e50"
       >
-        <div
-          style="margin-left:10px"
+      <div
+          style="margin: 0px 10px; line-height: 0px;"
         >
-          <img width="30" :src="require(`@/assets/${company.logo}`)"/>
+          <img width="60" :src="require(`@/assets/${company.logo}`)"/>
         </div>
 
         <div class="flex-grow" />

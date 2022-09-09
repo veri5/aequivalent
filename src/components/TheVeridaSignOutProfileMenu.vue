@@ -9,11 +9,13 @@
         text-color="black"
       >
         <div
-          style="margin-left:10px"
+          style="margin: 0px 10px; line-height: 0px;"
         >
           <img width="30" :src="require(`@/assets/${company.logo}`)"/>
         </div>
 
+        <div class="tagline">{{ props.tagLine }}</div>
+        
         <div class="flex-grow" />
         
         <!-- <el-tooltip content="You have unread notifications" placement="bottom">
@@ -63,6 +65,10 @@ const props = defineProps({
     type: String,
     default: "white"
   },
+  tagLine: {
+    type: String,
+    default: ""
+  },
 })
 
 function getAvatar(user) {
@@ -84,6 +90,9 @@ const company = computed(() => storeNamespace.company.profile)
 <style scoped>
 .flex-grow {
   flex-grow: 1;
+}
+.tagline{
+  color: black;
 }
 .bell-icon {
    font-size: 1.2rem;

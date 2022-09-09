@@ -59,32 +59,52 @@ const Statuses = {
   issued: 'Issued',
 }
 
+const issuerOptions = [
+  {
+    value: 'aequivalent',
+    label: 'Aequivalent',
+  },
+  {
+    value: 'experian',
+    label: 'Experian',
+  },
+  {
+    value: 'equifax',
+    label: 'Equifax',
+  },
+  {
+    value: 'nrma',
+    label: 'NRMA',
+  }
+]
+
 const typeOptions = [
   {
     value: 'university_diploma',
-    label: 'University diploma - Aequivalent',
+    label: 'University diploma',
     upload: true
   },
   {
     value: 'credit_report',
-    label: 'Credit report - Experian',
+    label: 'Credit report',
     upload: false
   },
   {
     value: 'score_report',
-    label: 'Score report - Equifax',
+    label: 'Score report',
     upload: false
   },
   {
     value: 'pink_slip',
-    label: 'eSafety (or Pink slip) - NRMA',
+    label: 'eSafety (or Pink slip)',
     upload: false
   }
 ]
 
 const state = {
-  tableData: tableData,
+  tableData: [],
   typeOptions: typeOptions,
+  issuerOptions: issuerOptions,
   isNewRequestModalVisible: false,
   isViewModalVisible: false,
   selected: null
@@ -134,6 +154,9 @@ const actions = {
   },
   clear ({ commit }) {
     commit('setSelected', null)
+  },
+  view ({ commit }) {
+    commit('setIsViewModalVisible', true)
   },
   showViewModal ({ commit }) {
     commit('setIsViewModalVisible', true)

@@ -6,7 +6,7 @@
   >
     <el-input v-if="tableData.length"
       v-model="search" 
-      placeholder="Search all types" 
+      placeholder="Search all issuers" 
       clearable
       :prefix-icon="Search"
       size="default"
@@ -18,15 +18,15 @@
       :show-header="!!tableData.length && !search"
       :table-layout="'auto'"
       :highlight-current-row="true"
-      :default-sort="{ prop: 'type', order: 'ascending' }"
+      :default-sort="{ prop: 'issuer', order: 'ascending' }"
       :header-cell-style="{ 
-        background: '#f3f2f3', 
+        background: '#f0f9eb', 
         color: '#2c3e50'
       }"
       :row-style="{
         cursor: 'pointer'
       }"
-      :height="410"
+      :height="350"
       @row-click="rowClick"
       @row-dblclick="rowDblClick"
     >
@@ -40,26 +40,28 @@
       </template>
       <template v-else #empty>
         <div style="line-height: 20px; color: #2c3e50;">
-          <el-icon :size="50"><DocumentCopy /></el-icon>
+          <el-icon :size="50"><Connection /></el-icon>
           <div>
             <strong>{{ noItemToShowYetText }}</strong>
+            <p style="margin: 0px;">
+              {{ firstTourStepText }}
+              <el-button
+                type="primary"
+                :size="'default'"
+                circle
+                plain
+                :icon="Edit" 
+                @click="newIssuer"
+                style="margin: 5px;"
+              />
+            </p>
           </div>
         </div>
       </template>
 
-      <el-table-column prop="type" label="Type" sortable />
-      <el-table-column prop="requester" label="Requester" sortable/>
-      <el-table-column prop="status" label="Status" sortable>
-        <template #default="scope">
-          <el-tag
-            :type="tagType(scope.row.status)"
-            :effect="'plain'"
-            style="width: 80px;"
-          >
-            {{ scope.row.status }}
-          </el-tag>
-        </template>
-      </el-table-column>
+      <el-table-column prop="name" label="Name" sortable/>
+      <el-table-column prop="element" label="Element" sortable />
+      <el-table-column prop="expiry" label="Expiry" sortable/>
     </el-table>
   </el-card>
 </template>
@@ -68,60 +70,46 @@
 import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
-import { DocumentCopy, Search, Edit, Operation } from '@element-plus/icons-vue'
+import { Connection, Search, Edit, Operation } from '@element-plus/icons-vue'
 
-const noMatchingCriteriaText = 'No request matching your search criteria was found'
-const noItemToShowYetText = 'No requests to show yet'
+const noMatchingCriteriaText = 'No issuer matching your search criteria was found'
+const noItemToShowYetText = 'No issuer to show yet'
+const firstTourStepText = 'Add your first issuer by clicking'
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'ttp'
 const storeNamespace = store.state[namespace]
 
-const tableData = computed(() => storeNamespace.requests.tableData)
+const tableData = computed(() => storeNamespace.issuers.tableData)
 const search = ref('')
 const filterType = computed(() =>
   tableData.value.filter((row) =>
       !search.value || 
-      row.type.toLowerCase().includes(search.value.toLowerCase()))
+      row.name.toLowerCase().includes(search.value.toLowerCase()))
 )
 
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
-const selected = computed(() => store.getters[`${namespace}/requests/selected`])
+const selected = computed(() => store.getters[`${namespace}/issuers/selected`])
 watch(selected, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
-function tagType(status: string) {
-  let tag = ''
-  switch (status) {
-    case 'Approved':
-      tag = 'success'
-      break
-    case 'Rejected':
-      tag = 'danger'
-      break
-    case 'Processing':
-      tag = 'info'
-      break
-    default:
-      tag = 'info'
-      break
-  }
 
-  return tag
+
+function newIssuer() {
+  store.dispatch(`${namespace}/issuers/showNewIssuerModal`)
 }
-
 function rowClick(selected){
-  store.dispatch(`${namespace}/requests/setSelected`, selected)
+  store.dispatch(`${namespace}/issuers/setSelected`, selected)
 }
 function rowDblClick() {
-  store.dispatch(`${namespace}/requests/showViewModal`)
+  store.dispatch(`${namespace}/issuers/showViewModal`)
 }
 </script>
 
 <style scoped>
 .card {
-  background-color: #f3f2f3; 
+  background-color: #f0f9eb; 
   padding: 0px; 
   border: none; 
   margin: 0px 10px 0px 10px; 
