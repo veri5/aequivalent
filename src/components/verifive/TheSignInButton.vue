@@ -2,25 +2,26 @@
   <el-button 
     v-loading="loading" 
     element-loading-background='rgba(0, 0, 0, 0.5)'
-    size="default"
-    color="#9e1510"
-    round
-    class="aeq-button"
+    size="large"
+    color="#42248a"
     @click="signIn"
   >
-    Sign in as an Issuer
+    <img class="vda-button"
+      src="~@/assets/verida_logo.png"
+      alt="Sign in with Verida"
+    /> Sign in with Verida
   </el-button>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, defineProps, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import veridaAccount from '@/verida/aeq-account'
+import veridaAccount from '@/verida/verifive-account'
 
 const loading = ref(false)
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'verifive'
 const isAuthenticated = computed(() => store.getters[`${namespace}/user/isAuthenticated`])
 
 async function signIn(){
@@ -47,8 +48,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.aeq-button {
-  font-weight:600; 
-  padding: 15px 60px;
+.vda-button {
+  max-width: 25px;
+  padding:0 7px;
 }
 </style>

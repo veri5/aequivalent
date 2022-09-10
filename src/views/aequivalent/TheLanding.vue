@@ -2,26 +2,21 @@
   <el-row>
     <el-col>
       <el-row>
-        <el-col class="aeq-banner-header">
+        <el-col class="header">
           <img alt="company logo" :src="require(`@/assets/${company.homeLogo}`)"/>
         </el-col>
       </el-row>
-      <el-row class="aeq-banner-body aeq-banner-background">
+      <el-row class="body body-background">
         <el-col :xs="18" :sm="18">
-          <h2 class="aeq-title">Who is {{ company.name }}?</h2>
-          <h2 class="aeq-title" style="margin-top: 15px; height: 1px;"><span class="aeq-underline">Who</span></h2>
-          <p class="aeq-intro-text">Aequivalent is Switzerland’s leading digital platform for employment screening (background checks). Through our secure online solution, our team verifies and delivers relevant information to help employers reduce the risk of inappropriate employment.</p>
+          <h2 class="title">Who is {{ company.name }}?</h2>
+          <h2 class="title" style="margin-top: 15px; height: 1px;"><span class="underline">Who</span></h2>
+          <p class="tagline">Aequivalent is Switzerland’s leading digital platform for employment screening (background checks). Through our secure online solution, our team verifies and delivers relevant information to help employers reduce the risk of inappropriate employment.</p>
           <el-divider border-style="none"/>
           <TheSignInButton />
         </el-col>
       </el-row>
-      <el-row class="aeq-body aeq-body-background">
-        <el-col>
-          <!-- Body -->
-        </el-col>
-      </el-row>
       <el-row>
-        <el-col class="aeq-footer">
+        <el-col class="footer">
           <div>© Copyright 2020 - 2022 | All Rights Reserved to Aequivalent SA</div>
         </el-col>
       </el-row>
@@ -42,41 +37,41 @@ const company = computed(() => storeNamespace.company.profile)
 </script>
 
 <style scoped>
-.aeq-banner-header {
+.header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   background: white;
 }
-.aeq-banner-header > img {
-  height: 30px;
-  padding: 10px;
+.header > img {
+  height: 29px;
+  padding: 10px 15px;
 }
-.aeq-banner-body {
+.body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  height: 50vh;
+  height: calc(100vh - 99px);
 }
-.aeq-title {
+.title {
   font-family: 'Roobert-Semibold';
   font-size: 36px;
   color: white;
   margin-bottom: 0px;
 }
-.aeq-intro-text {
+.tagline {
   font-family: 'Roobert-Regular';
   font-size: 18px;
-  color: white;
+  color: whitesmoke;
   text-align: justify;
 }
-.aeq-underline {
+.underline {
   border-top: 1px solid #9e1510;
   color: transparent;
 }
-.aeq-banner-background {
+.body-background {
   background-color: rgba(0,0,0,0.47);
-  background-image: url("~@/assets/aeq-banner-background.jpeg");
+  background-image: url("~@/assets/aeq_banner_background.jpeg");
   background-position: center bottom;
   background-repeat: no-repeat;
   background-blend-mode: overlay;
@@ -85,21 +80,7 @@ const company = computed(() => storeNamespace.company.profile)
   border-style: solid;
   background-size: cover;
 }
-.aeq-body {
-  font-family: 'Roobert-Regular';
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  text-align: justify;
-  height: 25vh;
-}
-.aeq-body-background {
-  background-color: #1b2032;
-  background-image: url("~@/assets/aeq-landing-background.jpeg");
-  background-position: center top;
-  background-repeat: no-repeat;
-}
-.aeq-footer {
+.footer {
   color: white;
   font-family: 'Roobert-Regular';
   font-size: 12px;

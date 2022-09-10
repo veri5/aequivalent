@@ -1,8 +1,7 @@
 const state = {
   profile: { 
-    name: 'æquivalent',
-    logo: 'aequivalent_logo.png', 
-    homeLogo: 'aequivalent_logo_noir.png'
+    name: 'Verifive',
+    logo: 'verifive_logo.png'
   }
 }
 

@@ -1,11 +1,11 @@
 <template>
-  <div id="home" v-if="isConnected">
-    <TheVeridaDisconnectProfileMenu
-      :namespace="namespace"
+  <div id="home" v-if="isAuthenticated">
+    <TheSignOutProfileMenu
       :background-color="bgColor"
+      :tag-line="tagLine"
     />
 
-    <TheCredentials />
+    <TheIssuers />
 
     <TheFooter />
   </div>
@@ -17,22 +17,23 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import TheVeridaDisconnectProfileMenu from '@/components/TheVeridaDisconnectProfileMenu.vue';
-import TheLanding from '@/views/verifive/TheLanding.vue';
-import TheCredentials from '@/views/verifive/TheCredentials.vue';
+import TheSignOutProfileMenu from '@/components/verifive/TheSignOutProfileMenu.vue';
+import TheIssuers from '@/components/verifive/TheIssuers.vue';
 import TheFooter from '@/components/verifive/TheFooter.vue';
+import TheLanding from '@/views/verifive/TheLanding.vue';
 
 const bgColor = '#d9ecff'
+const tagLine = 'The Trust Protocol'
 
 const store = useStore()
-const namespace = 'veri'
+const namespace = 'verifive'
 const storeNamespace = store.state[namespace]
-const isConnected = computed(() => storeNamespace.user.isConnected)
+const isAuthenticated = computed(() => storeNamespace.user.isAuthenticated)
 </script>
 
 <style scoped>
 #home {
   box-shadow: inset 0 0 0 1000px rgb(236 245 255 / 20%);
-  background-image: url('~@/assets/background.png');
+  background-image: url('~@/assets/verifive_home_background.png');
 }
 </style>

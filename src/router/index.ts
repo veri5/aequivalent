@@ -5,9 +5,9 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     components: {
-      veriApp: () => import('@/views/verifive/TheHome.vue'),
+      acmeApp: () => import('@/views/acme/TheHome.vue'),
       aeqApp: () => import('@/views/aequivalent/TheHome.vue'),
-      ttpApp: () => import('@/views/ttp/TheHome.vue')
+      verifiveApp: () => import('@/views/verifive/TheHome.vue')
     }
   },
 ]

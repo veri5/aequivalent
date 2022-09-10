@@ -9,14 +9,14 @@
       <el-row class="body body-background">
         <el-col>
           <h1 class="title">{{ company.name }}</h1>
-          <p class="tagline">Adding the final stich to the Identity Trust Fabric</p>
+          <p class="tagline">A better path to accurate employee verification</p>
           <el-divider border-style="none"/>
-          <TheSignInButton />
+          <TheConnectButton />
         </el-col>
       </el-row>
       <el-row>
         <el-col class="footer">
-          <div>© 2022 Verifive</div>
+          <div>© Copyright 2022 | Acme SA</div>
         </el-col>
       </el-row>
     </el-col>
@@ -26,10 +26,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import TheSignInButton from '@/components/verifive/TheSignInButton.vue';
+import TheConnectButton from '@/components/acme/TheConnectButton.vue'
 
 const store = useStore()
-const namespace = 'verifive'
+const namespace = 'acme'
 const storeNamespace = store.state[namespace]
 
 const company = computed(() => storeNamespace.company.profile)
@@ -39,7 +39,7 @@ const company = computed(() => storeNamespace.company.profile)
 .header {
   display: flex;
   justify-content: flex-start;
-  background: black;
+  background: #183543;
 }
 .header > img {
   height: 30px;
@@ -65,8 +65,8 @@ const company = computed(() => storeNamespace.company.profile)
   color: whitesmoke;
 }
 .body-background {
-  background-color: rgb(0 0 0 / 40%);
-  background-image: url("https://b.rgbimg.com/users/r/ro/rosebfischer/600/qzF1qIY.jpg");
+  background-color: rgb(0 0 0 / 50%);
+  background-image: url("~@/assets/acme_landing_background.jpeg");
   background-position: 25%;
   background-repeat: no-repeat;
   background-blend-mode: overlay;
@@ -76,8 +76,8 @@ const company = computed(() => storeNamespace.company.profile)
   color: whitesmoke;
   font-family: 'Helvetica';
   font-size: 12px;
-  background-color: black;
+  background-color: #183543;
   padding: 10px;
-  text-align: right;
+  text-align: center;
 }
 </style>

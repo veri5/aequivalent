@@ -1,16 +1,16 @@
 const initProfile = { 
-  name: 'Pablo Buitrago',
+  name: 'Micha Roon',
   did: 'did:vda:0x123...4567',
-  avatar: 'pablo_buitrago.jpeg',
+  avatar: 'micha_roon.jpeg',
   description: '',
   country: '',
-  mnemonic: 'canyon hover bronze mask view muscle notice where purchase save shed symbol'
+  mnemonic: 'shiver demand typical energy range absent rug face federal marine fold sauce'
 }
 
 const state = {
   profile: initProfile,
   isAuthenticated: false,
-  localKey:  '_verida_aeq_is-authenticated'
+  localKey:  '_verida_verifive_is-authenticated'
 }
 
 const mutations = {

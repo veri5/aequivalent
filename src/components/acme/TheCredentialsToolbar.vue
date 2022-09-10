@@ -1,5 +1,5 @@
 <template>
-  <el-card v-if="tableData.length"
+  <el-card 
     shadow="never"
     class="card"
     :body-style="{ padding: '5px' }"
@@ -44,42 +44,52 @@
           />
         </el-tooltip>
       </div>
-      <div v-else class="not-selected-text">
-        {{ notSelectedYetText}}
-      </div>
+      <el-tooltip v-else
+        content="New credential" 
+        placement="bottom"
+      >
+        <el-button
+          type="primary"
+          :size="'default'"
+          circle
+          plain
+          :icon="Edit" 
+          @click="newRequest"
+        />
+      </el-tooltip>
     </div>
-  </el-card>  
+  </el-card>
 </template>
 
 <script lang="ts" setup>
 import { computed, markRaw } from 'vue'
 import { useStore } from 'vuex'
 import { ElNotification, ElMessageBox } from 'element-plus'
-import { Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
-
-const notSelectedYetText = 'Please select a request to start reviewing'
+import { Edit, Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'acme'
 const storeNamespace = store.state[namespace]
 
-const selected = computed(() => store.getters[`${namespace}/requests/selected`])
-const tableData = computed(() => storeNamespace.requests.tableData)
+const selected = computed(() => store.getters[`${namespace}/credentials/selected`])
 
 
+function newRequest() {
+  store.dispatch(`${namespace}/credentials/showNewRequestModal`)
+}
 function removeSelected() {
-  store.dispatch(`${namespace}/requests/remove`)
+  store.dispatch(`${namespace}/credentials/remove`)
 }
 function viewSelected() {
-  store.dispatch(`${namespace}/requests/showViewModal`)
+  store.dispatch(`${namespace}/credentials/showViewModal`)
 }
 function clearSelected() {
-  store.dispatch(`${namespace}/requests/clear`)
+  store.dispatch(`${namespace}/credentials/clear`)
 }
 function showRemoveSelectedBox(){
   ElMessageBox.confirm(
-    'Request will permanently be remove. Continue?',
-    'Remove request',
+    'Credential will permanently be remove. Continue?',
+    'Remove credential',
     {
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
@@ -89,9 +99,9 @@ function showRemoveSelectedBox(){
   )
   .then(() => {
     ElNotification({
-      message: 'Request removed successfully',
+      message: 'Credential removed successfully',
       icon: markRaw(RemoveFilled),
-      position: 'top-right',
+      position: 'top-left',
       duration: 3000
     })
     removeSelected()
@@ -101,22 +111,14 @@ function showRemoveSelectedBox(){
 
 <style scoped>
 #toolbar {
-  min-height: 32px;
   padding: 10px;
   background-color: white;
 }
 .card {
-  background-color: #f3f2f3; 
+  background-color: #f0f9eb; 
   padding: 0px; 
   border: none; 
   margin: 0px 10px 0px 10px; 
   border-radius: 0px;
-  border-bottom: 1px solid #9e1510;
-}
-.not-selected-text {
-  font-family: 'Roobert-Semibold';
-  font-size: 14px;
-  color: black;
-  padding: 8px 0px;
 }
 </style>

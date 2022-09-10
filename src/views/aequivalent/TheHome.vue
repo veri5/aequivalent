@@ -1,8 +1,6 @@
 <template>
   <div id="home" v-if="isAuthenticated">
-    <TheVeridaSignOutProfileMenu
-      :namespace="namespace"
-    />
+    <TheSignOutProfileMenu />
 
     <TheRequests />
 
@@ -16,10 +14,10 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import TheVeridaSignOutProfileMenu from '@/components/TheVeridaSignOutProfileMenu.vue';
-import TheLanding from '@/views/aequivalent/TheLanding.vue';
-import TheRequests from '@/views/aequivalent/TheRequests.vue';
+import TheSignOutProfileMenu from '@/components/aequivalent/TheSignOutProfileMenu.vue';
+import TheRequests from '@/components/aequivalent/TheRequests.vue';
 import TheFooter from '@/components/aequivalent/TheFooter.vue';
+import TheLanding from '@/views/aequivalent/TheLanding.vue';
 
 const store = useStore()
 const namespace = 'aeq'
