@@ -2,7 +2,8 @@ const state = {
   profile: { 
     name: 'Verifive',
     tagline: 'The Trust Protocol',
-    logo: 'verifive_logo.png'
+    homeLogo: 'verifive_logo.png',
+    landingLogo: 'verifive_logo.png'
   }
 }
 

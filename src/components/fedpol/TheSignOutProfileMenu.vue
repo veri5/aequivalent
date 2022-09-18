@@ -4,17 +4,17 @@
       <el-menu
         mode="horizontal"
         :ellipsis="false"
-        style="align-items: center; padding: 5px; border-bottom: 4px solid #dc0018;"
+        style="align-items: center; padding: 5px; border-bottom: 3px solid #dc0018;"
         :background-color="'white'"
         text-color="black"
       >
         <div
           style="margin: 0px 10px; line-height: 0px;"
         >
-          <img width="30" :src="require(`@/assets/${company.logo}`)"/>
+          <img width="30" :src="require(`@/assets/${company.homeLogo}`)"/>
         </div>
 
-        <div class="tagline">{{ tagLine }}</div>
+        <div class="tagline">{{ company.tagline }}</div>
         
         <div class="flex-grow" />
         
@@ -53,7 +53,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { Bell } from '@element-plus/icons-vue'
-import TheSignOutMenuItem from '@/components/aequivalent/TheSignOutMenuItem.vue';
+import TheSignOutMenuItem from '@/components/fedpol/TheSignOutMenuItem.vue';
 
 function getAvatar(user) {
   return !user.avatar.uri ? require(`@/assets/${user.avatar}`) : user.avatar.uri
@@ -69,7 +69,6 @@ const storeNamespace = store.state[namespace]
 
 const user = computed(() => storeNamespace.user.profile)
 const company = computed(() => storeNamespace.company.profile)
-const tagLine = company.value.name
 </script>
 
 <style scoped>

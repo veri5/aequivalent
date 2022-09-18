@@ -1,7 +1,8 @@
 const state = {
   profile: { 
     name: 'Acme',
-    logo: 'acme_logo.png'
+    landingLogo: 'acme_logo.png',
+    homeLogo: 'acme_logo.png'
   }
 }
 

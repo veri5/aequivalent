@@ -3,7 +3,7 @@
     <el-col>
       <el-row>
         <el-col class="header">
-          <img alt="company logo" :src="require(`@/assets/${company.logo}`)"/>
+          <img alt="company logo" :src="require(`@/assets/${company.landingLogo}`)"/>
         </el-col>
       </el-row>
       <el-row class="body body-background">

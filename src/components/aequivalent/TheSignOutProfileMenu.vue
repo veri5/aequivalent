@@ -11,9 +11,11 @@
         <div
           style="margin: 0px 10px; line-height: 0px;"
         >
-          <img width="30" :src="require(`@/assets/${company.logo}`)"/>
+          <img width="30" :src="require(`@/assets/${company.homeLogo}`)"/>
         </div>
 
+        <div class="tagline">{{ company.tagline }}</div>
+        
         <div class="flex-grow" />
         
         <!-- <el-tooltip content="You have unread notifications" placement="bottom">

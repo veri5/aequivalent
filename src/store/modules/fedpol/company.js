@@ -1,7 +1,8 @@
 const state = {
   profile: { 
-    name: 'Federal Office of Police fedpol',
-    logo: 'fedpol_logo.png', 
+    name: 'Federal Office of Police',
+    tagline: 'Federal Office of Police',
+    landingLogo: 'fedpol_logo.png', 
     homeLogo: 'fedpol_logo.png'
   }
 }

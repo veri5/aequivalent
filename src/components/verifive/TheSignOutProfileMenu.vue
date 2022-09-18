@@ -11,7 +11,7 @@
         <div
           style="margin: 0px 10px; line-height: 0px;"
         >
-          <img width="30" :src="require(`@/assets/${company.logo}`)"/>
+          <img width="30" :src="require(`@/assets/${company.homeLogo}`)"/>
         </div>
 
         <div class="tagline">{{ tagLine }}</div>

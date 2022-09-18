@@ -4,17 +4,9 @@
     class="card"
     :body-style="{ padding: '5px 5px' }"
   >
-    <el-input v-if="tableData.length"
-      v-model="search" 
-      placeholder="Search all types" 
-      clearable
-      :prefix-icon="Search"
-      size="default"
-      :input-style="{ color: '#2c3e50', padding: '5px'}"
-    />
     <el-table
       ref="tableRef"
-      :data="filterType"
+      :data="tableData"
       :show-header="!!tableData.length"
       :table-layout="'auto'"
       :highlight-current-row="true"
@@ -78,13 +70,6 @@ const namespace = 'aeq'
 const storeNamespace = store.state[namespace]
 
 const tableData = computed(() => storeNamespace.requests.tableData)
-const search = ref('')
-const filterType = computed(() =>
-  tableData.value.filter((row) =>
-      !search.value || 
-      row.type.toLowerCase().includes(search.value.toLowerCase()))
-)
-
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
 const selected = computed(() => store.getters[`${namespace}/requests/selected`])

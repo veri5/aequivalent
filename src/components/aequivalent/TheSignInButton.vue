@@ -49,6 +49,6 @@ onMounted(() => {
 <style scoped>
 .aeq-button {
   font-weight:600; 
-  padding: 15px 60px;
+  padding: 10px 70px;
 }
 </style>

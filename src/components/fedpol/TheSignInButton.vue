@@ -3,9 +3,8 @@
     v-loading="loading" 
     element-loading-background='rgba(0, 0, 0, 0.5)'
     size="default"
-    color="#9e1510"
-    round
-    class="aeq-button"
+    color="#c8d2d2"
+    class="fedpol-button"
     @click="signIn"
   >
     Sign in
@@ -15,7 +14,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import veridaAccount from '@/verida/aeq-account'
+import veridaAccount from '@/verida/fedpol-account'
 
 const loading = ref(false)
 
@@ -47,8 +46,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.aeq-button {
+.fedpol-button {
   font-weight:600; 
-  padding: 15px 60px;
+  padding: 10px 50px;
+  color: #2c3e50
 }
 </style>

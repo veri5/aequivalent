@@ -9,8 +9,8 @@ const initProfile = {
 
 const state = {
   profile: initProfile,
-  isAuthenticated: true,
-  localKey:  '_verida_aeq_is-authenticated'
+  isAuthenticated: false,
+  localKey: '_verida_fedpol_is-authenticated'
 }
 
 const mutations = {

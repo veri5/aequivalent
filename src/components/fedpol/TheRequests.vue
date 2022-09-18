@@ -33,7 +33,7 @@ const heading = 'Requests'
 
 <style scoped>
 #requests {
-  min-height: calc(50vh - 103px);
+  min-height: calc(50vh - 102px);
 }
 .heading {
   padding: 5px;

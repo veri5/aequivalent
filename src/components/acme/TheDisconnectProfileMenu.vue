@@ -11,7 +11,7 @@
       <div
           style="margin: 0px 10px; line-height: 0px;"
         >
-          <img width="60" :src="require(`@/assets/${company.logo}`)"/>
+          <img width="60" :src="require(`@/assets/${company.homeLogo}`)"/>
         </div>
 
         <div class="flex-grow" />
