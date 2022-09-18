@@ -24,21 +24,20 @@
 </template>
 
 <script lang="ts" setup>
-import TheRequestsToolbar from '@/components/aequivalent/TheRequestsToolbar.vue'
-import TheRequestsTable from '@/components/aequivalent/TheRequestsTable.vue'
-import TheViewRequestModal from '@/components/aequivalent/TheViewRequestModal.vue'
+import TheRequestsToolbar from '@/components/fedpol/TheRequestsToolbar.vue'
+import TheRequestsTable from '@/components/fedpol/TheRequestsTable.vue'
+import TheViewRequestModal from '@/components/fedpol/TheViewRequestModal.vue'
 
 const heading = 'Requests'
 </script>
 
 <style scoped>
 #requests {
-  min-height: calc(50vh - 98px);
+  min-height: calc(50vh - 103px);
 }
 .heading {
   padding: 5px;
   padding-left: 15px;
   color: black;
-  font-family: 'Roobert-Semibold';
 }
 </style>

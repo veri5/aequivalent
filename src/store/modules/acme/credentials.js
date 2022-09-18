@@ -1,10 +1,30 @@
-// - Helpers
+// - Mock data
+
+const mockTableData = [
+  {
+    type: 'University Diploma',
+    issuer: 'aequivalent',
+    status: 'Approved'
+  },
+  {
+    type: 'Criminal Records',
+    issuer: 'fedpol',
+    status: 'Approved'
+  },
+  {
+    type: 'Passport',
+    issuer: 'fedpol',
+    status: 'Rejected'
+  }
+]
+
+
 const randomProperty = (obj) => {
   var keys = Object.keys(obj);
   return obj[keys[ keys.length * Math.random() << 0]];
 }
 
-const elements = [
+const mockCredentials = [
   {
     did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
     type: 'University Diploma',
@@ -42,21 +62,22 @@ const elements = [
   }
 ]
 
-const tableData = elements.map(element => ({
-  type: element.type,
-  issuer: element.name,
-  url: element.url,
+const tableData = mockCredentials.map(credential => ({
+  type: credential.type,
+  issuer: credential.name,
+  url: credential.url,
   status: randomProperty({
     revoked: 'Revoked',
+    rejected: 'Rejected',
     issued: 'Issued',
   })
 }))
 ///
 
 const Statuses = {
-  processing: 'Processing',
-  revoked: 'Revoked',
-  issued: 'Issued',
+  Processing: 'Under Review',
+  Rejected: 'Rejected',
+  Approved: 'Approved',
 }
 
 const issuerOptions = [
@@ -65,17 +86,9 @@ const issuerOptions = [
     label: 'Aequivalent',
   },
   {
-    value: 'experian',
-    label: 'Experian',
+    value: 'fedpol',
+    label: 'Federal Police',
   },
-  {
-    value: 'equifax',
-    label: 'Equifax',
-  },
-  {
-    value: 'nrma',
-    label: 'NRMA',
-  }
 ]
 
 const typeOptions = [
@@ -85,24 +98,19 @@ const typeOptions = [
     upload: true
   },
   {
-    value: 'credit_report',
-    label: 'Credit report',
+    value: 'passport',
+    label: 'Passport',
     upload: false
   },
   {
-    value: 'score_report',
-    label: 'Score report',
-    upload: false
-  },
-  {
-    value: 'pink_slip',
-    label: 'eSafety (or Pink slip)',
+    value: 'crecords',
+    label: 'Criminal Records',
     upload: false
   }
 ]
 
 const state = {
-  tableData: [],
+  tableData: mockTableData,
   typeOptions: typeOptions,
   issuerOptions: issuerOptions,
   isNewRequestModalVisible: false,
@@ -118,11 +126,11 @@ const mutations = {
     state.isViewModalVisible = status
   },
   confirmNewRequest (state, request) {
-    const element = elements.find(({ element }) => element == request.element)
+    const credential = mockCredentials.find(({ credential }) => credential == request.credential)
     const row = {
-      type: element.type,
-      issuer: element.name,
-      url: element.url,
+      type: credential.type,
+      issuer: credential.name,
+      url: credential.url,
       status: randomProperty(Statuses)
     }
     state.tableData.push(row)

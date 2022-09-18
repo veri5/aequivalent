@@ -1,8 +1,8 @@
 const state = {
   profile: { 
-    name: 'Verifive',
-    tagline: 'The Trust Protocol',
-    logo: 'verifive_logo.png'
+    name: 'Federal Office of Police fedpol',
+    logo: 'fedpol_logo.png', 
+    homeLogo: 'fedpol_logo.png'
   }
 }
 

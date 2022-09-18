@@ -1,7 +1,7 @@
 const initProfile = { 
-  name: 'Pablo Buitrago',
+  name: 'Kate Bush',
   did: 'did:vda:0x123...4567',
-  avatar: 'pablo_buitrago.jpeg',
+  avatar: 'kate_bush.png',
   description: '',
   country: '',
   mnemonic: 'canyon hover bronze mask view muscle notice where purchase save shed symbol'

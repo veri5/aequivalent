@@ -20,7 +20,7 @@ import veridaAccount from '@/verida/aeq-account'
 const loading = ref(false)
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'fedpol'
 const isAuthenticated = computed(() => store.getters[`${namespace}/user/isAuthenticated`])
 
 async function signIn(){

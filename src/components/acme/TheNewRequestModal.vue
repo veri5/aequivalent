@@ -19,10 +19,10 @@
     >
       <el-form-item
         label="Issuer"
-        prop="issuer"
+        prop="element"
       >
         <el-select 
-          v-model="form.issuer" 
+          v-model="form.element" 
           placeholder="Click to select a credential issuer"
           :filterable="true"
           :clearable="true"
@@ -130,7 +130,7 @@ function showUpload(){
 
 const formRef = ref<FormInstance>()
 const form = reactive({
-  issuer: '',
+  element: '',
   type: '',
   uploadedFile: '',
 })
@@ -144,10 +144,10 @@ function validateUpload(rule: any, value: any, callback: any){
   }
 }
 const rules = reactive<FormRules>({
-  issuer: [
+  element: [
     { 
       required: true, 
-      message: 'An issuer is required', 
+      message: 'An element is required', 
       trigger: ['blur', 'change']
     },
   ],

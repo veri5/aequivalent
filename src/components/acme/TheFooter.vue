@@ -9,10 +9,10 @@
 
 <style scoped>
 .acme-footer {
-  color: #2c3e50;
+  color: black;
   font-family: 'Helvetica';
   font-size: 12px;
-  background-color: #e1f3d8;
+  background-color: #95d475;
   padding: 10px;
   text-align: center;
 }

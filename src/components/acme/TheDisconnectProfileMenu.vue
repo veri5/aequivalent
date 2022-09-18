@@ -5,7 +5,7 @@
         mode="horizontal"
         :ellipsis="false"
         style="align-items: center; padding: 5px;"
-        :background-color="props.backgroundColor"
+        :background-color="'#b3e19d'"
         text-color="#2c3e50"
       >
       <div
@@ -48,17 +48,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { Bell } from '@element-plus/icons-vue'
 import TheDisconnectMenuItem from '@/components/acme/TheDisconnectMenuItem.vue';
-
-const props = defineProps({
-  backgroundColor: {
-    type: String,
-    default: "white"
-  }
-})
 
 function getAvatar(user) {
   return !user.avatar.uri ? require(`@/assets/${user.avatar}`) : user.avatar.uri

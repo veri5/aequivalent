@@ -2,17 +2,16 @@
   <el-row>
     <el-divider border-style="none" class="aeq-divider"/>
     <el-col class="aeq-footer">
-      <div>© Copyright 2020 - 2022 | All Rights Reserved to Aequivalent SA</div>
+      <div>© 2022 Federal Office of Police</div>
     </el-col>
   </el-row>
 </template>
 
 <style scoped>
 .aeq-footer {
-  color: white;
-  font-family: 'Roobert-Regular';
+  color: black;
   font-size: 12px;
-  background-color: black;
+  background-color:rgb(228 228 228 / 70%);
   padding: 10px;
   text-align: center;
 }

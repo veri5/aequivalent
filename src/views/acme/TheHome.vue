@@ -1,8 +1,6 @@
 <template>
   <div id="home" v-if="isConnected">
-    <TheDisconnectProfileMenu
-      :background-color="bgColor"
-    />
+    <TheDisconnectProfileMenu />
 
     <TheCredentials />
 
@@ -31,7 +29,7 @@ const isConnected = computed(() => storeNamespace.user.isConnected)
 
 <style scoped>
 #home {
-  box-shadow: inset 0 0 0 1000px rgb(240 249 235 / 20%);
+  box-shadow: inset 0 0 0 1000px rgb(209 237 196 / 10%);
   background-image: url('~@/assets/acme_home_background.jpeg');
 }
 </style>

@@ -74,7 +74,7 @@ const noMatchingCriteriaText = 'No request matching your search criteria was fou
 const noItemToShowYetText = 'No requests to show yet'
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'fedpol'
 const storeNamespace = store.state[namespace]
 
 const tableData = computed(() => storeNamespace.requests.tableData)

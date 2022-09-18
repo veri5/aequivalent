@@ -111,14 +111,14 @@ function showRemoveSelectedBox(){
 
 <style scoped>
 #toolbar {
-  padding: 10px;
+  padding: 5px;
   background-color: white;
 }
 .card {
-  background-color: #f0f9eb; 
+  background-color: #e1f3d8; 
   padding: 0px; 
   border: none; 
-  margin: 0px 10px 0px 10px; 
+  margin: 0px 10px; 
   border-radius: 0px;
 }
 </style>

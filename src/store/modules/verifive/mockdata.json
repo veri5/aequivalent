@@ -1,0 +1,37 @@
+{
+	"elements": [
+	  { 
+      "name": "aequivalent",
+      "validFrom": "2020-08-01",
+      "validUntil": "2022-08-01",
+      "status": "Valid"
+    },
+	  { 
+      "name": "university-diploma",
+      "validFrom": "2020-08-01",
+      "validUntil": "2022-08-01",
+      "parent": "aequivalent",
+      "status": "Valid"
+    },
+	  { 
+      "name": "fedpol",
+      "validFrom": "2020-08-01",
+      "validUntil": "2022-08-01",
+      "status": "Valid"
+    },
+	  { 
+      "name": "passport",
+      "validFrom": "2020-08-01",
+      "validUntil": "2022-08-01",
+      "parent": "fedpol",
+      "status": "Valid"
+    },
+	  { 
+      "name": "criminal-records",
+      "validFrom": "2020-08-01",
+      "validUntil": "2022-08-01",
+      "parent": "fedpol",
+      "status": "Valid"
+    }
+	]
+}

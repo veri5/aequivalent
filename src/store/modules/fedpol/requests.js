@@ -2,7 +2,12 @@
 // - Mock data
 const mockTableData = [
   {
-    type: 'University diploma',
+    type: 'Passport',
+    requester: 'John Doe',
+    status: 'Rejected'
+  },
+  {
+    type: 'Criminal Records',
     requester: 'John Doe',
     status: 'Approved'
   }

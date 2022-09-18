@@ -102,16 +102,15 @@ function showRemoveSelectedBox(){
 <style scoped>
 #toolbar {
   min-height: 32px;
-  padding: 10px;
+  padding: 5px;
   background-color: white;
 }
 .card {
   background-color: #f3f2f3; 
   padding: 0px; 
   border: none; 
-  margin: 0px 10px 0px 10px; 
+  margin: 0px 10px; 
   border-radius: 0px;
-  border-bottom: 1px solid #9e1510;
 }
 .not-selected-text {
   font-family: 'Roobert-Semibold';

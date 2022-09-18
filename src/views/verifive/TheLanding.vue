@@ -8,8 +8,8 @@
       </el-row>
       <el-row class="body body-background">
         <el-col>
-          <h1 class="title">{{ company.name }}</h1>
-          <p class="tagline">Adding the final stich to the Identity Trust Fabric</p>
+          <h1 class="title">{{ company.tagline }}</h1>
+          <p class="tagline">The Indentity Federation Endgame</p>
           <el-divider border-style="none"/>
           <TheSignInButton />
         </el-col>
@@ -50,11 +50,11 @@ const company = computed(() => storeNamespace.company.profile)
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 84px);
 }
 .title {
   font-family: 'ui-serif';
-  font-size: 42px;
+  font-size: 34px;
   font-weight: 400;
   color: white;
   text-transform: uppercase;
@@ -65,8 +65,8 @@ const company = computed(() => storeNamespace.company.profile)
   color: whitesmoke;
 }
 .body-background {
-  background-color: rgb(0 0 0 / 40%);
-  background-image: url("https://b.rgbimg.com/users/r/ro/rosebfischer/600/qzF1qIY.jpg");
+  background-color: rgb(0 0 0 / 50%);
+  background-image: url("~@/assets/verifive_landing_background.jpg");
   background-position: 25%;
   background-repeat: no-repeat;
   background-blend-mode: overlay;

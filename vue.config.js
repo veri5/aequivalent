@@ -3,4 +3,10 @@ module.exports = {
   ? '/aequivalent/'
   : '/',
   outputDir: 'docs',
+  pages: {
+    index: {
+      entry: 'src/main.ts',
+      title: 'Identity Federation Demo',
+    }
+  }
 };

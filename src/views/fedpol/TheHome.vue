@@ -14,20 +14,19 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import TheSignOutProfileMenu from '@/components/aequivalent/TheSignOutProfileMenu.vue';
-import TheRequests from '@/components/aequivalent/TheRequests.vue';
-import TheFooter from '@/components/aequivalent/TheFooter.vue';
-import TheLanding from '@/views/aequivalent/TheLanding.vue';
+import TheSignOutProfileMenu from '@/components/fedpol/TheSignOutProfileMenu.vue';
+import TheRequests from '@/components/fedpol/TheRequests.vue';
+import TheFooter from '@/components/fedpol/TheFooter.vue';
+import TheLanding from '@/views/fedpol/TheLanding.vue';
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'fedpol'
 const storeNamespace = store.state[namespace]
 const isAuthenticated = computed(() => storeNamespace.user.isAuthenticated)
 </script>
 
 <style scoped>
 #home {
-  background-color:rgb(228 228 228 / 70%);
-  border: 1px solid #2c3e50;
+  background-color: white;
 }
 </style>

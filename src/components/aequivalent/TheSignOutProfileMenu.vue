@@ -5,7 +5,7 @@
         mode="horizontal"
         :ellipsis="false"
         style="align-items: center; padding: 5px;"
-        :background-color="props.backgroundColor"
+        :background-color="'white'"
         text-color="black"
       >
         <div
@@ -14,8 +14,6 @@
           <img width="30" :src="require(`@/assets/${company.logo}`)"/>
         </div>
 
-        <div class="tagline">{{ props.tagLine }}</div>
-        
         <div class="flex-grow" />
         
         <!-- <el-tooltip content="You have unread notifications" placement="bottom">
@@ -54,17 +52,6 @@ import { defineProps, computed } from 'vue'
 import { useStore } from 'vuex'
 import { Bell } from '@element-plus/icons-vue'
 import TheSignOutMenuItem from '@/components/aequivalent/TheSignOutMenuItem.vue';
-
-const props = defineProps({
-  backgroundColor: {
-    type: String,
-    default: "white"
-  },
-  tagLine: {
-    type: String,
-    default: ""
-  },
-})
 
 function getAvatar(user) {
   return !user.avatar.uri ? require(`@/assets/${user.avatar}`) : user.avatar.uri

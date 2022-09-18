@@ -4,7 +4,14 @@
       <router-view name="acmeApp"/>
     </el-col>
     <el-col :xs="8" :sm="8">
-      <router-view name="aeqApp"/>
+      <el-row>
+        <el-col>
+          <router-view name="aeqApp"/>
+        </el-col>
+        <el-col>
+          <router-view name="fedpolApp"/>
+        </el-col>
+      </el-row>
     </el-col>
     <el-col :xs="8" :sm="8">
       <router-view name="verifiveApp"/>
@@ -18,7 +25,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background: whitesmoke;
+  background: white;
   margin: 0px;
 }
 .el-dialog__body {
@@ -26,5 +33,19 @@ body {
 }
 .el-table__empty-text {
   width: 100%;
+}
+.el-popper.is-dark {
+  font-size: 11px;
+  padding: 1px 5px;
+}
+.cell {
+  display: flex;
+  align-items: center;
+}
+.el-switch__label {
+  color: #a8abb2
+}
+.el-switch__label.is-active {
+  color: #606266;
 }
 </style>

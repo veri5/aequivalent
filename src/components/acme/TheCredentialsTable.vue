@@ -2,11 +2,11 @@
   <el-card 
     shadow="never"
     class="card"
-    :body-style="{ padding: '5px' }"
+    :body-style="{ padding: '5px 5px' }"
   >
     <el-input v-if="tableData.length"
       v-model="search" 
-      placeholder="Search all types" 
+      placeholder="Search all issuers" 
       clearable
       :prefix-icon="Search"
       size="default"
@@ -18,12 +18,12 @@
     <el-table
       ref="tableRef"
       :data="filterType"
-      :show-header="!!tableData.length && !search"
+      :show-header="!!tableData.length"
       :table-layout="'auto'"
       :highlight-current-row="true"
       :default-sort="{ prop: 'type', order: 'ascending' }"
       :header-cell-style="{ 
-        background: '#f0f9eb', 
+        background: '#d1edc4', 
         color: '#2c3e50'
       }"
       :row-style="{
@@ -35,7 +35,7 @@
     >
       <template v-if="tableData.length" #empty>
         <div style="line-height: 20px; color: #2c3e50;">
-          <el-icon :size="50"><Operation /></el-icon>
+          <el-icon :size="50"><SetUp /></el-icon>
           <div>
             <p>{{ noMatchingCriteriaText }}</p>
           </div>
@@ -62,8 +62,8 @@
         </div>
       </template>
 
-      <el-table-column prop="type" label="Type" sortable />
       <el-table-column prop="issuer" label="Issuer" sortable/>
+      <el-table-column prop="type" label="Type" sortable />
       <el-table-column prop="status" label="Status" sortable>
         <template #default="scope">
           <el-tag
@@ -83,7 +83,7 @@
 import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
-import { CreditCard, Search, Edit, Operation } from '@element-plus/icons-vue'
+import { CreditCard, Search, Edit, SetUp } from '@element-plus/icons-vue'
 
 const noMatchingCriteriaText = 'No credential matching your search criteria was found'
 const noItemToShowYetText = 'No credential to show yet'
@@ -98,7 +98,7 @@ const search = ref('')
 const filterType = computed(() =>
   tableData.value.filter((row) =>
       !search.value || 
-      row.type.toLowerCase().includes(search.value.toLowerCase()))
+      row.issuer.toLowerCase().includes(search.value.toLowerCase()))
 )
 
 
@@ -110,14 +110,11 @@ watch(selected, (value) => {
 function tagType(status: string) {
   let tag = ''
   switch (status) {
-    case 'Issued':
+    case 'Approved':
       tag = 'success'
       break
-    case 'Revoked':
+    case 'Rejected':
       tag = 'danger'
-      break
-    case 'Processing':
-      tag = 'info'
       break
     default:
       tag = 'info'
@@ -141,10 +138,10 @@ function rowDblClick() {
 
 <style scoped>
   .card {
-    background-color: #f0f9eb; 
+    background-color: #e1f3d8; 
     padding: 0px; 
     border: none; 
-    margin: 0px 10px 0px 10px; 
+    margin: 0px 10px; 
     border-radius: 0px;
   }
 </style>

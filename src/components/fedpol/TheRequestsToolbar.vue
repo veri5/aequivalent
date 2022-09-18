@@ -1,5 +1,5 @@
 <template>
-  <el-card 
+  <el-card v-if="tableData.length"
     shadow="never"
     class="card"
     :body-style="{ padding: '5px' }"
@@ -44,52 +44,42 @@
           />
         </el-tooltip>
       </div>
-      <el-tooltip v-else
-        content="New issuer" 
-        placement="bottom"
-      >
-        <el-button
-          type="primary"
-          :size="'default'"
-          circle
-          plain
-          :icon="Edit" 
-          @click="newIssuer"
-        />
-      </el-tooltip>
+      <div v-else class="not-selected-text">
+        {{ notSelectedYetText}}
+      </div>
     </div>
-  </el-card>
+  </el-card>  
 </template>
 
 <script lang="ts" setup>
 import { computed, markRaw } from 'vue'
 import { useStore } from 'vuex'
 import { ElNotification, ElMessageBox } from 'element-plus'
-import { Edit, Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
+import { Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
+
+const notSelectedYetText = 'Please select a request to start reviewing'
 
 const store = useStore()
-const namespace = 'verifive'
+const namespace = 'fedpol'
 const storeNamespace = store.state[namespace]
 
-const selected = computed(() => store.getters[`${namespace}/issuers/selected`])
+const selected = computed(() => store.getters[`${namespace}/requests/selected`])
+const tableData = computed(() => storeNamespace.requests.tableData)
 
 
-function newIssuer() {
-  store.dispatch(`${namespace}/issuers/showNewIssuerModal`)
-}
 function removeSelected() {
-  store.dispatch(`${namespace}/issuers/remove`)
+  store.dispatch(`${namespace}/requests/remove`)
 }
 function viewSelected() {
-  store.dispatch(`${namespace}/issuers/showViewModal`)
+  store.dispatch(`${namespace}/requests/showViewModal`)
 }
 function clearSelected() {
-  store.dispatch(`${namespace}/issuers/clear`)
+  store.dispatch(`${namespace}/requests/clear`)
 }
 function showRemoveSelectedBox(){
   ElMessageBox.confirm(
-    'Issuer will permanently be remove. Continue?',
-    'Remove issuer',
+    'Request will permanently be remove. Continue?',
+    'Remove request',
     {
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
@@ -99,7 +89,7 @@ function showRemoveSelectedBox(){
   )
   .then(() => {
     ElNotification({
-      message: 'Issuer removed successfully',
+      message: 'Request removed successfully',
       icon: markRaw(RemoveFilled),
       position: 'top-right',
       duration: 3000
@@ -111,14 +101,20 @@ function showRemoveSelectedBox(){
 
 <style scoped>
 #toolbar {
-  padding: 10px;
+  min-height: 32px;
+  padding: 5px;
   background-color: white;
 }
 .card {
-  background-color: #ecf5ff; 
+  background-color: #f3f2f3; 
   padding: 0px; 
-  border: none; 
-  margin: 0px 10px 0px 10px; 
+  border: none;
+  margin: 0px 10px; 
   border-radius: 0px;
+}
+.not-selected-text {
+  font-size: 14px;
+  color: black;
+  padding: 8px 0px;
 }
 </style>

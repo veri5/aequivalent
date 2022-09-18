@@ -35,7 +35,7 @@ const heading = 'Credentials'
 
 <style scoped>
 #credentials {
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 126px);
 }
 .heading {
   padding: 5px;

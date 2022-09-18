@@ -7,9 +7,10 @@ const routes: Array<RouteRecordRaw> = [
     components: {
       acmeApp: () => import('@/views/acme/TheHome.vue'),
       aeqApp: () => import('@/views/aequivalent/TheHome.vue'),
+      fedpolApp: () => import('@/views/fedpol/TheHome.vue'),
       verifiveApp: () => import('@/views/verifive/TheHome.vue')
     }
-  },
+  }
 ]
 
 const router = createRouter({

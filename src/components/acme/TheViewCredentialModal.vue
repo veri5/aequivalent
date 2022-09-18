@@ -80,9 +80,6 @@ function tagType(status: string) {
     case 'Revoked':
       tag = 'danger'
       break
-    case 'Processing':
-      tag = 'info'
-      break
     default:
       tag = 'info'
       break

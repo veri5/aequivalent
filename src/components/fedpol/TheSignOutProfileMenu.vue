@@ -4,9 +4,9 @@
       <el-menu
         mode="horizontal"
         :ellipsis="false"
-        style="align-items: center; padding: 5px;"
-        :background-color="'#a0cfff'"
-        text-color="#2c3e50"
+        style="align-items: center; padding: 5px; border-bottom: 4px solid #dc0018;"
+        :background-color="'white'"
+        text-color="black"
       >
         <div
           style="margin: 0px 10px; line-height: 0px;"
@@ -25,7 +25,7 @@
         </el-tooltip>
 
         <el-divider direction="vertical" class="menu-divider"/> -->
-        <!-- <el-space :size="size" spacer="|"> // alternative to divider -->
+
         <el-sub-menu index="0">
           <template #title>
             <el-avatar :size="30">
@@ -53,7 +53,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { Bell } from '@element-plus/icons-vue'
-import TheSignOutMenuItem from '@/components/verifive/TheSignOutMenuItem.vue';
+import TheSignOutMenuItem from '@/components/aequivalent/TheSignOutMenuItem.vue';
 
 function getAvatar(user) {
   return !user.avatar.uri ? require(`@/assets/${user.avatar}`) : user.avatar.uri
@@ -64,12 +64,12 @@ function hideDid(str) {
 }
 
 const store = useStore()
-const namespace = 'verifive'
+const namespace = 'fedpol'
 const storeNamespace = store.state[namespace]
 
 const user = computed(() => storeNamespace.user.profile)
 const company = computed(() => storeNamespace.company.profile)
-const tagLine = company.value.tagline
+const tagLine = company.value.name
 </script>
 
 <style scoped>
@@ -79,7 +79,7 @@ const tagLine = company.value.tagline
 .tagline{
   color: black;
 }
-.bell-icon {
+/* .bell-icon {
    font-size: 1.2rem;
 }
 .bell-badge {
@@ -87,7 +87,7 @@ const tagLine = company.value.tagline
 }
 .menu-divider {
   margin-left: 20px;
-}
+} */
 .submenu-header {
   display: flex;
   flex-direction: column;

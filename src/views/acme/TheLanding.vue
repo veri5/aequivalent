@@ -9,7 +9,7 @@
       <el-row class="body body-background">
         <el-col>
           <h1 class="title">{{ company.name }}</h1>
-          <p class="tagline">A better path to accurate employee verification</p>
+          <p class="tagline">The employement history wallet.</p>
           <el-divider border-style="none"/>
           <TheConnectButton />
         </el-col>
@@ -50,18 +50,18 @@ const company = computed(() => storeNamespace.company.profile)
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 84px);
 }
 .title {
   font-family: 'ui-serif';
-  font-size: 42px;
+  font-size: 34px;
   font-weight: 400;
   color: white;
   text-transform: uppercase;
 }
 .tagline {
   font-family: 'Roboto';
-  font-size: 18px;
+  font-size: 16px;
   color: whitesmoke;
 }
 .body-background {
