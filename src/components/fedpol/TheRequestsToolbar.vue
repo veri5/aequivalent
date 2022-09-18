@@ -113,7 +113,7 @@ function showRemoveSelectedBox(){
   border-radius: 0px;
 }
 .not-selected-text {
-  font-size: 14px;
+  font-size: 12px;
   color: black;
   padding: 8px 0px;
 }

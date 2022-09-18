@@ -55,7 +55,7 @@ const company = computed(() => storeNamespace.company.profile)
 }
 .title {
   font-family: 'Roobert-Semibold';
-  font-size: 34px;
+  font-size: 32px;
   color: white;
   margin-bottom: 0px;
 }

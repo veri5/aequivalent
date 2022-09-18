@@ -7,7 +7,7 @@
         </el-col>
       </el-row>
       <el-row class="body body-background">
-        <el-col>
+        <el-col :xs="20" :sm="20">
           <h2 class="title">{{ company.name }}</h2>
           <h2 class="title" style="margin-top: 15px; height: 1px;"><span class="underline">{{ company.name }}</span></h2>
           <p class="tagline">The exchange of information and the identification of people and objects are central to fighting crime. fedpol develops and operates national databases, and makes these instruments available to federal and cantonal security and migration services.</p>
@@ -41,6 +41,7 @@ const company = computed(() => storeNamespace.company.profile)
   display: flex;
   justify-content: flex-start;
   background: white;
+  border-bottom: 3px solid #dc0018;
 }
 .header > img {
   height: 29px;
@@ -51,16 +52,14 @@ const company = computed(() => storeNamespace.company.profile)
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  height: calc(50vh - 83px);
+  height: calc(50vh - 86px);
 }
 .title {
-  font-family: 'Roobert-Semibold';
-  font-size: 34px;
+  font-size: 32px;
   color: white;
   margin-bottom: 0px;
 }
 .tagline {
-  font-family: 'Roobert-Regular';
   font-size: 16px;
   color: whitesmoke;
   text-align: justify;
