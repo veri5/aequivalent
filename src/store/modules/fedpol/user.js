@@ -9,7 +9,7 @@ const initProfile = {
 
 const state = {
   profile: initProfile,
-  isAuthenticated: true,
+  isAuthenticated: false,
   localKey: '_verida_fedpol_is-authenticated'
 }
 

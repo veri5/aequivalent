@@ -9,7 +9,7 @@ const initProfile = {
 
 const state = {
   profile: initProfile,
-  isAuthenticated: true,
+  isAuthenticated: false,
   localKey:  '_verida_verifive_is-authenticated'
 }
 
