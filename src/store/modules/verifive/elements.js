@@ -52,7 +52,7 @@ const actions = {
   setSelectedElement ({ commit }, element) {
     commit('setSelectedElement', element)
   },
-  retireElement ({ commit }) {
+  retireSelectedElement ({ commit }) {
     commit('retireSelectedElement')
   },
   clearSelectedElement ({ commit }) {

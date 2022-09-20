@@ -27,6 +27,6 @@ const isAuthenticated = computed(() => storeNamespace.user.isAuthenticated)
 
 <style scoped>
 #home {
-  background-color: white;
+  background-color: whitesmoke;
 }
 </style>

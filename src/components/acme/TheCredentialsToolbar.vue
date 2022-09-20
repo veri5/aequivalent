@@ -19,6 +19,9 @@
             @click="showRemoveSelectedBox"
           />
         </el-tooltip>
+
+        <el-divider direction="vertical" class="menu-divider"/>
+
         <el-tooltip
           content="View" 
           placement="bottom"
@@ -120,5 +123,8 @@ function showRemoveSelectedBox(){
   border: none; 
   margin: 0px 10px; 
   border-radius: 0px;
+}
+.menu-divider {
+  margin: 0px 15px;
 }
 </style>

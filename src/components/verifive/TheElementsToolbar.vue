@@ -13,7 +13,8 @@
         >
           <!-- owner -->
           <el-tooltip
-            v-if="selectedRole === Roles.Owner" 
+            v-if="selectedRole === Roles.Owner &&
+                  selectedElement.status !== Statuses.Retired" 
             content="New Element" 
             placement="bottom"
           >
@@ -44,7 +45,9 @@
             />
           </el-tooltip>
 
-          <el-divider direction="vertical" class="menu-divider"/>
+          <el-divider
+            v-if="selectedElement.status !== Statuses.Retired" 
+            direction="vertical" class="menu-divider"/>
           
           <!-- all roles -->
           <el-tooltip
@@ -120,7 +123,7 @@ function newElement() {
   store.dispatch(`${namespace}/elements/showNewElementModal`)
 }
 function retireSelected() {
-  store.dispatch(`${namespace}/elements/retireElement`)
+  store.dispatch(`${namespace}/elements/retireSelectedElement`)
 }
 function viewSelectedElement() {
   store.dispatch(`${namespace}/elements/showViewElementModal`)
@@ -170,6 +173,6 @@ function showRetireSelectedBox(){
   border-radius: 0px;
 }
 .menu-divider {
-  margin: 0px 15px;
+  margin: 0px 10px;
 }
 </style>

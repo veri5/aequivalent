@@ -1,26 +1,37 @@
 <template>
-  <el-card v-if="tableData.length"
+  <el-card v-if="requests.length"
     shadow="never"
     class="card"
     :body-style="{ padding: '5px' }"
   >
-    <div id="toolbar">
-      <div v-if="selected">
+    <div id="container">
+      <div 
+        v-if="selectedRequest"
+        class="toolbar"
+      >
         <el-tooltip
-          content="Remove" 
+          v-if="selectedRequest.status !== Statuses.Approved &&
+                selectedRequest.status !== Statuses.Rejected" 
+          content="Review Request" 
           placement="bottom"
         >
           <el-button
-            type="danger"
+            type="primary"
             :size="'default'"
             circle
             plain
-            :icon="Delete" 
-            @click="showRemoveSelectedBox"
+            :icon="Edit" 
+            @click="reviewSelectedRequest"
           />
         </el-tooltip>
+
+        <el-divider
+          v-if="selectedRequest.status !== Statuses.Approved &&
+                selectedRequest.status !== Statuses.Rejected" 
+          direction="vertical" class="menu-divider"/>
+        
         <el-tooltip
-          content="View" 
+          content="View Request" 
           placement="bottom"
         >
           <el-button
@@ -28,11 +39,12 @@
             circle
             plain
             :icon="View"
-            @click="viewSelected"
+            @click="viewSelectedRequest"
           />
         </el-tooltip>
+
         <el-tooltip 
-          content="Clear" 
+          content="Clear Selection" 
           placement="bottom"
         >
           <el-button
@@ -40,46 +52,51 @@
             circle
             plain
             :icon="Close"
-            @click="clearSelected"
+            @click="clearSelectedRequest"
           />
         </el-tooltip>
       </div>
-      <div v-else class="not-selected-text">
-        {{ notSelectedYetText}}
+      <div v-else
+        class="toolbar "
+      >
+        <span class="not-selected-text">
+          {{ notSelectedYetText }}
+        </span>
       </div>
     </div>
-  </el-card>  
+  </el-card>
 </template>
 
 <script lang="ts" setup>
 import { computed, markRaw } from 'vue'
 import { useStore } from 'vuex'
 import { ElNotification, ElMessageBox } from 'element-plus'
-import { Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
-
-const notSelectedYetText = 'Please select a request to start reviewing'
+import { Edit, Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
 
 const store = useStore()
 const namespace = 'fedpol'
-const storeNamespace = store.state[namespace]
+const selectedRequest = computed(() => store.getters[`${namespace}/requests/selectedRequest`])
+const requests = computed(() => store.getters[`${namespace}/requests/requests`])
+const Statuses = computed(() => store.getters[`${namespace}/requests/Statuses`])
 
-const selected = computed(() => store.getters[`${namespace}/requests/selected`])
-const tableData = computed(() => storeNamespace.requests.tableData)
+const notSelectedYetText = 'Click on a request to show the toolbar'
 
-
-function removeSelected() {
-  store.dispatch(`${namespace}/requests/remove`)
+function reviewSelectedRequest() {
+  store.dispatch(`${namespace}/requests/showReviewRequestModal`)
 }
-function viewSelected() {
-  store.dispatch(`${namespace}/requests/showViewModal`)
+function rejectSelectedRequest() {
+  store.dispatch(`${namespace}/requests/rejectSelectedRequest`)
 }
-function clearSelected() {
-  store.dispatch(`${namespace}/requests/clear`)
+function viewSelectedRequest() {
+  store.dispatch(`${namespace}/requests/showViewRequestModal`)
+}
+function clearSelectedRequest() {
+  store.dispatch(`${namespace}/requests/clearSelectedRequest`)
 }
 function showRemoveSelectedBox(){
   ElMessageBox.confirm(
-    'Request will permanently be remove. Continue?',
-    'Remove request',
+    'Request will permanently be rejected. Continue?',
+    'Reject request',
     {
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
@@ -89,26 +106,31 @@ function showRemoveSelectedBox(){
   )
   .then(() => {
     ElNotification({
-      message: 'Request removed successfully',
+      message: 'Request rejected successfully',
       icon: markRaw(RemoveFilled),
       position: 'top-right',
       duration: 3000
     })
-    removeSelected()
+    rejectSelectedRequest()
   })
 }
 </script>
 
 <style scoped>
-#toolbar {
-  min-height: 32px;
-  padding: 5px;
+#container {
+  display: flex;
+  justify-content: space-between;
   background-color: white;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: 5px;
 }
 .card {
   background-color: #f3f2f3; 
   padding: 0px; 
-  border: none;
+  border: none; 
   margin: 0px 10px; 
   border-radius: 0px;
 }
@@ -116,5 +138,8 @@ function showRemoveSelectedBox(){
   font-size: 12px;
   color: black;
   padding: 8px 0px;
+}
+.menu-divider {
+  margin: 0px 10px;
 }
 </style>

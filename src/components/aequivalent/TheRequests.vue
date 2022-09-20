@@ -20,12 +20,14 @@
   </div>
 
   <!-- modals -->
+  <TheReviewRequestModal />
   <TheViewRequestModal />
 </template>
 
 <script lang="ts" setup>
 import TheRequestsToolbar from '@/components/aequivalent/TheRequestsToolbar.vue'
 import TheRequestsTable from '@/components/aequivalent/TheRequestsTable.vue'
+import TheReviewRequestModal from '@/components/aequivalent/TheReviewRequestModal.vue'
 import TheViewRequestModal from '@/components/aequivalent/TheViewRequestModal.vue'
 
 const heading = 'Requests'

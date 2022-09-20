@@ -10,7 +10,7 @@
       :show-header="!!tableData.length"
       :table-layout="'auto'"
       :highlight-current-row="true"
-      :default-sort="{ prop: 'type', order: 'ascending' }"
+      :default-sort="{ prop: 'status', order: 'descending' }"
       :header-cell-style="{ 
         background: '#e4e4e4', 
         color: '#2c3e50'
@@ -18,7 +18,7 @@
       :row-style="{
         cursor: 'pointer'
       }"
-      :height="100"
+      :height="150"
       @row-click="rowClick"
       @row-dblclick="rowDblClick"
     >
@@ -39,14 +39,14 @@
         </div>
       </template>
 
-      <el-table-column prop="type" label="Type" sortable />
-      <el-table-column prop="requester" label="Requester" sortable/>
-      <el-table-column prop="status" label="Status" sortable>
+      <el-table-column prop="type" label="Type"/>
+      <el-table-column prop="requester" label="Requester"/>
+      <el-table-column prop="status" label="Status">
         <template #default="scope">
           <el-tag
             :type="tagType(scope.row.status)"
             :effect="'plain'"
-            style="width: 80px;"
+            style="min-width: 90px;"
           >
             {{ scope.row.status }}
           </el-tag>
@@ -67,13 +67,11 @@ const noItemToShowYetText = 'No requests to show yet'
 
 const store = useStore()
 const namespace = 'aeq'
-const storeNamespace = store.state[namespace]
-
-const tableData = computed(() => storeNamespace.requests.tableData)
+const tableData = computed(() => store.getters[`${namespace}/requests/requests`])
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
-const selected = computed(() => store.getters[`${namespace}/requests/selected`])
-watch(selected, (value) => {
+const selectedRequest = computed(() => store.getters[`${namespace}/requests/selectedRequest`])
+watch(selectedRequest, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
 function tagType(status: string) {
@@ -85,7 +83,7 @@ function tagType(status: string) {
     case 'Rejected':
       tag = 'danger'
       break
-    case 'Processing':
+    case 'Under-Review':
       tag = 'info'
       break
     default:
@@ -96,11 +94,11 @@ function tagType(status: string) {
   return tag
 }
 
-function rowClick(selected){
-  store.dispatch(`${namespace}/requests/setSelected`, selected)
+function rowClick(request){
+  store.dispatch(`${namespace}/requests/setSelectedRequest`, request)
 }
 function rowDblClick() {
-  store.dispatch(`${namespace}/requests/showViewModal`)
+  store.dispatch(`${namespace}/requests/showViewRequestModal`)
 }
 </script>
 

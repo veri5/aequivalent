@@ -69,7 +69,7 @@
           <el-tag
             :type="tagType(scope.row.status)"
             :effect="'plain'"
-            style="width: 80px;"
+            style="min-width: 90px;"
           >
             {{ scope.row.status }}
           </el-tag>

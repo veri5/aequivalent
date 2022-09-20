@@ -7,7 +7,7 @@
         </el-col>
       </el-row>
       <el-row class="body body-background">
-        <el-col :xs="20" :sm="20">
+        <el-col>
           <h2 class="title">{{ company.name }}</h2>
           <h2 class="title" style="margin-top: 15px; height: 1px;"><span class="underline">{{ company.name }}</span></h2>
           <p class="tagline">The exchange of information and the identification of people and objects are central to fighting crime. fedpol develops and operates national databases, and makes these instruments available to federal and cantonal security and migration services.</p>

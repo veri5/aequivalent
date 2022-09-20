@@ -1,0 +1,22 @@
+{
+	"requests": [
+	  { 
+      "type": "University Diploma",
+      "element": "university-diploma",
+      "requester": "John Doe",
+      "status": "Approved"
+    },
+	  { 
+      "type": "University Diploma",
+      "element": "university-diploma",
+      "requester": "Alice Doe",
+      "status": "Under Review"
+    },
+	  { 
+      "type": "University Diploma",
+      "element": "university-diploma",
+      "requester": "Bob Doe",
+      "status": "Rejected"
+    }
+	]
+}

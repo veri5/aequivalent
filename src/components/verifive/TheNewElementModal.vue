@@ -7,7 +7,6 @@
     <template #header>
       <strong>{{ headerTitle() }}</strong>
       <p style="font-size: var(--el-font-size-small);">{{ headerDescription() }}</p>
-      <el-divider style="margin: 0;"/>
     </template>
 
     <el-form 
@@ -91,7 +90,6 @@
     </el-form>
 
     <template #footer>
-      <el-divider style="margin: 0px; margin-bottom: 15px"/>
       <el-button
         @click="closeModal"
       >

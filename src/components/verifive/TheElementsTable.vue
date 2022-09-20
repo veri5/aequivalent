@@ -51,7 +51,7 @@
           <el-tag v-if="scope.row.status"
             :type="tagType(scope.row.status)"
             :effect="'plain'"
-            style="width: 80px;"
+            style="min-width: 90px;"
           >
             {{ scope.row.status }}
           </el-tag>
@@ -116,7 +116,7 @@ const tableRowStyle= ({
   row,
   rowIndex,
 }: {
-  row: Element
+  row: any
   rowIndex: number
 }): any => {
   if (row.parent) {
@@ -134,7 +134,7 @@ const tableRowStyle= ({
 function newElement() {
   store.dispatch(`${namespace}/elements/showNewElementModal`)
 }
-function rowClick(element: Element){
+function rowClick(element){
   store.dispatch(`${namespace}/elements/setSelectedElement`, element)
 }
 function rowDblClick() {

@@ -1,75 +1,82 @@
-
 // - Mock data
-const mockTableData = [
-  {
-    type: 'University diploma',
-    requester: 'John Doe',
-    status: 'Approved'
-  }
-]
+import { requests as mockRequests } from "./mockdata.json"
 ///
 
 const Statuses = {
-  ureview: 'Under Review',
-  rejected: 'Rejected',
-  approved: 'Approved',
+  UnderReview: 'Under Review',
+  Rejected: 'Rejected',
+  Approved: 'Approved',
 }
 
 const state = {
-  tableData: mockTableData,
-  isModalVisible: false,
-  isViewModalVisible: false,
-  selected: null
+  requests: mockRequests,
+  isReviewRequestModalVisible: false,
+  isViewRequestModalVisible: false,
+  selectedRequest: null
 }
 
 const mutations = {
-  setIsViewModalVisible (state, status) {
-    state.isViewModalVisible = status
+  setIsReviewRequestModalVisible (state, status) {
+    state.isReviewRequestModalVisible = status
   },
-  setSelected (state, row) {
-    state.selected = row
+  setIsViewRequestModalVisible (state, status) {
+    state.isViewRequestModalVisible = status
   },
-  removeSelected (state) {
-    state.tableData.splice(state.tableData.indexOf(state.selected), 1)
-    state.selected = null
+  setSelectedRequest (state, request) {
+    state.selectedRequest = request
+  },
+  approveSelectedRequest (state) {
+    state.selectedRequest.status = Statuses.Approved
+  },
+  rejectSelectedRequest (state) {
+    state.selectedRequest.status = Statuses.Rejected
   }
 }
 
 const actions = {
-  setSelected ({ commit }, row) {
-    commit('setSelected', row)
+  setSelectedRequest ({ commit }, request) {
+    commit('setSelectedRequest', request)
   },
-  remove ({ commit }) {
-    commit('removeSelected')
+  approveSelectedRequest({ commit }) {
+    commit('approveSelectedRequest')
   },
-  clear ({ commit }) {
-    commit('setSelected', null)
+  rejectSelectedRequest({ commit }) {
+    commit('rejectSelectedRequest')
   },
-  showViewModal ({ commit }) {
-    commit('setIsViewModalVisible', true)
+  clearSelectedRequest ({ commit }) {
+    commit('setSelectedRequest', null)
   },
-  closeViewModal ({ commit }) {
-    commit('setIsViewModalVisible', false)
+  showReviewRequestModal ({ commit }) {
+    commit('setIsReviewRequestModalVisible', true)
   },
-}
-
-const getters = {
-  isViewModalVisible (state) {
-    return state.isViewModalVisible === true
+  closeReviewRequestModal ({ commit }) {
+    commit('setIsReviewRequestModalVisible', false)
   },
-  selected (state) {
-    return state.selected
+  showViewRequestModal ({ commit }) {
+    commit('setIsViewRequestModalVisible', true)
   },
-  statuses (state) {
-    return Statuses
+  closeViewRequestModal ({ commit }) {
+    commit('setIsViewRequestModalVisible', false)
   }
 }
 
-// Helpers
-const randomProperty = (obj) => {
-  var keys = Object.keys(obj);
-  return obj[keys[ keys.length * Math.random() << 0]];
-};
+const getters = {
+  requests(state) {
+    return state.requests
+  },
+  isReviewRequestModalVisible (state) {
+    return state.isReviewRequestModalVisible === true
+  },
+  isViewRequestModalVisible (state) {
+    return state.isViewRequestModalVisible === true
+  },
+  selectedRequest (state) {
+    return state.selectedRequest
+  },
+  Statuses (state) {
+    return Statuses
+  }
+}
 
 export default {
   namespaced: true,
