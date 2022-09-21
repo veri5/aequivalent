@@ -79,7 +79,7 @@ function tagType(status: string) {
     case 'Rejected':
       tag = 'danger'
       break
-    case 'Under-Review':
+    case 'Under Review':
       tag = 'warning'
       break
     default:
