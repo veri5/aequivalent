@@ -20,6 +20,7 @@
         <el-tag
           :type="tagType(selectedRequest.status)"
           :effect="'plain'"
+          style="min-width: 90px;"
         >
           {{ selectedRequest.status }}
         </el-tag>
@@ -67,7 +68,7 @@ function tagType(status: string) {
     case 'Rejected':
       tag = 'danger'
       break
-    case 'Under-Review':
+    case 'Under Review':
       tag = 'warning'
       break
     default:

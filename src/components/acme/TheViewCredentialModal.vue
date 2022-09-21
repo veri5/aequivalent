@@ -20,6 +20,7 @@
         <el-tag
           :type="tagType(selectedCredential.validity)"
           :effect="'plain'"
+          style="min-width: 90px;"
         >
           {{ selectedCredential.validity }}
         </el-tag>
@@ -64,8 +65,11 @@ function tagType(validity: string) {
     case 'Valid':
       tag = 'success'
       break
-    case 'Retired':
+    case 'Not Valid':
       tag = 'danger'
+      break
+    case 'Under Review':
+      tag = 'warning'
       break
     default:
       tag = 'info'

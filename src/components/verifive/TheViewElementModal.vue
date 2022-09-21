@@ -21,6 +21,7 @@
         <el-tag
           :type="tagType(selectedElement.status)"
           :effect="'plain'"
+          style="min-width: 90px;"
         >
           {{ selectedElement.status}}
         </el-tag>
