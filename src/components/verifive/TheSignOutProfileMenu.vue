@@ -14,7 +14,7 @@
           <img width="30" :src="require(`@/assets/${company.homeLogo}`)"/>
         </div>
 
-        <div class="tagline">{{ tagLine }}</div>
+        <div class="tagline">{{ company.tagline }}</div>
         
         <div class="flex-grow" />
         
@@ -69,7 +69,6 @@ const storeNamespace = store.state[namespace]
 
 const user = computed(() => storeNamespace.user.profile)
 const company = computed(() => storeNamespace.company.profile)
-const tagLine = company.value.tagline
 </script>
 
 <style scoped>

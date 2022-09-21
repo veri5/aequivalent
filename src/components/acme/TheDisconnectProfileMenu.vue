@@ -14,6 +14,8 @@
           <img width="60" :src="require(`@/assets/${company.homeLogo}`)"/>
         </div>
 
+        <div class="tagline">{{ company.tagline }}</div>
+        
         <div class="flex-grow" />
         
         <!-- <el-tooltip content="You have unread notifications" placement="bottom">
@@ -72,6 +74,9 @@ const company = computed(() => storeNamespace.company.profile)
 <style scoped>
 .flex-grow {
   flex-grow: 1;
+}
+.tagline{
+  color: black;
 }
 .bell-icon {
    font-size: 1.2rem;
