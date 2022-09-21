@@ -9,35 +9,25 @@
       <p style="font-size: var(--el-font-size-small);">Please find the credential details below</p>
     </template>
 
-    <el-descriptions v-if="credential !== null"
+    <el-descriptions v-if="selectedCredential !== null"
       direction="vertical"
       :column="2"
       border
     >
-      <el-descriptions-item label="Type">{{ credential.type }}</el-descriptions-item>
+      <el-descriptions-item label="Type" :span="2">{{ selectedCredential.type }}</el-descriptions-item>
+      <el-descriptions-item label="Issuer">{{ selectedCredential.issuer }}</el-descriptions-item>
       <el-descriptions-item label="Status">
         <el-tag
-          :type="tagType(credential.status)"
+          :type="tagType(selectedCredential.status)"
           :effect="'plain'"
         >
-          {{ credential.status }}
+          {{ selectedCredential.status }}
         </el-tag>
       </el-descriptions-item>
-      <el-descriptions-item label="Issuer">{{ credential.issuer }}</el-descriptions-item>
-      <el-descriptions-item label="Website">
-        <el-link
-          type="primary"
-          :underline="false" 
-          href="https://aequivalent.ch" 
-          target="_blank"
-        >
-          {{ credential.url }}
-        </el-link>
-      </el-descriptions-item>
-      <el-descriptions-item label="Expiry">2027-09-04</el-descriptions-item>
     </el-descriptions>
     
     <template #footer>
+      <el-divider style="margin: 0px; margin-bottom: 15px; border: none;"/>
       <el-button
         @click="closeModal"
       >
@@ -54,30 +44,27 @@ import { useStore } from 'vuex'
 
 const store = useStore()
 const namespace = 'acme'
-
-const credential = computed(() => store.getters[`${namespace}/credentials/selected`])
+const selectedCredential = computed(() => store.getters[`${namespace}/credentials/selectedCredential`])
 
 const showModel = ref(false)
-const isViewModalVisible = computed(() => store.getters[`${namespace}/credentials/isViewModalVisible`])
+const isViewModalVisible = computed(() => store.getters[`${namespace}/credentials/isViewCredentialModalVisible`])
 watch(isViewModalVisible, (value) => {
   showModel.value = value
 })
 function closeModal(){
-  store.dispatch(`${namespace}/credentials/closeViewModal`)
+  store.dispatch(`${namespace}/credentials/closeViewCredentialModal`)
 }
 function beforeClose(done){
   closeModal()
   done()
 }
-
-
 function tagType(status: string) {
   let tag = ''
   switch (status) {
-    case 'Issued':
+    case 'Valid':
       tag = 'success'
       break
-    case 'Revoked':
+    case 'Retired':
       tag = 'danger'
       break
     default:

@@ -39,14 +39,14 @@
       <el-button 
         type="primary"
         plain 
-        @click="approveSelectedRequest"
+        @click="openApproveConfirmBox"
       >
         Approve
       </el-button>
       <el-button 
         type="danger"
         plain 
-        @click="rejectSelectedRequest"
+        @click="openRejectConfirmBox"
       >
         Reject
       </el-button>
@@ -56,7 +56,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, markRaw } from 'vue'
+import { Key, SuccessFilled } from '@element-plus/icons-vue'
+import { ElNotification, ElMessageBox } from 'element-plus'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -68,13 +70,6 @@ const isViewModalVisible = computed(() => store.getters[`${namespace}/requests/i
 watch(isViewModalVisible, (value) => {
   showModel.value = value
 })
-function closeModal(){
-  store.dispatch(`${namespace}/requests/closeReviewRequestModal`)
-}
-function beforeClose(done){
-  closeModal()
-  done()
-}
 function tagType(status: string) {
   let tag = ''
   switch (status) {
@@ -94,13 +89,59 @@ function tagType(status: string) {
 
   return tag
 }
-function approveSelectedRequest(){
-  store.dispatch(`${namespace}/requests/approveSelectedRequest`)
-  closeModal()
+
+function closeModal(){
+  store.dispatch(`${namespace}/requests/closeReviewRequestModal`)
 }
-function rejectSelectedRequest(){
-  store.dispatch(`${namespace}/requests/rejectSelectedRequest`)
+function beforeClose(done){
   closeModal()
+  done()
+}
+function openApproveConfirmBox(){
+  ElMessageBox.confirm(
+    'Your signature is being requested. Continue?',
+    'Signature request',
+    {
+      confirmButtonText: 'Sign',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+      icon: markRaw(Key),
+    }
+  )
+  .then(() => {
+    store.dispatch(`${namespace}/requests/approveSelectedRequest`)
+
+    ElNotification({
+      message: 'Request approved successfully',
+      icon: markRaw(SuccessFilled),
+      position: 'top-left',
+      duration: 3000
+    })
+    closeModal()
+  })
+}
+function openRejectConfirmBox(){
+  ElMessageBox.confirm(
+    'Your signature is being requested. Continue?',
+    'Signature request',
+    {
+      confirmButtonText: 'Sign',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+      icon: markRaw(Key),
+    }
+  )
+  .then(() => {
+    store.dispatch(`${namespace}/requests/rejectSelectedRequest`)
+
+    ElNotification({
+      message: 'Request rejected successfully',
+      icon: markRaw(SuccessFilled),
+      position: 'top-left',
+      duration: 3000
+    })
+    closeModal()
+  })
 }
 </script>
 

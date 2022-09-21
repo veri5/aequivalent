@@ -1,0 +1,46 @@
+{
+	"issuers": [
+    {
+      "name": "Aequivalent",
+      "types": [
+        {
+          "name": "University Diploma",
+          "upload": true
+        }
+      ]
+    },
+    {
+      "name": "Federal Office of Police",
+      "types": [
+        {
+          "name": "Passport",
+          "upload": false
+        },
+        {
+          "name": "Criminal Record",
+          "upload": false
+        }
+      ]
+    }
+  ],
+	"credentials": [
+	  { 
+      "type": "University Diploma",
+      "element": "university-diploma",
+      "issuer": "aequivalent",
+      "status": "Valid"
+    },
+	  { 
+      "type": "Passport",
+      "element": "passport",
+      "issuer": "fedpol",
+      "status": "Retired"
+    },
+	  { 
+      "type": "Criminal Records",
+      "element": "criminal-records",
+      "issuer": "fedpol",
+      "status": "Valid"
+    }
+	]
+}

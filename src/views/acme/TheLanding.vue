@@ -9,7 +9,7 @@
       <el-row class="body body-background">
         <el-col>
           <h1 class="title">{{ company.name }}</h1>
-          <p class="tagline">The employement history wallet.</p>
+          <p class="tagline">The Employement History Wallet.</p>
           <el-divider border-style="none"/>
           <TheConnectButton />
         </el-col>

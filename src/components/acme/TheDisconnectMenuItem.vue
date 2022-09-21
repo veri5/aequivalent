@@ -19,7 +19,7 @@ const verida = computed(() => storeNamespace.verida)
 
 async function disconnect(){
   const account = new VaultAccount({
-    request: {
+    credential: {
       logoUrl: verida.value.logoUrl,
     },
   });

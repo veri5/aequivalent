@@ -57,7 +57,7 @@
         </el-tooltip>
       </div>
       <div v-else
-        class="toolbar "
+        class="toolbar"
       >
         <span class="not-selected-text">
           {{ notSelectedYetText }}
@@ -126,6 +126,7 @@ function showRemoveSelectedBox(){
   display: flex;
   align-items: center;
   padding: 5px;
+  min-height: 40px;
 }
 .card {
   background-color: #f3f2f3; 

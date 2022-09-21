@@ -1,191 +1,77 @@
 // - Mock data
-
-const mockTableData = [
-  {
-    type: 'University Diploma',
-    issuer: 'aequivalent',
-    status: 'Approved'
-  },
-  {
-    type: 'Criminal Records',
-    issuer: 'fedpol',
-    status: 'Approved'
-  },
-  {
-    type: 'Passport',
-    issuer: 'fedpol',
-    status: 'Rejected'
-  }
-]
-
-
-const randomProperty = (obj) => {
-  var keys = Object.keys(obj);
-  return obj[keys[ keys.length * Math.random() << 0]];
-}
-
-const mockCredentials = [
-  {
-    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'University Diploma',
-    element: 'university_diploma',
-    name: 'Aequivalent',
-    url: 'https://www.aequivalent.ch',
-  },
-  {
-    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'University Diploma (fake)',
-    element: 'university_diploma_fake',
-    name: 'Aequivalent',
-    url: 'https://www.aequivalent.com',
-  },
-  {
-    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'Credit Report',
-    element: 'credit_report',
-    name: 'Experian',
-    url: 'https://www.experian.com',
-  },
-  {
-    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'Score Report',
-    element: 'score_report',
-    name: 'Equifax',
-    url: 'https://www.equifax.com',
-  },
-  {
-    did: 'did:vda:0x37ACB36C4D316076F598CBFC1F4F234e3c20e769',
-    type: 'eSafety (or Pink Slip)',
-    element: 'pink_slip',
-    name: 'NRMA',
-    url: 'https://www.nrma.com.au',
-  }
-]
-
-const tableData = mockCredentials.map(credential => ({
-  type: credential.type,
-  issuer: credential.name,
-  url: credential.url,
-  status: randomProperty({
-    revoked: 'Revoked',
-    rejected: 'Rejected',
-    issued: 'Issued',
-  })
-}))
+import { issuers, credentials as mockCredentials } from "./mockdata.json"
 ///
 
 const Statuses = {
-  Processing: 'Under Review',
-  Rejected: 'Rejected',
-  Approved: 'Approved',
+  Valid: 'Valid',
+  Retired: 'Retired',
+  UnderReview: 'Under Review'
 }
 
-const issuerOptions = [
-  {
-    value: 'aequivalent',
-    label: 'Aequivalent',
-  },
-  {
-    value: 'fedpol',
-    label: 'Federal Police',
-  },
-]
-
-const typeOptions = [
-  {
-    value: 'university_diploma',
-    label: 'University diploma',
-    upload: true
-  },
-  {
-    value: 'passport',
-    label: 'Passport',
-    upload: false
-  },
-  {
-    value: 'crecords',
-    label: 'Criminal Records',
-    upload: false
-  }
-]
-
 const state = {
-  tableData: mockTableData,
-  typeOptions: typeOptions,
-  issuerOptions: issuerOptions,
-  isNewRequestModalVisible: false,
-  isViewModalVisible: false,
-  selected: null
+  credentials: [],
+  isNewCredentialModalVisible: false,
+  isViewCredentialModalVisible: false,
+  selectedCredential: null
 }
 
 const mutations = {
-  setIsNewRequestModalVisible (state, status) {
-    state.isNewRequestModalVisible = status
+  setIsNewCredentialModalVisible (state, status) {
+    state.isNewCredentialModalVisible = status
   },
-  setIsViewModalVisible (state, status) {
-    state.isViewModalVisible = status
+  setIsViewCredentialModalVisible (state, status) {
+    state.isViewCredentialModalVisible = status
   },
-  confirmNewRequest (state, request) {
-    const credential = mockCredentials.find(({ credential }) => credential == request.credential)
-    const row = {
-      type: credential.type,
-      issuer: credential.name,
-      url: credential.url,
-      status: randomProperty(Statuses)
-    }
-    state.tableData.push(row)
+  confirmNewCredential (state, credential) {
+    state.credentials.push(credential)
   },
-  setSelected (state, row) {
-    state.selected = row
-  },
-  removeSelected (state) {
-    state.tableData.splice(state.tableData.indexOf(state.selected), 1)
-    state.selected = null
+  setSelectedCredential (state, credential) {
+    state.selectedCredential = credential
   }
 }
 
 const actions = {
-  showNewRequestModal ({ commit }) {
-    commit('setIsNewRequestModalVisible', true)
+  confirmNewCredential ({ commit }, credential) {
+    commit('confirmNewCredential', credential)
   },
-  closeNewRequestModal ({ commit }) {
-    commit('setIsNewRequestModalVisible', false)
+  setSelectedCredential ({ commit }, credential) {
+    commit('setSelectedCredential', credential)
   },
-  confirmNewRequest ({ commit }, request) {
-    commit('confirmNewRequest', request)
+  clearSelectedCredential ({ commit }) {
+    commit('setSelectedCredential', null)
   },
-  setSelected ({ commit }, row) {
-    commit('setSelected', row)
+  showNewCredentialModal ({ commit }) {
+    commit('setIsNewCredentialModalVisible', true)
   },
-  remove ({ commit }) {
-    commit('removeSelected')
+  closeNewCredentialModal ({ commit }) {
+    commit('setIsNewCredentialModalVisible', false)
   },
-  clear ({ commit }) {
-    commit('setSelected', null)
+  showViewCredentialModal ({ commit }) {
+    commit('setIsViewCredentialModalVisible', true)
   },
-  view ({ commit }) {
-    commit('setIsViewModalVisible', true)
-  },
-  showViewModal ({ commit }) {
-    commit('setIsViewModalVisible', true)
-  },
-  closeViewModal ({ commit }) {
-    commit('setIsViewModalVisible', false)
-  },
+  closeViewCredentialModal ({ commit }) {
+    commit('setIsViewCredentialModalVisible', false)
+  }
 }
 
 const getters = {
-  isNewRequestModalVisible (state) {
-    return state.isNewRequestModalVisible === true
+  credentials(state) {
+    return state.credentials
   },
-  isViewModalVisible (state) {
-    return state.isViewModalVisible === true
+  isNewCredentialModalVisible (state) {
+    return state.isNewCredentialModalVisible === true
   },
-  selected (state) {
-    return state.selected
+  isViewCredentialModalVisible (state) {
+    return state.isViewCredentialModalVisible === true
   },
-  statuses (state) {
+  selectedCredential (state) {
+    return state.selectedCredential
+  },
+  Statuses (state) {
     return Statuses
+  },
+  issuers (state) {
+    return issuers
   }
 }
 

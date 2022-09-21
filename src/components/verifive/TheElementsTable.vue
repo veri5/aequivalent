@@ -74,7 +74,11 @@ const firstTourStepText = 'Add your first element by clicking'
 const store = useStore()
 const namespace = 'verifive'
 const mockElements = computed(() => store.getters[`${namespace}/elements/elements`])
-
+const Statuses = computed(() => store.getters[`${namespace}/elements/Statuses`])
+const selected = computed(() => store.getters[`${namespace}/elements/selectedElement`])
+watch(selected, (row: Element) => {
+  row == null && tableRef.value!.setCurrentRow(row)
+})
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
 const tableData = computed(() => {
@@ -90,11 +94,6 @@ const tableData = computed(() => {
 
   const rootElements = mockElements.value.filter(element => !element.parent)
   return arrayToTree(rootElements)
-})
-const Statuses = computed(() => store.getters[`${namespace}/elements/Statuses`])
-const selected = computed(() => store.getters[`${namespace}/elements/selectedElement`])
-watch(selected, (row: Element) => {
-  row == null && tableRef.value!.setCurrentRow(row)
 })
 function tagType(status: string) {
   let tag = ''
@@ -129,7 +128,6 @@ const tableRowStyle= ({
     cursor: 'pointer'
   }
 }
-
 
 function newElement() {
   store.dispatch(`${namespace}/elements/showNewElementModal`)

@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-divider border-style="none" class="aeq-divider"/>
+    <el-divider class="aeq-divider"/>
     <el-col class="aeq-footer">
       <div>© Copyright 2020 - 2022 | All Rights Reserved to Aequivalent SA</div>
     </el-col>
@@ -17,6 +17,7 @@
   text-align: center;
 }
 .aeq-divider {
+  border: none;
   margin: 10px 0px;
 }
 </style>

@@ -20,14 +20,14 @@
   </div>
 
   <!-- modals -->
-  <TheNewRequestModal />
+  <TheNewCredentialModal />
   <TheViewCredentialModal />
 </template>
 
 <script lang="ts" setup>
 import TheCredentialsToolbar from '@/components/acme/TheCredentialsToolbar.vue'
 import TheCredentialsTable from '@/components/acme/TheCredentialsTable.vue'
-import TheNewRequestModal from '@/components/acme/TheNewRequestModal.vue'
+import TheNewCredentialModal from '@/components/acme/TheNewCredentialModal.vue'
 import TheViewCredentialModal from '@/components/acme/TheViewCredentialModal.vue'
 
 const heading = 'Credentials'
@@ -35,7 +35,7 @@ const heading = 'Credentials'
 
 <style scoped>
 #credentials {
-  min-height: calc(100vh - 126px);
+  min-height: calc(100vh - 98px);
 }
 .heading {
   padding: 5px;

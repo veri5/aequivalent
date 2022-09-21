@@ -14,7 +14,9 @@
       :column="2"
       border
     >
-      <el-descriptions-item label="Name">{{ selectedElement.name }}</el-descriptions-item>
+      <el-descriptions-item label="Name" :span="2">{{ selectedElement.name }}</el-descriptions-item>
+      <el-descriptions-item label="Valid From">{{ selectedElement.validFrom }}</el-descriptions-item>
+      <el-descriptions-item label="Valid Until">{{ selectedElement.validUntil }}</el-descriptions-item>
       <el-descriptions-item label="Status">
         <el-tag
           :type="tagType(selectedElement.status)"
@@ -23,8 +25,6 @@
           {{ selectedElement.status}}
         </el-tag>
       </el-descriptions-item>
-      <el-descriptions-item label="Valid From">{{ selectedElement.validFrom }}</el-descriptions-item>
-      <el-descriptions-item label="Valid Until">{{ selectedElement.validUntil }}</el-descriptions-item>
     </el-descriptions>
 
     <template #footer>

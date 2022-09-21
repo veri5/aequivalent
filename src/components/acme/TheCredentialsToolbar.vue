@@ -1,29 +1,16 @@
 <template>
-  <el-card 
+  <el-card
     shadow="never"
     class="card"
     :body-style="{ padding: '5px' }"
   >
-    <div id="toolbar">
-      <div v-if="selected">
+    <div id="container">
+      <div 
+        v-if="selectedCredential"
+        class="toolbar"
+      >
         <el-tooltip
-          content="Remove" 
-          placement="bottom"
-        >
-          <el-button
-            type="danger"
-            :size="'default'"
-            circle
-            plain
-            :icon="Delete" 
-            @click="showRemoveSelectedBox"
-          />
-        </el-tooltip>
-
-        <el-divider direction="vertical" class="menu-divider"/>
-
-        <el-tooltip
-          content="View" 
+          content="View Credential" 
           placement="bottom"
         >
           <el-button
@@ -31,11 +18,12 @@
             circle
             plain
             :icon="View"
-            @click="viewSelected"
+            @click="viewSelectedCredential"
           />
         </el-tooltip>
+
         <el-tooltip 
-          content="Clear" 
+          content="Clear Selection" 
           placement="bottom"
         >
           <el-button
@@ -43,79 +31,62 @@
             circle
             plain
             :icon="Close"
-            @click="clearSelected"
+            @click="clearSelectedCredential"
           />
         </el-tooltip>
       </div>
-      <el-tooltip v-else
-        content="New credential" 
-        placement="bottom"
+      <div v-else
+        class="toolbar "
       >
-        <el-button
-          type="primary"
-          :size="'default'"
-          circle
-          plain
-          :icon="Edit" 
-          @click="newRequest"
-        />
-      </el-tooltip>
+        <el-tooltip
+          content="New Credential" 
+          placement="bottom"
+        >
+          <el-button
+            type="primary"
+            :size="'default'"
+            circle
+            plain
+            :icon="Plus" 
+            @click="newCredential"
+          />
+        </el-tooltip>
+      </div>
     </div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
-import { computed, markRaw } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { ElNotification, ElMessageBox } from 'element-plus'
-import { Edit, Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
+import { Plus, Delete, View, Close } from '@element-plus/icons-vue'
 
 const store = useStore()
 const namespace = 'acme'
-const storeNamespace = store.state[namespace]
-
-const selected = computed(() => store.getters[`${namespace}/credentials/selected`])
+const selectedCredential = computed(() => store.getters[`${namespace}/credentials/selectedCredential`])
 
 
-function newRequest() {
-  store.dispatch(`${namespace}/credentials/showNewRequestModal`)
+function newCredential() {
+  store.dispatch(`${namespace}/credentials/showNewCredentialModal`)
 }
-function removeSelected() {
-  store.dispatch(`${namespace}/credentials/remove`)
+function viewSelectedCredential() {
+  store.dispatch(`${namespace}/credentials/showViewCredentialModal`)
 }
-function viewSelected() {
-  store.dispatch(`${namespace}/credentials/showViewModal`)
-}
-function clearSelected() {
-  store.dispatch(`${namespace}/credentials/clear`)
-}
-function showRemoveSelectedBox(){
-  ElMessageBox.confirm(
-    'Credential will permanently be remove. Continue?',
-    'Remove credential',
-    {
-      confirmButtonText: 'Confirm',
-      cancelButtonText: 'Cancel',
-      type: 'error',
-      icon: markRaw(Delete),
-    }
-  )
-  .then(() => {
-    ElNotification({
-      message: 'Credential removed successfully',
-      icon: markRaw(RemoveFilled),
-      position: 'top-left',
-      duration: 3000
-    })
-    removeSelected()
-  })
+function clearSelectedCredential() {
+  store.dispatch(`${namespace}/credentials/clearSelectedCredential`)
 }
 </script>
 
 <style scoped>
-#toolbar {
-  padding: 5px;
+#container {
+  display: flex;
+  justify-content: space-between;
   background-color: white;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: 5px;
 }
 .card {
   background-color: #e1f3d8; 
@@ -123,8 +94,5 @@ function showRemoveSelectedBox(){
   border: none; 
   margin: 0px 10px; 
   border-radius: 0px;
-}
-.menu-divider {
-  margin: 0px 15px;
 }
 </style>

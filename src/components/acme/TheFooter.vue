@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-divider border-style="none"/>
+    <el-divider class="acme-divider"/>
     <el-col class="acme-footer">
       <div>© Copyright 2022 | Acme SA</div>
     </el-col>
@@ -15,5 +15,9 @@
   background-color: #95d475;
   padding: 10px;
   text-align: center;
+}
+.acme-divider {
+  border: none;
+  margin: 10px 0px;
 }
 </style>
