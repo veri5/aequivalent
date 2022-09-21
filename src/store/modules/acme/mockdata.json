@@ -17,7 +17,7 @@
           "upload": false
         },
         {
-          "name": "Criminal Record",
+          "name": "Criminal Records",
           "upload": false
         }
       ]
@@ -26,19 +26,16 @@
 	"credentials": [
 	  { 
       "type": "University Diploma",
-      "element": "university-diploma",
       "issuer": "aequivalent",
       "status": "Valid"
     },
 	  { 
       "type": "Passport",
-      "element": "passport",
       "issuer": "fedpol",
       "status": "Retired"
     },
 	  { 
       "type": "Criminal Records",
-      "element": "criminal-records",
       "issuer": "fedpol",
       "status": "Valid"
     }
