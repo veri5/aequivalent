@@ -88,7 +88,7 @@ class Verida {
   }
 }
 
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 const isAutoAccount = true
 const verida = new Verida(namespace, isAutoAccount)
 verida.initialize()

@@ -33,12 +33,15 @@ const actions = {
   signOut ({ commit }) {
     commit('setProfile', initProfile)
     commit('setIsAuthenticated', false)
-  }
+  },
 }
 
 const getters = {
   isAuthenticated (state) {
     return localStorage.getItem(state.localKey) === 'true'
+  },
+  profile (state) {
+    return state.profile
   }
 }
 

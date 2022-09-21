@@ -3,9 +3,11 @@ import { issuers, credentials as mockCredentials } from "./mockdata.json"
 ///
 
 const Statuses = {
+  UnderReview: 'Under Review',
   Valid: 'Valid',
-  Retired: 'Retired',
-  UnderReview: 'Under Review'
+  NotValid: 'Not Valid',
+  Rejected: 'Rejected',
+  Approved: 'Approved'
 }
 
 const state = {
@@ -22,7 +24,7 @@ const mutations = {
   setIsViewCredentialModalVisible (state, status) {
     state.isViewCredentialModalVisible = status
   },
-  confirmNewCredential (state, credential) {
+  addNewCredential (state, credential) {
     state.credentials.push(credential)
   },
   setSelectedCredential (state, credential) {
@@ -31,8 +33,8 @@ const mutations = {
 }
 
 const actions = {
-  confirmNewCredential ({ commit }, credential) {
-    commit('confirmNewCredential', credential)
+  addNewCredential ({ commit }, credential) {
+    commit('addNewCredential', credential)
   },
   setSelectedCredential ({ commit }, credential) {
     commit('setSelectedCredential', credential)
@@ -55,8 +57,11 @@ const actions = {
 }
 
 const getters = {
-  credentials(state) {
-    return state.credentials
+  credentials(state, getters, rootState, rootGetters) {
+    const aequivalentRequests = rootGetters['aequivalent/requests/requests']
+    const fedpolRequests = rootGetters['fedpol/requests/requests']
+    
+    return [...aequivalentRequests, ...fedpolRequests]
   },
   isNewCredentialModalVisible (state) {
     return state.isNewCredentialModalVisible === true
@@ -67,12 +72,12 @@ const getters = {
   selectedCredential (state) {
     return state.selectedCredential
   },
+  issuers (state) {
+    return issuers
+  },
   Statuses (state) {
     return Statuses
   },
-  issuers (state) {
-    return issuers
-  }
 }
 
 export default {

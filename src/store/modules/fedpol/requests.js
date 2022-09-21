@@ -4,18 +4,24 @@ import { requests as mockRequests } from "./mockdata.json"
 
 const Statuses = {
   UnderReview: 'Under Review',
+  Valid: 'Valid',
+  NotValid: 'Not Valid',
+  Retired: 'Retired',
   Rejected: 'Rejected',
-  Approved: 'Approved',
+  Approved: 'Approved'
 }
 
 const state = {
-  requests: mockRequests,
+  requests: [],
   isReviewRequestModalVisible: false,
   isViewRequestModalVisible: false,
   selectedRequest: null
 }
 
 const mutations = {
+  addNewRequest (state, request) {
+    state.requests.push(request)
+  },
   setIsReviewRequestModalVisible (state, status) {
     state.isReviewRequestModalVisible = status
   },
@@ -26,14 +32,25 @@ const mutations = {
     state.selectedRequest = request
   },
   approveSelectedRequest (state) {
-    state.selectedRequest.status = Statuses.Approved
+    state.requests = [
+      ...state.requests.filter(({ uid }) => state.selectedRequest.uid !== uid),
+      Object.assign({}, { ...state.selectedRequest }, { status: Statuses.Approved, validity: Statuses.Valid })
+    ]
+    state.selectedRequest = null
   },
   rejectSelectedRequest (state) {
-    state.selectedRequest.status = Statuses.Rejected
+    state.requests = [
+      ...state.requests.filter(({ uid }) => state.selectedRequest.uid !== uid),
+      Object.assign({}, { ...state.selectedRequest }, { status: Statuses.Rejected, validity: Statuses.NotValid })
+    ]
+    state.selectedRequest = null
   }
 }
 
 const actions = {
+  addNewRequest ({ commit }, request) {
+    commit('addNewRequest', request)
+  },
   setSelectedRequest ({ commit }, request) {
     commit('setSelectedRequest', request)
   },

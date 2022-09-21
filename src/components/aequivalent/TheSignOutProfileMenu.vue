@@ -64,7 +64,7 @@ function hideDid(str) {
 }
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 const storeNamespace = store.state[namespace]
 
 const user = computed(() => storeNamespace.user.profile)

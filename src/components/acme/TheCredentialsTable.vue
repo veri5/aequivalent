@@ -21,7 +21,7 @@
       :show-header="!!tableData.length"
       :table-layout="'auto'"
       :highlight-current-row="true"
-      :default-sort="{ prop: 'status', order: 'descending' }"
+      :default-sort="{ prop: 'validity', order: 'descending' }"
       :header-cell-style="{ 
         background: '#d1edc4', 
         color: '#2c3e50'
@@ -52,14 +52,14 @@
 
       <el-table-column prop="type" label="Type"/>
       <el-table-column prop="issuer" label="Issuer"/>
-      <el-table-column prop="status" label="Status">
+      <el-table-column prop="validity" label="Validity">
         <template #default="scope">
           <el-tag
-            :type="tagType(scope.row.status)"
+            :type="tagType(scope.row.validity)"
             :effect="'plain'"
             style="min-width: 90px;"
           >
-            {{ scope.row.status }}
+            {{ scope.row.validity }}
           </el-tag>
         </template>
       </el-table-column>
@@ -91,14 +91,17 @@ const filterType = computed(() =>
       !search.value || 
       row.type.toLowerCase().includes(search.value.toLowerCase()))
 )
-function tagType(status: string) {
+function tagType(validity: string) {
   let tag = ''
-  switch (status) {
+  switch (validity) {
     case 'Valid':
       tag = 'success'
       break
-    case 'Retired':
+    case 'Not Valid':
       tag = 'danger'
+      break
+    case 'Under Review':
+      tag = 'warning'
       break
     default:
       tag = 'info'

@@ -20,7 +20,7 @@ import TheFooter from '@/components/aequivalent/TheFooter.vue';
 import TheLanding from '@/views/aequivalent/TheLanding.vue';
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 const storeNamespace = store.state[namespace]
 const isAuthenticated = computed(() => storeNamespace.user.isAuthenticated)
 </script>

@@ -16,12 +16,12 @@
     >
       <el-descriptions-item label="Type" :span="2">{{ selectedCredential.type }}</el-descriptions-item>
       <el-descriptions-item label="Issuer">{{ selectedCredential.issuer }}</el-descriptions-item>
-      <el-descriptions-item label="Status">
+      <el-descriptions-item label="Validity">
         <el-tag
-          :type="tagType(selectedCredential.status)"
+          :type="tagType(selectedCredential.validity)"
           :effect="'plain'"
         >
-          {{ selectedCredential.status }}
+          {{ selectedCredential.validity }}
         </el-tag>
       </el-descriptions-item>
     </el-descriptions>
@@ -58,9 +58,9 @@ function beforeClose(done){
   closeModal()
   done()
 }
-function tagType(status: string) {
+function tagType(validity: string) {
   let tag = ''
-  switch (status) {
+  switch (validity) {
     case 'Valid':
       tag = 'success'
       break

@@ -15,12 +15,12 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import veridaAccount from '@/verida/aeq-account'
+import veridaAccount from '@/verida/aequivalent-account'
 
 const loading = ref(false)
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 const isAuthenticated = computed(() => store.getters[`${namespace}/user/isAuthenticated`])
 
 async function signIn(){

@@ -36,6 +36,9 @@ const actions = {
 const getters = {
   isConnected (state) {
     return state.isConnected === 'true'
+  },
+  profile (state) {
+    return state.profile
   }
 }
 

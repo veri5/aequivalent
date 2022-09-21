@@ -84,7 +84,7 @@ function tagType(status: string) {
       tag = 'danger'
       break
     case 'Under-Review':
-      tag = 'info'
+      tag = 'warning'
       break
     default:
       tag = 'info'

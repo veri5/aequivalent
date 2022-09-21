@@ -66,7 +66,7 @@ const noMatchingCriteriaText = 'No request matching your search criteria was fou
 const noItemToShowYetText = 'No requests to show yet'
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 const tableData = computed(() => store.getters[`${namespace}/requests/requests`])
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
@@ -84,7 +84,7 @@ function tagType(status: string) {
       tag = 'danger'
       break
     case 'Under-Review':
-      tag = 'info'
+      tag = 'warning'
       break
     default:
       tag = 'info'

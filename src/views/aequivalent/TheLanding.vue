@@ -30,7 +30,7 @@ import { useStore } from 'vuex'
 import TheSignInButton from '@/components/aequivalent/TheSignInButton.vue';
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 const storeNamespace = store.state[namespace]
 
 const company = computed(() => storeNamespace.company.profile)

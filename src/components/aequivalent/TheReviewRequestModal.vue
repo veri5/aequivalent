@@ -62,7 +62,7 @@ import { ElNotification, ElMessageBox } from 'element-plus'
 import { useStore } from 'vuex'
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 const selectedRequest = computed(() => store.getters[`${namespace}/requests/selectedRequest`])
 
 const showModel = ref(false)
@@ -80,7 +80,7 @@ function tagType(status: string) {
       tag = 'danger'
       break
     case 'Under-Review':
-      tag = 'info'
+      tag = 'warning'
       break
     default:
       tag = 'info'

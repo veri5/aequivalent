@@ -74,7 +74,7 @@ import { ElNotification, ElMessageBox } from 'element-plus'
 import { Edit, Delete, View, Close, RemoveFilled } from '@element-plus/icons-vue'
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 const selectedRequest = computed(() => store.getters[`${namespace}/requests/selectedRequest`])
 const requests = computed(() => store.getters[`${namespace}/requests/requests`])
 const Statuses = computed(() => store.getters[`${namespace}/requests/Statuses`])

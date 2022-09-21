@@ -72,6 +72,14 @@ const company = computed(() => storeNamespace.company.profile)
   background-blend-mode: overlay;
   background-size: cover;
 }
+/* .body-background {
+  background-color: rgb(0 0 0 / 50%);
+  background-image: url("~@/assets/verifive_landing_background2.jpg");
+  background-position: 45%;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  background-size: cover;
+} */
 .footer {
   color: whitesmoke;
   font-family: 'Helvetica';

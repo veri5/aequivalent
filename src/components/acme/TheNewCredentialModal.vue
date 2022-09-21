@@ -30,7 +30,8 @@
         >
           <el-option
             v-for="item in issuers"
-              :key="item.name"
+              :key="item.label"
+              :label="item.label"
               :value="item.name"
           />
         </el-select>
@@ -52,18 +53,19 @@
           <el-option
             v-for="item in issuers.find(({ name }) => form.issuer == name).types"
               :key="item.name"
-              :value="item.name"
+              :value="item.label"
           />
         </el-select>
       </el-form-item>
 
       <el-form-item 
         v-if="form.type == 'University Diploma'"
+        ref="formUploadRef"
         label="Certificate"
         prop="upload"
       >
         <el-alert type="info" show-icon :closable="false">
-          <h4>Please upload a scanned or electronic copy of your original certificate</h4>
+          <span>Please upload a scanned or electronic copy of your original certificate</span>
         </el-alert>        
         <el-upload
           ref="upload"
@@ -71,8 +73,8 @@
           :auto-upload="false"
           :drag="true"
           :limit="1"
-          @success="(response, uploadFile) => { fileUploaded = true }"
-          @change="(uploadFile, uploadFiles) => { fileUploaded = true }"
+          @success="(response, uploadFile) => { fileUploaded = true; formUploadRef?.resetField() }"
+          @change="(uploadFile, uploadFiles) => { fileUploaded = true; formUploadRef?.resetField() }"
           @remove="() => fileUploaded = false"
           style="width: 100%"
         >
@@ -114,12 +116,14 @@ import { useStore } from 'vuex'
 import type { FormInstance, FormItemInstance, FormRules } from 'element-plus'
 import { UploadFilled, Key, SuccessFilled } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
+import { uid } from 'uid';
 
 const showModel = ref(false)
 const fileUploaded = ref(false)
 
 const store = useStore()
 const namespace = 'acme'
+const profile = computed(() => store.getters[`${namespace}/user/profile`])
 const issuers = computed(() => store.getters[`${namespace}/credentials/issuers`])
 const Statuses = computed(() => store.getters[`${namespace}/credentials/Statuses`])
 const isViewModalVisible = computed(() => store.getters[`${namespace}/credentials/isNewCredentialModalVisible`])
@@ -130,6 +134,8 @@ watch(isViewModalVisible, (value) => {
 
 const formRef = ref<FormInstance>()
 const formTypeRef = ref<FormItemInstance>()
+const formUploadRef = ref<FormItemInstance>()
+
 const form = reactive({
   issuer: '',
   type: '',
@@ -153,6 +159,7 @@ const rules = reactive<FormRules>({
   upload: [
     {
       validator: () => fileUploaded.value, 
+      required: true, 
       message: 'A original certificate is required',
       trigger: ['blur', 'change']
     },
@@ -182,6 +189,20 @@ function submit(){
     }
   })
 }
+/*
+  Workaround to unify Requests and Credentials. Just for demo purposes.
+*/
+function addNewRequest(){
+  const request = {
+    uid: uid(16),
+    type: form.type,
+    issuer: form.issuer,
+    validity: Statuses.value.UnderReview,
+    requester: profile.value.name,
+    status: Statuses.value.UnderReview
+  }
+  store.dispatch(`${form.issuer}/requests/addNewRequest`, request)
+}
 function openConfirmBox(){
   ElMessageBox.confirm(
     'Your signature is being requested. Continue?',
@@ -194,13 +215,8 @@ function openConfirmBox(){
     }
   )
   .then(() => {
-    const credential = {
-      issuer: form.issuer,
-      type: form.type,
-      status: Statuses.value.UnderReview
-    }
-    store.dispatch(`${namespace}/credentials/confirmNewCredential`, credential)
-
+    addNewRequest()
+    
     ElNotification({
       message: 'Credential requested successfully',
       icon: markRaw(SuccessFilled),

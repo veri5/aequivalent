@@ -9,7 +9,7 @@ import { useStore } from 'vuex'
 import { Back } from '@element-plus/icons-vue'
 
 const store = useStore()
-const namespace = 'aeq'
+const namespace = 'aequivalent'
 
 function signOut(){
   store.dispatch(`${namespace}/user/signOut`)

@@ -4,9 +4,9 @@ import acmeUser from './modules/acme/user'
 import acmeCompany from './modules/acme/company'
 import credentials from './modules/acme/credentials'
 
-import aeqUser from './modules/aeq/user'
-import aeqCompany from './modules/aeq/company'
-import aeqRequests from './modules/aeq/requests'
+import aequivalentUser from './modules/aequivalent/user'
+import aequivalentCompany from './modules/aequivalent/company'
+import aequivalentRequests from './modules/aequivalent/requests'
 
 import fedpolUser from './modules/fedpol/user'
 import fedpolCompany from './modules/fedpol/company'
@@ -30,12 +30,12 @@ export default createStore({
         toolbar
       }
     },
-    aeq: {
+    aequivalent: {
       namespaced: true,
       modules: {
-        user: aeqUser,
-        company: aeqCompany,
-        requests: aeqRequests,
+        user: aequivalentUser,
+        company: aequivalentCompany,
+        requests: aequivalentRequests,
         verida,
       }
     },

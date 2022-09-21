@@ -1,23 +1,28 @@
 {
 	"issuers": [
     {
-      "name": "Aequivalent",
+      "label": "Aequivalent",
+      "name": "aequivalent",
       "types": [
         {
-          "name": "University Diploma",
+          "label": "University Diploma",
+          "name": "university-diploma",
           "upload": true
         }
       ]
     },
     {
-      "name": "Federal Office of Police",
+      "label": "Federal Office of Police",
+      "name": "fedpol",
       "types": [
         {
-          "name": "Passport",
+          "label": "Passport",
+          "name": "passport",
           "upload": false
         },
         {
-          "name": "Criminal Records",
+          "label": "Criminal Records",
+          "name": "criminal-records",
           "upload": false
         }
       ]
