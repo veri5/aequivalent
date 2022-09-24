@@ -1,4 +1,4 @@
-# Aequivalent Demo
+# Verifive Demo
 
 ## Project setup
 ```
