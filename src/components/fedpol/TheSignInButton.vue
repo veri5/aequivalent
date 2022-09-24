@@ -7,7 +7,7 @@
     class="fedpol-button"
     @click="signIn"
   >
-    Sign in
+    Sign in as Issuer
   </el-button>
 </template>
 

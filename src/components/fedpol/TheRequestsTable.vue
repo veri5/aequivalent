@@ -10,7 +10,7 @@
       :show-header="!!tableData.length"
       :table-layout="'auto'"
       :highlight-current-row="true"
-      :default-sort="{ prop: 'status', order: 'descending' }"
+      :default-sort="{ prop: 'type', order: 'ascending' }"
       :header-cell-style="{ 
         background: '#e4e4e4', 
         color: '#2c3e50'
@@ -44,9 +44,9 @@
       <el-table-column prop="status" label="Status">
         <template #default="scope">
           <el-tag
-            :type="tagType(scope.row.status)"
+            :type="requestTagType(scope.row.status)"
             :effect="'plain'"
-            style="min-width: 90px;"
+            style="min-width: 90px; text-transform: capitalize;"
           >
             {{ scope.row.status }}
           </el-tag>
@@ -61,6 +61,7 @@ import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
 import { DocumentCopy, Search, Edit, SetUp } from '@element-plus/icons-vue'
+import { requestTagType } from '@/components/helpers/tags';
 
 const noMatchingCriteriaText = 'No request matching your search criteria was found'
 const noItemToShowYetText = 'No requests to show yet'
@@ -74,25 +75,7 @@ const selectedRequest = computed(() => store.getters[`${namespace}/requests/sele
 watch(selectedRequest, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
-function tagType(status: string) {
-  let tag = ''
-  switch (status) {
-    case 'Approved':
-      tag = 'success'
-      break
-    case 'Rejected':
-      tag = 'danger'
-      break
-    case 'Under Review':
-      tag = 'warning'
-      break
-    default:
-      tag = 'info'
-      break
-  }
 
-  return tag
-}
 function rowClick(request){
   store.dispatch(`${namespace}/requests/setSelectedRequest`, request)
 }

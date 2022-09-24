@@ -19,6 +19,12 @@
   </el-row>
 </template>
 
+<style scoped>
+.el-col {
+  box-shadow: rgb(38, 57, 77) 0px 0px 30px -10px;
+}
+</style>
+
 <style>
 body {
   font-family: Helvetica, Arial, sans-serif;

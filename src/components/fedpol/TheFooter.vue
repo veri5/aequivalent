@@ -2,7 +2,7 @@
   <el-row>
     <el-divider class="fedpol-divider"/>
     <el-col class="fedpol-footer">
-      <div>© 2022 Federal Office of Police</div>
+      <div>© 2022 Federal Office of Police fedpol</div>
     </el-col>
   </el-row>
 </template>

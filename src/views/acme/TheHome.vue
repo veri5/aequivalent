@@ -2,6 +2,8 @@
   <div id="home" v-if="isConnected">
     <TheDisconnectProfileMenu />
 
+    <TheRequests />
+
     <TheCredentials />
 
     <TheFooter />
@@ -15,6 +17,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import TheDisconnectProfileMenu from '@/components/acme/TheDisconnectProfileMenu.vue';
+import TheRequests from '@/components/acme/TheRequests.vue';
 import TheCredentials from '@/components/acme/TheCredentials.vue';
 import TheFooter from '@/components/acme/TheFooter.vue';
 import TheLanding from '@/views/acme/TheLanding.vue';

@@ -1,14 +1,12 @@
+import { uid } from 'uid';
 // - Mock data
 import { requests as mockRequests } from "./mockdata.json"
 ///
 
 const Statuses = {
-  UnderReview: 'Under Review',
-  Valid: 'Valid',
-  NotValid: 'Not Valid',
-  Retired: 'Retired',
-  Rejected: 'Rejected',
-  Approved: 'Approved'
+  UnderReview: 'under review',
+  Rejected: 'rejected',
+  Issued: 'issued'
 }
 
 const state = {
@@ -31,17 +29,17 @@ const mutations = {
   setSelectedRequest (state, request) {
     state.selectedRequest = request
   },
-  approveSelectedRequest (state) {
+  issueSelectedRequest (state) {
     state.requests = [
       ...state.requests.filter(({ uid }) => state.selectedRequest.uid !== uid),
-      Object.assign({}, { ...state.selectedRequest }, { status: Statuses.Approved, validity: Statuses.Valid })
+      Object.assign({}, { ...state.selectedRequest }, { status: Statuses.Issued })
     ]
     state.selectedRequest = null
   },
   rejectSelectedRequest (state) {
     state.requests = [
       ...state.requests.filter(({ uid }) => state.selectedRequest.uid !== uid),
-      Object.assign({}, { ...state.selectedRequest }, { status: Statuses.Rejected, validity: Statuses.NotValid })
+      Object.assign({}, { ...state.selectedRequest }, { status: Statuses.Rejected })
     ]
     state.selectedRequest = null
   }
@@ -54,8 +52,18 @@ const actions = {
   setSelectedRequest ({ commit }, request) {
     commit('setSelectedRequest', request)
   },
-  approveSelectedRequest({ commit }) {
-    commit('approveSelectedRequest')
+  issueSelectedRequest({ commit, state, dispatch }) {
+    const { type, issuer } = state.selectedRequest
+    const credential = {
+      uid: uid(16),
+      type,
+      issuer,
+      correct: 'true',
+      valid: 'false'
+    }
+    dispatch('acme/credentials/addNewCredential', credential, { root: true })
+
+    commit('issueSelectedRequest')
   },
   rejectSelectedRequest({ commit }) {
     commit('rejectSelectedRequest')

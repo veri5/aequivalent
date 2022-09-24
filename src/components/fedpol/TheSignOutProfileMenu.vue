@@ -75,7 +75,7 @@ const company = computed(() => storeNamespace.company.profile)
 .flex-grow {
   flex-grow: 1;
 }
-.tagline{
+.tagline {
   color: black;
 }
 /* .bell-icon {

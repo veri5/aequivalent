@@ -4,11 +4,12 @@
       <el-row>
         <el-col class="header">
           <img alt="company logo" :src="require(`@/assets/${company.landingLogo}`)"/>
+          <div class="header-tagline">{{ company.tagline }}</div>
         </el-col>
       </el-row>
       <el-row class="body body-background">
         <el-col>
-          <h2 class="title">{{ company.name }}</h2>
+          <h2 class="title">fedpolʼs mission</h2>
           <h2 class="title" style="margin-top: 15px; height: 1px;"><span class="underline">{{ company.name }}</span></h2>
           <p class="tagline">The exchange of information and the identification of people and objects are central to fighting crime. fedpol develops and operates national databases, and makes these instruments available to federal and cantonal security and migration services.</p>
           <el-divider border-style="none"/>
@@ -42,10 +43,14 @@ const company = computed(() => storeNamespace.company.profile)
   justify-content: flex-start;
   background: white;
   border-bottom: 3px solid #dc0018;
+  align-items: center;
 }
 .header > img {
   height: 29px;
   padding: 10px 15px;
+}
+.header-tagline {
+  color: black;
 }
 .body {
   display: flex;
@@ -60,7 +65,7 @@ const company = computed(() => storeNamespace.company.profile)
   margin-bottom: 0px;
 }
 .tagline {
-  font-size: 16px;
+  font-size: 14px;
   color: whitesmoke;
   text-align: justify;
 }

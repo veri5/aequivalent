@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 import acmeUser from './modules/acme/user'
 import acmeCompany from './modules/acme/company'
-import credentials from './modules/acme/credentials'
+import acmeCredentials from './modules/acme/credentials'
+import acmeRequests from './modules/acme/requests'
 
 import aequivalentUser from './modules/aequivalent/user'
 import aequivalentCompany from './modules/aequivalent/company'
@@ -20,14 +21,14 @@ import verida from './modules/vda/verida'
 
 export default createStore({
   modules: {
-    verifive: {
+    acme: {
       namespaced: true,
       modules: {
-        user: verifiveUser,
-        company: verifiveCompany,
-        verida,
-        elements,
-        toolbar
+        user: acmeUser,
+        company: acmeCompany,
+        credentials: acmeCredentials,
+        requests: acmeRequests,
+        verida
       }
     },
     aequivalent: {
@@ -48,13 +49,14 @@ export default createStore({
         verida,
       }
     },
-    acme: {
+    verifive: {
       namespaced: true,
       modules: {
-        user: acmeUser,
-        company: acmeCompany,
+        user: verifiveUser,
+        company: verifiveCompany,
         verida,
-        credentials
+        elements,
+        toolbar
       }
     }
   }

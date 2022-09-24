@@ -7,7 +7,7 @@
         </el-col>
       </el-row>
       <el-row class="body body-background">
-        <el-col :xs="18" :sm="18">
+        <el-col :xs="20" :sm="20">
           <h2 class="title">Who is {{ company.name }}?</h2>
           <h2 class="title" style="margin-top: 15px; height: 1px;"><span class="underline">Who</span></h2>
           <p class="tagline">Aequivalent is Switzerland’s leading digital platform for employment screening (background checks). Through our secure online solution, our team verifies and delivers relevant information to help employers reduce the risk of inappropriate employment.</p>

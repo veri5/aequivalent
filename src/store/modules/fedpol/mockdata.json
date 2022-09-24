@@ -10,7 +10,7 @@
       "type": "Criminal Records",
       "element": "criminal-records",
       "requester": "Alice Doe",
-      "status": "Approved"
+      "status": "Issued"
     },
 	  { 
       "type": "Criminal Records",

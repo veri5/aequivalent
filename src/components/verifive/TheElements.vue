@@ -38,7 +38,7 @@ const heading = 'Elements'
 
 <style scoped>
 #elements {
-  min-height: calc(100vh - 98px);
+  min-height: calc(100vh - 100px);
 }
 .heading {
   padding: 5px;

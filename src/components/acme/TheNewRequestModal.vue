@@ -5,7 +5,7 @@
       :width="'40%'"
     >
     <template #header>
-      <strong>New credential</strong>
+      <strong>New request</strong>
       <p style="font-size: var(--el-font-size-small);">Please fill out the following form to request a new credential</p>
     </template>
 
@@ -124,9 +124,9 @@ const fileUploaded = ref(false)
 const store = useStore()
 const namespace = 'acme'
 const profile = computed(() => store.getters[`${namespace}/user/profile`])
-const issuers = computed(() => store.getters[`${namespace}/credentials/issuers`])
-const Statuses = computed(() => store.getters[`${namespace}/credentials/Statuses`])
-const isViewModalVisible = computed(() => store.getters[`${namespace}/credentials/isNewCredentialModalVisible`])
+const issuers = computed(() => store.getters[`${namespace}/requests/issuers`])
+const Statuses = computed(() => store.getters[`${namespace}/requests/Statuses`])
+const isViewModalVisible = computed(() => store.getters[`${namespace}/requests/isNewRequestModalVisible`])
 watch(isViewModalVisible, (value) => {
   showModel.value = value
 })
@@ -172,7 +172,7 @@ function resetForm(){
 function closeModal(){
   fileUploaded.value = false
   resetForm(formRef.value)
-  store.dispatch(`${namespace}/credentials/closeNewCredentialModal`)
+  store.dispatch(`${namespace}/requests/closeNewRequestModal`)
 }
 function beforeClose(done){
   closeModal()
@@ -189,19 +189,22 @@ function submit(){
     }
   })
 }
-/*
-  Workaround to unify Requests and Credentials. Just for demo purposes.
-*/
 function addNewRequest(){
   const request = {
     uid: uid(16),
     type: form.type,
     issuer: form.issuer,
-    validity: Statuses.value.UnderReview,
     requester: profile.value.name,
     status: Statuses.value.UnderReview
   }
-  store.dispatch(`${form.issuer}/requests/addNewRequest`, request)
+  // Workaround to simulate fake issuers
+  if(request.issuer.includes("fake-")) {
+    // e.g. fake-fedpol -> fedpol
+    request.issuer = request.issuer.replace('fake-','')
+    store.dispatch(`${request.issuer}/requests/addNewFakeRequest`, request)
+  } else {
+    store.dispatch(`${request.issuer}/requests/addNewRequest`, request)
+  }
 }
 function openConfirmBox(){
   ElMessageBox.confirm(
@@ -218,7 +221,7 @@ function openConfirmBox(){
     addNewRequest()
     
     ElNotification({
-      message: 'Credential requested successfully',
+      message: 'Request sent successfully',
       icon: markRaw(SuccessFilled),
       position: 'top-left',
       duration: 3000

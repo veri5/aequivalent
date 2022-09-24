@@ -3,8 +3,8 @@ import { elements as mockElements } from "./mockdata.json"
 ///
 
 const Statuses = {
-  Valid: 'Valid',
-  Retired: 'Retired'
+  Valid: 'valid',
+  Retired: 'retired'
 }
 
 const state = {

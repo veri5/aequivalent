@@ -4,34 +4,34 @@
       "name": "aequivalent",
       "validFrom": "2020-08-01",
       "validUntil": "2022-08-01",
-      "status": "Valid"
+      "status": "valid"
     },
 	  { 
       "name": "university-diploma",
       "validFrom": "2020-08-01",
       "validUntil": "2022-08-01",
       "parent": "aequivalent",
-      "status": "Valid"
+      "status": "valid"
     },
 	  { 
       "name": "fedpol",
       "validFrom": "2020-08-01",
       "validUntil": "2022-08-01",
-      "status": "Valid"
+      "status": "valid"
     },
 	  { 
       "name": "passport",
       "validFrom": "2020-08-01",
       "validUntil": "2022-08-01",
       "parent": "fedpol",
-      "status": "Valid"
+      "status": "valid"
     },
 	  { 
       "name": "criminal-records",
       "validFrom": "2020-08-01",
       "validUntil": "2022-08-01",
       "parent": "fedpol",
-      "status": "Valid"
+      "status": "valid"
     }
 	]
 }

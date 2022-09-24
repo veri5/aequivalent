@@ -10,9 +10,9 @@
       :show-header="!!tableData.length"
       :table-layout="'auto'"
       :highlight-current-row="true"
-      :default-sort="{ prop: 'type', order: 'ascending' }"
+      :default-sort="{ prop: 'status', order: 'descending' }"
       :header-cell-style="{ 
-        background: '#e4e4e4', 
+        background: '#d1edc4', 
         color: '#2c3e50'
       }"
       :row-style="{
@@ -40,7 +40,7 @@
       </template>
 
       <el-table-column prop="type" label="Type"/>
-      <el-table-column prop="requester" label="Requester"/>
+      <el-table-column prop="issuer" label="Issuer"/>
       <el-table-column prop="status" label="Status">
         <template #default="scope">
           <el-tag
@@ -63,21 +63,21 @@ import { ElTable } from 'element-plus'
 import { DocumentCopy, Search, Edit, SetUp } from '@element-plus/icons-vue'
 import { requestTagType } from '@/components/helpers/tags';
 
-const noMatchingCriteriaText = 'No request matching your search criteria was found'
+const noMatchingCriteriaText = 'No requests matching your search criteria was found'
 const noItemToShowYetText = 'No requests to show yet'
 
 const store = useStore()
-const namespace = 'aequivalent'
+const namespace = 'acme'
 const tableData = computed(() => store.getters[`${namespace}/requests/requests`])
+const selectedRequest = computed(() => store.getters[`${namespace}/requests/selectedRequest`])
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
-const selectedRequest = computed(() => store.getters[`${namespace}/requests/selectedRequest`])
 watch(selectedRequest, (value) => {
   value == null && tableRef.value!.setCurrentRow()
 })
 
-function rowClick(request){
-  store.dispatch(`${namespace}/requests/setSelectedRequest`, request)
+function rowClick(credential){
+  store.dispatch(`${namespace}/requests/setSelectedRequest`, credential)
 }
 function rowDblClick() {
   store.dispatch(`${namespace}/requests/showViewRequestModal`)
@@ -86,7 +86,7 @@ function rowDblClick() {
 
 <style scoped>
 .card {
-  background-color: #f3f2f3; 
+  background-color: #e1f3d8; 
   padding: 0px; 
   border: none; 
   margin: 0px 10px; 

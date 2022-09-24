@@ -15,7 +15,7 @@
       border
     >
       <el-descriptions-item label="Type" :span="2">{{ selectedRequest.type }}</el-descriptions-item>
-      <el-descriptions-item label="Requester">{{ selectedRequest.requester }}</el-descriptions-item>
+      <el-descriptions-item label="Issuer">{{ selectedRequest.issuer }}</el-descriptions-item>
       <el-descriptions-item label="Status">
         <el-tag
           :type="requestTagType(selectedRequest.status)"
@@ -42,10 +42,10 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
-import { requestTagType } from '@/components/helpers/tags';
+import { requestTagType } from '@/components/helpers/tags'
 
 const store = useStore()
-const namespace = 'fedpol'
+const namespace = 'acme'
 const selectedRequest = computed(() => store.getters[`${namespace}/requests/selectedRequest`])
 
 const showModel = ref(false)

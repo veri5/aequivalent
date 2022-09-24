@@ -1,31 +1,37 @@
 // - Mock data
-import { issuers, credentials as mockCredentials } from "./mockdata.json"
+import { credentials as mockCredentials } from "./mockdata.json"
 ///
 
 const Statuses = {
-  UnderReview: 'Under Review',
-  Valid: 'Valid',
-  NotValid: 'Not Valid',
-  Rejected: 'Rejected',
-  Approved: 'Approved'
+  Correct: 'true',
+  Incorrect: 'false',
+  Valid: 'true',
+  Invalid: 'false'
 }
 
 const state = {
   credentials: [],
-  isNewCredentialModalVisible: false,
+  isVerifiveCredentialModalVisible: false,
   isViewCredentialModalVisible: false,
   selectedCredential: null
 }
 
 const mutations = {
-  setIsNewCredentialModalVisible (state, status) {
-    state.isNewCredentialModalVisible = status
+  setIsVerifiveCredentialModalVisible (state, status) {
+    state.isVerifiveCredentialModalVisible = status
   },
   setIsViewCredentialModalVisible (state, status) {
     state.isViewCredentialModalVisible = status
   },
   addNewCredential (state, credential) {
     state.credentials.push(credential)
+  },
+  verifiveSelectedCredential (state) {
+    state.credentials = [
+      ...state.credentials.filter(({ uid }) => state.selectedCredential.uid !== uid),
+      Object.assign({}, { ...state.selectedCredential }, { correct: Statuses.Correct, valid: Statuses.Valid })
+    ]
+    state.selectedCredential = null
   },
   setSelectedCredential (state, credential) {
     state.selectedCredential = credential
@@ -36,17 +42,20 @@ const actions = {
   addNewCredential ({ commit }, credential) {
     commit('addNewCredential', credential)
   },
+  verifiveSelectedCredential ({ commit }) {
+    commit('verifiveSelectedCredential')
+  },
   setSelectedCredential ({ commit }, credential) {
     commit('setSelectedCredential', credential)
   },
   clearSelectedCredential ({ commit }) {
     commit('setSelectedCredential', null)
   },
-  showNewCredentialModal ({ commit }) {
-    commit('setIsNewCredentialModalVisible', true)
+  showVerifiveCredentialModal ({ commit }) {
+    commit('setIsVerifiveCredentialModalVisible', true)
   },
-  closeNewCredentialModal ({ commit }) {
-    commit('setIsNewCredentialModalVisible', false)
+  closeVerifiveCredentialModal ({ commit }) {
+    commit('setIsVerifiveCredentialModalVisible', false)
   },
   showViewCredentialModal ({ commit }) {
     commit('setIsViewCredentialModalVisible', true)
@@ -57,14 +66,11 @@ const actions = {
 }
 
 const getters = {
-  credentials(state, getters, rootState, rootGetters) {
-    const aequivalentRequests = rootGetters['aequivalent/requests/requests']
-    const fedpolRequests = rootGetters['fedpol/requests/requests']
-    
-    return [...aequivalentRequests, ...fedpolRequests]
+  credentials(state) {
+    return state.credentials
   },
-  isNewCredentialModalVisible (state) {
-    return state.isNewCredentialModalVisible === true
+  isVerifiveCredentialModalVisible (state) {
+    return state.isVerifiveCredentialModalVisible === true
   },
   isViewCredentialModalVisible (state) {
     return state.isViewCredentialModalVisible === true
@@ -72,12 +78,9 @@ const getters = {
   selectedCredential (state) {
     return state.selectedCredential
   },
-  issuers (state) {
-    return issuers
-  },
   Statuses (state) {
     return Statuses
-  },
+  }
 }
 
 export default {

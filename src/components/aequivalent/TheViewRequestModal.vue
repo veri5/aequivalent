@@ -18,9 +18,9 @@
       <el-descriptions-item label="Requester">{{ selectedRequest.requester }}</el-descriptions-item>
       <el-descriptions-item label="Status">
         <el-tag
-          :type="tagType(selectedRequest.status)"
+          :type="requestTagType(selectedRequest.status)"
           :effect="'plain'"
-          style="min-width: 90px;"
+          style="min-width: 90px; text-transform: capitalize;"
         >
           {{ selectedRequest.status }}
         </el-tag>
@@ -42,6 +42,7 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
+import { requestTagType } from '@/components/helpers/tags';
 
 const store = useStore()
 const namespace = 'aequivalent'
@@ -58,24 +59,5 @@ function closeModal(){
 function beforeClose(done){
   closeModal()
   done()
-}
-function tagType(status: string) {
-  let tag = ''
-  switch (status) {
-    case 'Approved':
-      tag = 'success'
-      break
-    case 'Rejected':
-      tag = 'danger'
-      break
-    case 'Under Review':
-      tag = 'warning'
-      break
-    default:
-      tag = 'info'
-      break
-  }
-
-  return tag
 }
 </script>

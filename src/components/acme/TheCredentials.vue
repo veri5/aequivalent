@@ -11,7 +11,7 @@
         <TheCredentialsToolbar />
       </el-col>
     </el-row>
-    
+
     <el-row>
       <el-col>
         <TheCredentialsTable />
@@ -20,14 +20,14 @@
   </div>
 
   <!-- modals -->
-  <TheNewCredentialModal />
+  <TheVerifiveCredentialModal />
   <TheViewCredentialModal />
 </template>
 
 <script lang="ts" setup>
 import TheCredentialsToolbar from '@/components/acme/TheCredentialsToolbar.vue'
 import TheCredentialsTable from '@/components/acme/TheCredentialsTable.vue'
-import TheNewCredentialModal from '@/components/acme/TheNewCredentialModal.vue'
+import TheVerifiveCredentialModal from '@/components/acme/TheVerifiveCredentialModal.vue'
 import TheViewCredentialModal from '@/components/acme/TheViewCredentialModal.vue'
 
 const heading = 'Credentials'
@@ -35,7 +35,7 @@ const heading = 'Credentials'
 
 <style scoped>
 #credentials {
-  min-height: calc(100vh - 98px);
+  min-height: calc(100vh - 35vh - 100px);
 }
 .heading {
   padding: 5px;

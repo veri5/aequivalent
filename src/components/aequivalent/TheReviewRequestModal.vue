@@ -18,7 +18,7 @@
       <el-descriptions-item label="Requester">{{ selectedRequest.requester }}</el-descriptions-item>
       <el-descriptions-item label="Status">
         <el-tag
-          :type="tagType(selectedRequest.status)"
+          :type="requestTagType(selectedRequest.status)"
           :effect="'plain'"
         >
           {{ selectedRequest.status }}
@@ -39,9 +39,9 @@
       <el-button 
         type="primary"
         plain 
-        @click="openApproveConfirmBox"
+        @click="openIssueConfirmBox"
       >
-        Approve
+        Issue
       </el-button>
       <el-button 
         type="danger"
@@ -60,6 +60,7 @@ import { ref, computed, watch, markRaw } from 'vue'
 import { Key, SuccessFilled } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
 import { useStore } from 'vuex'
+import { requestTagType } from '@/components/helpers/tags'
 
 const store = useStore()
 const namespace = 'aequivalent'
@@ -70,25 +71,6 @@ const isViewModalVisible = computed(() => store.getters[`${namespace}/requests/i
 watch(isViewModalVisible, (value) => {
   showModel.value = value
 })
-function tagType(status: string) {
-  let tag = ''
-  switch (status) {
-    case 'Approved':
-      tag = 'success'
-      break
-    case 'Rejected':
-      tag = 'danger'
-      break
-    case 'Under Review':
-      tag = 'warning'
-      break
-    default:
-      tag = 'info'
-      break
-  }
-
-  return tag
-}
 
 function closeModal(){
   store.dispatch(`${namespace}/requests/closeReviewRequestModal`)
@@ -97,7 +79,7 @@ function beforeClose(done){
   closeModal()
   done()
 }
-function openApproveConfirmBox(){
+function openIssueConfirmBox(){
   ElMessageBox.confirm(
     'Your signature is being requested. Continue?',
     'Signature request',
@@ -109,10 +91,10 @@ function openApproveConfirmBox(){
     }
   )
   .then(() => {
-    store.dispatch(`${namespace}/requests/approveSelectedRequest`)
+    store.dispatch(`${namespace}/requests/issueSelectedRequest`)
 
     ElNotification({
-      message: 'Request approved successfully',
+      message: 'Request issued successfully',
       icon: markRaw(SuccessFilled),
       position: 'top-left',
       duration: 3000

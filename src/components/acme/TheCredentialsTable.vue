@@ -21,7 +21,7 @@
       :show-header="!!tableData.length"
       :table-layout="'auto'"
       :highlight-current-row="true"
-      :default-sort="{ prop: 'validity', order: 'descending' }"
+      :default-sort="{ prop: 'type', order: 'ascending' }"
       :header-cell-style="{ 
         background: '#d1edc4', 
         color: '#2c3e50'
@@ -29,7 +29,7 @@
       :row-style="{
         cursor: 'pointer'
       }"
-      :height="308"
+      :height="200"
       @row-click="rowClick"
       @row-dblclick="rowDblClick"
     >
@@ -43,7 +43,7 @@
       </template>
       <template v-else #empty>
         <div style="line-height: 20px; color: #2c3e50;">
-          <el-icon :size="50"><DocumentCopy /></el-icon>
+          <el-icon :size="50"><CreditCard /></el-icon>
           <div>
             <strong>{{ noItemToShowYetText }}</strong>
           </div>
@@ -52,14 +52,25 @@
 
       <el-table-column prop="type" label="Type"/>
       <el-table-column prop="issuer" label="Issuer"/>
-      <el-table-column prop="validity" label="Validity">
+      <el-table-column label="Correctness">
         <template #default="scope">
           <el-tag
-            :type="tagType(scope.row.validity)"
+            :type="correctTagType(scope.row.correct)"
             :effect="'plain'"
-            style="min-width: 90px;"
+            style="min-width: 80px; text-transform: capitalize;"
           >
-            {{ scope.row.validity }}
+            {{ scope.row.correct }}
+          </el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column label="Validity">
+        <template #default="scope">
+          <el-tag
+            :type="validTagType(scope.row.valid)"
+            :effect="'plain'"
+            style="min-width: 80px; text-transform: capitalize;"
+          >
+            {{ scope.row.valid }}
           </el-tag>
         </template>
       </el-table-column>
@@ -71,7 +82,8 @@
 import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
-import { DocumentCopy, Search, Edit, SetUp } from '@element-plus/icons-vue'
+import { CreditCard, Search, SetUp, SuccessFilled } from '@element-plus/icons-vue'
+import { correctTagType, validTagType } from '@/components/helpers/tags'
 
 const noMatchingCriteriaText = 'No credential matching your search criteria was found'
 const noItemToShowYetText = 'No credentials to show yet'
@@ -91,25 +103,6 @@ const filterType = computed(() =>
       !search.value || 
       row.type.toLowerCase().includes(search.value.toLowerCase()))
 )
-function tagType(validity: string) {
-  let tag = ''
-  switch (validity) {
-    case 'Valid':
-      tag = 'success'
-      break
-    case 'Not Valid':
-      tag = 'danger'
-      break
-    case 'Under Review':
-      tag = 'warning'
-      break
-    default:
-      tag = 'info'
-      break
-  }
-
-  return tag
-}
 
 function rowClick(credential){
   store.dispatch(`${namespace}/credentials/setSelectedCredential`, credential)

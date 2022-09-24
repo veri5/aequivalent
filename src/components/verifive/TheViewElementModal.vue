@@ -19,9 +19,9 @@
       <el-descriptions-item label="Valid Until">{{ selectedElement.validUntil }}</el-descriptions-item>
       <el-descriptions-item label="Status">
         <el-tag
-          :type="tagType(selectedElement.status)"
+          :type="elementsTagType(selectedElement.status)"
           :effect="'plain'"
-          style="min-width: 90px;"
+          style="min-width: 80px; text-transform: capitalize;"
         >
           {{ selectedElement.status}}
         </el-tag>
@@ -42,6 +42,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { elementsTagType } from '@/components/helpers/tags';
 
 const store = useStore()
 const namespace = 'verifive'
@@ -49,23 +50,6 @@ const selectedElement = computed(() => store.getters[`${namespace}/elements/sele
 const Statuses = computed(() => store.getters[`${namespace}/elements/Statuses`])
 const isViewElementModalVisible = computed(() => store.getters[`${namespace}/elements/isViewElementModalVisible`])
 
-
-function tagType(status: string) {
-  let tag = ''
-  switch (status) {
-    case Statuses.value.Valid:
-      tag = 'success'
-      break
-    case Statuses.value.Retired:
-      tag = 'danger'
-      break
-    default:
-      tag = 'info'
-      break
-  }
-
-  return tag
-}
 function closeModal(){
   store.dispatch(`${namespace}/elements/closeViewElementModal`)
 }

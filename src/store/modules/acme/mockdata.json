@@ -26,23 +26,38 @@
           "upload": false
         }
       ]
+    },
+    {
+      "label": "Swiss Police Department - Instant Issuance!",
+      "name": "fake-fedpol",
+      "types": [
+        {
+          "label": "Passport",
+          "name": "passport",
+          "upload": false
+        },
+        {
+          "label": "Criminal Records",
+          "name": "criminal-records",
+          "upload": false
+        }
+      ]
     }
   ],
 	"credentials": [
 	  { 
+      "uid": 1,
       "type": "University Diploma",
       "issuer": "aequivalent",
-      "status": "Valid"
+      "correct": "correct",
+      "valid": "valid"
     },
 	  { 
+      "uid": 3,
       "type": "Passport",
       "issuer": "fedpol",
-      "status": "Retired"
-    },
-	  { 
-      "type": "Criminal Records",
-      "issuer": "fedpol",
-      "status": "Valid"
+      "correct": "incorrect",
+      "valid": "invalid"
     }
 	]
 }

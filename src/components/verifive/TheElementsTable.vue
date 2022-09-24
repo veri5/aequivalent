@@ -49,9 +49,9 @@
       <el-table-column label="Status">
         <template #default="scope">
           <el-tag v-if="scope.row.status"
-            :type="tagType(scope.row.status)"
+            :type="elementsTagType(scope.row.status)"
             :effect="'plain'"
-            style="min-width: 90px;"
+            style="min-width: 80px; text-transform: capitalize;"
           >
             {{ scope.row.status }}
           </el-tag>
@@ -66,6 +66,7 @@ import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
 import { Connection, Search, Plus, SetUp } from '@element-plus/icons-vue'
+import { elementsTagType } from '@/components/helpers/tags';
 
 const noMatchingCriteriaText = 'No element matching your search criteria was found'
 const noItemToShowYetText = 'No element to show yet'
@@ -95,22 +96,6 @@ const tableData = computed(() => {
   const rootElements = mockElements.value.filter(element => !element.parent)
   return arrayToTree(rootElements)
 })
-function tagType(status: string) {
-  let tag = ''
-  switch (status) {
-    case Statuses.value.Valid:
-      tag = 'success'
-      break
-    case Statuses.value.Retired:
-      tag = 'danger'
-      break
-    default:
-      tag = 'info'
-      break
-  }
-
-  return tag
-}
 const tableRowStyle= ({
   row,
   rowIndex,

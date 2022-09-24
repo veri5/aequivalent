@@ -10,7 +10,7 @@
         class="toolbar"
       >
         <el-tooltip
-          v-if="selectedRequest.status !== Statuses.Approved &&
+          v-if="selectedRequest.status !== Statuses.Issued &&
                 selectedRequest.status !== Statuses.Rejected" 
           content="Review Request" 
           placement="bottom"
@@ -26,7 +26,7 @@
         </el-tooltip>
 
         <el-divider
-          v-if="selectedRequest.status !== Statuses.Approved &&
+          v-if="selectedRequest.status !== Statuses.Issued &&
                 selectedRequest.status !== Statuses.Rejected" 
           direction="vertical" class="menu-divider"/>
         

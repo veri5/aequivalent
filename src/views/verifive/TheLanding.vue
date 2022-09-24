@@ -9,7 +9,7 @@
       <el-row class="body body-background">
         <el-col>
           <h1 class="title">{{ company.tagline }}</h1>
-          <p class="tagline">The Indentity Federation Endgame</p>
+          <p class="tagline">The On-Chain Indentity Federation Endgame</p>
           <el-divider border-style="none"/>
           <TheSignInButton />
         </el-col>
@@ -49,15 +49,15 @@ const company = computed(() => storeNamespace.company.profile)
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 40px;
   height: calc(100vh - 84px);
 }
 .title {
   font-family: 'ui-serif';
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 400;
   color: white;
-  text-transform: uppercase;
+  margin-top: 80px;
 }
 .tagline {
   font-family: 'Roboto';
@@ -65,21 +65,13 @@ const company = computed(() => storeNamespace.company.profile)
   color: whitesmoke;
 }
 .body-background {
-  background-color: rgb(0 0 0 / 50%);
-  background-image: url("~@/assets/verifive_landing_background.jpg");
-  background-position: 25%;
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-  background-size: cover;
-}
-/* .body-background {
-  background-color: rgb(0 0 0 / 50%);
+  background-color: rgb(0 0 0 / 70%);
   background-image: url("~@/assets/verifive_landing_background2.jpg");
   background-position: 45%;
   background-repeat: no-repeat;
   background-blend-mode: overlay;
   background-size: cover;
-} */
+}
 .footer {
   color: whitesmoke;
   font-family: 'Helvetica';
