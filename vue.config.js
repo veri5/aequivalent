@@ -6,7 +6,7 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.ts',
-      title: 'verifive | Demo',
+      title: 'Verifive | Demo',
     }
   }
 };
