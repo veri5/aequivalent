@@ -29,7 +29,7 @@
       :row-style="{
         cursor: 'pointer'
       }"
-      :height="200"
+      :height="150"
       @row-click="rowClick"
       @row-dblclick="rowDblClick"
     >
