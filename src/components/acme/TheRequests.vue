@@ -1,5 +1,5 @@
 <template>
-  <div id="credentials">
+  <div id="requests">
     <el-row>
       <el-col>
         <h2 class="heading">{{ heading }}</h2>
@@ -34,8 +34,8 @@ const heading = 'Requests'
 </script>
 
 <style scoped>
-#credentials {
-  min-height: 35vh;
+#requests {
+  min-height: calc(50vh - 43px);
 }
 .heading {
   padding: 5px;

@@ -3,10 +3,11 @@ import { credentials as mockCredentials } from "./mockdata.json"
 ///
 
 const Statuses = {
-  Correct: 'true',
-  Incorrect: 'false',
-  Valid: 'true',
-  Invalid: 'false'
+  Correct: 'correct',
+  Incorrect: 'incorrect',
+  Valid: 'valid',
+  Invalid: 'invalid',
+  Unknown: 'unknown'
 }
 
 const state = {
