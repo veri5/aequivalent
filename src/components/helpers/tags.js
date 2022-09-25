@@ -1,4 +1,4 @@
-export const requestTagType = (status: string) => {
+export const requestTagType = (status) => {
   let tag = ''
   switch (status) {
     case 'issued':
@@ -17,7 +17,7 @@ export const requestTagType = (status: string) => {
   return tag
 }
 
-export const correctTagType = (correct: string) => {
+export const correctTagType = (correct) => {
   let tag = ''
   switch (correct) {
     case 'correct':
@@ -33,7 +33,7 @@ export const correctTagType = (correct: string) => {
   return tag
 }
 
-export const validTagType = (valid: string) => {
+export const validTagType = (valid) => {
   let tag = ''
   switch (valid) {
     case 'valid':
@@ -52,7 +52,7 @@ export const validTagType = (valid: string) => {
   return tag
 }
 
-export const elementsTagType = (status: string) => {
+export const elementsTagType = (status) => {
   let tag = ''
   switch (status) {
     case 'valid':

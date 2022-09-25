@@ -60,7 +60,7 @@
       </el-form-item>
 
       <el-form-item 
-        v-if="form.type == 'University Diploma'"
+        v-if="form.type == 'university-diploma'"
         ref="formUploadRef"
         label="Certificate"
         prop="upload"
