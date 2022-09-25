@@ -30,7 +30,7 @@
         >
           <el-option
             v-for="item in issuers"
-              :key="item.label"
+              :key="item.name"
               :label="item.label"
               :value="item.name"
           />
@@ -51,9 +51,10 @@
           style="width: 100%"
         >
           <el-option
-            v-for="item in issuers.find(({ name }) => form.issuer == name).types"
+            v-for="item in issuers.find(({ name }) => form.issuer === name).children"
               :key="item.name"
-              :value="item.label"
+              :label="item.label"
+              :value="item.name"
           />
         </el-select>
       </el-form-item>
@@ -117,6 +118,7 @@ import type { FormInstance, FormItemInstance, FormRules } from 'element-plus'
 import { UploadFilled, Key, SuccessFilled } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
 import { uid } from 'uid';
+import { recursiveArrayToTree } from '@/components/helpers/trees'
 
 const showModel = ref(false)
 const fileUploaded = ref(false)
@@ -124,7 +126,7 @@ const fileUploaded = ref(false)
 const store = useStore()
 const namespace = 'acme'
 const profile = computed(() => store.getters[`${namespace}/user/profile`])
-const issuers = computed(() => store.getters[`${namespace}/requests/issuers`])
+const issuers = computed(() => recursiveArrayToTree(store.getters[`${namespace}/requests/issuers`]))
 const Statuses = computed(() => store.getters[`${namespace}/requests/Statuses`])
 const isViewModalVisible = computed(() => store.getters[`${namespace}/requests/isNewRequestModalVisible`])
 watch(isViewModalVisible, (value) => {
@@ -194,17 +196,11 @@ function addNewRequest(){
     uid: uid(16),
     type: form.type,
     issuer: form.issuer,
+    element: `${form.issuer}.${form.type}`,
     requester: profile.value.name,
     status: Statuses.value.UnderReview
   }
-  // Workaround to simulate fake issuers
-  if(request.issuer.includes("fake-")) {
-    // e.g. fake-fedpol -> fedpol
-    request.issuer = request.issuer.replace('fake-','')
-    store.dispatch(`${request.issuer}/requests/addNewFakeRequest`, request)
-  } else {
-    store.dispatch(`${request.issuer}/requests/addNewRequest`, request)
-  }
+  store.dispatch(`${request.issuer}/requests/addNewRequest`, request)
 }
 function openConfirmBox(){
   ElMessageBox.confirm(

@@ -49,27 +49,16 @@ const actions = {
   addNewRequest ({ commit }, request) {
     commit('addNewRequest', request)
   },
-  addNewFakeRequest ({ dispatch }, request) {
-    const { type, issuer } = request
-    const credential = {
-      uid: uid(16),
-      type,
-      issuer,
-      correct: 'correct',
-      valid: 'unknown',
-      fake: true
-    }
-    dispatch('acme/credentials/addNewCredential', credential, { root: true })
-  },
   setSelectedRequest ({ commit }, request) {
     commit('setSelectedRequest', request)
   },
   issueSelectedRequest({ commit, state, dispatch }) {
-    const { type, issuer } = state.selectedRequest
+    const { type, issuer, element } = state.selectedRequest
     const credential = {
       uid: uid(16),
       type,
       issuer,
+      element,
       correct: 'correct',
       valid: 'unknown'
     }

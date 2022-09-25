@@ -1,7 +1,7 @@
 const state = {
   profile: { 
     name: 'æquivalent',
-    tagline: 'Employment Screening',
+    tagline: 'Background Checking',
     landingLogo: 'aequivalent_logo_noir.png',
     homeLogo: 'aequivalent_logo.png'
   }

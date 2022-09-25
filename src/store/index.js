@@ -12,6 +12,7 @@ import aequivalentRequests from './modules/aequivalent/requests'
 import fedpolUser from './modules/fedpol/user'
 import fedpolCompany from './modules/fedpol/company'
 import fedpolRequests from './modules/fedpol/requests'
+import swisspolRequests from './modules/swisspol/requests'
 
 import verifiveUser from './modules/verifive/user'
 import verifiveCompany from './modules/verifive/company'
@@ -47,6 +48,12 @@ export default createStore({
         company: fedpolCompany,
         requests: fedpolRequests,
         verida,
+      }
+    },
+    swisspol: {
+      namespaced: true,
+      modules: {
+        requests: swisspolRequests,
       }
     },
     verifive: {

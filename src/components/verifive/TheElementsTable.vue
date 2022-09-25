@@ -66,7 +66,8 @@ import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { ElTable } from 'element-plus'
 import { Connection, Search, Plus, SetUp } from '@element-plus/icons-vue'
-import { elementsTagType } from '@/components/helpers/tags';
+import { elementsTagType } from '@/components/helpers/tags'
+import { recursiveArrayToTree } from '@/components/helpers/trees'
 
 const noMatchingCriteriaText = 'No element matching your search criteria was found'
 const noItemToShowYetText = 'No element to show yet'
@@ -74,7 +75,6 @@ const firstTourStepText = 'Add your first element by clicking'
 
 const store = useStore()
 const namespace = 'verifive'
-const mockElements = computed(() => store.getters[`${namespace}/elements/elements`])
 const Statuses = computed(() => store.getters[`${namespace}/elements/Statuses`])
 const selected = computed(() => store.getters[`${namespace}/elements/selectedElement`])
 watch(selected, (row: Element) => {
@@ -82,20 +82,8 @@ watch(selected, (row: Element) => {
 })
 
 const tableRef = ref<InstanceType<typeof ElTable>>()
-const tableData = computed(() => {
-  const arrayToTree = (elements) =>
-    elements.map(element => {
-      const children = mockElements.value.filter(({ parent }) => parent === element.name )
+const tableData = computed(() => recursiveArrayToTree(store.getters[`${namespace}/elements/elements`]))
 
-      return Object.assign({}, 
-        { ...element }, 
-        children.length ? { children: arrayToTree(children) } : {}
-      )
-    })
-
-  const rootElements = mockElements.value.filter(element => !element.parent)
-  return arrayToTree(rootElements)
-})
 const tableRowStyle= ({
   row,
   rowIndex,

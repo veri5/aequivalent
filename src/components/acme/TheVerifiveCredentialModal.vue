@@ -60,7 +60,7 @@
 
 <script lang="ts" setup>
 import { ref, computed, watch, markRaw } from 'vue'
-import { Key, SuccessFilled } from '@element-plus/icons-vue'
+import { Key, SuccessFilled, RemoveFilled } from '@element-plus/icons-vue'
 import { ElNotification, ElMessageBox } from 'element-plus'
 import { useStore } from 'vuex'
 import { correctTagType, validTagType } from '@/components/helpers/tags'
@@ -93,15 +93,26 @@ function openVerifiveConfirmBox(){
       icon: markRaw(Key),
     }
   )
-  .then(() => {
-    store.dispatch(`${namespace}/credentials/verifiveSelectedCredential`)
+  .then(async () => {
+    const isValid = await store.dispatch(`${namespace}/credentials/verifiveSelectedCredential`)
 
-    ElNotification({
-      message: 'Credential verifived successfully',
-      icon: markRaw(SuccessFilled),
-      position: 'top-left',
-      duration: 3000
-    })
+    if(isValid) {
+      ElNotification({
+        title: 'Federation element found',
+        message: 'Credential verifived successfully',
+        icon: markRaw(SuccessFilled),
+        position: 'top-left',
+        duration: 3000
+      })
+    } else {
+      ElNotification({
+        title: 'Potential fake element',
+        message: 'Failed to verifived credential',
+        icon: markRaw(RemoveFilled),
+        position: 'top-left',
+        duration: 3000
+      })
+    }
     closeModal()
   })
 }

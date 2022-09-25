@@ -1,63 +1,42 @@
 {
-	"issuers": [
-    {
+  "issuers": [
+    { 
       "label": "Aequivalent",
-      "name": "aequivalent",
-      "types": [
-        {
-          "label": "University Diploma",
-          "name": "university-diploma",
-          "upload": true
-        }
-      ]
+      "name": "aequivalent"
     },
-    {
+    { 
+      "label": "University Diploma",
+      "name": "university-diploma",
+      "parent": "aequivalent",
+      "upload": true
+    },
+    { 
       "label": "Federal Office of Police",
-      "name": "fedpol",
-      "types": [
-        {
-          "label": "Passport",
-          "name": "passport",
-          "upload": false
-        },
-        {
-          "label": "Criminal Records",
-          "name": "criminal-records",
-          "upload": false
-        }
-      ]
+      "name": "fedpol"
     },
-    {
+    { 
+      "label": "Passport",
+      "name": "passport",
+      "parent": "fedpol"
+    },
+    { 
+      "label": "Criminal Records",
+      "name": "criminal-records",
+      "parent": "fedpol"
+    },
+    { 
       "label": "Swiss Police Department - Instant Issuance!",
-      "name": "fake-fedpol",
-      "types": [
-        {
-          "label": "Passport",
-          "name": "passport",
-          "upload": false
-        },
-        {
-          "label": "Criminal Records",
-          "name": "criminal-records",
-          "upload": false
-        }
-      ]
-    }
-  ],
-	"credentials": [
-	  { 
-      "uid": 1,
-      "type": "University Diploma",
-      "issuer": "aequivalent",
-      "correct": "correct",
-      "valid": "valid"
+      "name": "swisspol"
     },
-	  { 
-      "uid": 3,
-      "type": "Passport",
-      "issuer": "fedpol",
-      "correct": "incorrect",
-      "valid": "invalid"
+    { 
+      "label": "Passport",
+      "name": "passport",
+      "parent": "swisspol"
+    },
+    { 
+      "label": "Criminal Records",
+      "name": "criminal-records",
+      "parent": "swisspol"
     }
-	]
+  ]
 }

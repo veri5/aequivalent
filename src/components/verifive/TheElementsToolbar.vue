@@ -31,6 +31,7 @@
           <!-- owner -->
           <el-tooltip
             v-if="selectedRole === Roles.Owner &&
+                  selectedElement.parent &&
                   selectedElement.status !== Statuses.Retired"
             content="Retire Element" 
             placement="bottom"

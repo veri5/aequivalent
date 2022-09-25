@@ -8,8 +8,8 @@
       </el-row>
       <el-row class="body body-background">
         <el-col>
-          <h1 class="title">{{ company.tagline }}</h1>
-          <p class="tagline">The On-Chain Indentity Federation Endgame</p>
+          <h1 class="title">The Trust Protocol</h1>
+          <p class="tagline">{{ company.tagline }}</p>
           <el-divider border-style="none"/>
           <TheSignInButton />
         </el-col>
@@ -66,7 +66,7 @@ const company = computed(() => storeNamespace.company.profile)
 }
 .body-background {
   background-color: rgb(0 0 0 / 70%);
-  background-image: url("~@/assets/verifive_landing_background2.jpg");
+  background-image: url("~@/assets/verifive_landing_background.jpg");
   background-position: 45%;
   background-repeat: no-repeat;
   background-blend-mode: overlay;

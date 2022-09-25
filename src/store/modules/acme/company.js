@@ -1,7 +1,7 @@
 const state = {
   profile: { 
     name: 'Acme',
-    tagline: 'The Whitelabel Company',
+    tagline: 'The Employement History Wallet',
     landingLogo: 'acme_logo.png',
     homeLogo: 'acme_logo.png'
   }

@@ -84,35 +84,11 @@ const notSelectedYetText = 'Click on a credential to show the toolbar'
 function reviewSelectedCredential() {
   store.dispatch(`${namespace}/credentials/showVerifiveCredentialModal`)
 }
-function rejectSelectedCredential() {
-  store.dispatch(`${namespace}/credentials/rejectSelectedCredential`)
-}
 function viewSelectedCredential() {
   store.dispatch(`${namespace}/credentials/showViewCredentialModal`)
 }
 function clearSelectedCredential() {
   store.dispatch(`${namespace}/credentials/clearSelectedCredential`)
-}
-function showRemoveSelectedBox(){
-  ElMessageBox.confirm(
-    'Credential will permanently be rejected. Continue?',
-    'Reject credential',
-    {
-      confirmButtonText: 'Confirm',
-      cancelButtonText: 'Cancel',
-      type: 'error',
-      icon: markRaw(Delete),
-    }
-  )
-  .then(() => {
-    ElNotification({
-      message: 'Credential rejected successfully',
-      icon: markRaw(RemoveFilled),
-      position: 'top-right',
-      duration: 3000
-    })
-    rejectSelectedCredential()
-  })
 }
 </script>
 
