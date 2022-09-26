@@ -8,7 +8,9 @@ const initProfile = {
 
 const state = {
   profile: initProfile,
-  isConnected: true,
+  isConnected: false,
+  // Wallet detour
+  localKey: '_verida_acme_is-authenticated'
 }
 
 const mutations = {
@@ -17,6 +19,7 @@ const mutations = {
   },
   setIsConnected (state, status) {
     state.isConnected = status
+    localStorage.setItem(state.localKey, status);
   }
 }
 
@@ -35,7 +38,9 @@ const actions = {
 
 const getters = {
   isConnected (state) {
-    return state.isConnected === 'true'
+    // Wallet detour
+    // return state.isConnected === 'true'
+    return localStorage.getItem(state.localKey) === 'true'
   },
   profile (state) {
     return state.profile

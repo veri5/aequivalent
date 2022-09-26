@@ -1,5 +1,5 @@
 <template>
-  <el-menu-item @click="disconnect">
+  <el-menu-item @click="detourDisconnect">
     <el-icon><Back /></el-icon>Disconnect
   </el-menu-item>
 </template>
@@ -16,6 +16,12 @@ const namespace = 'acme'
 const storeNamespace = store.state[namespace]
 
 const verida = computed(() => storeNamespace.verida)
+
+// wallet detour
+function detourDisconnect(){
+  store.dispatch(`${namespace}/user/disconnect`)
+}
+///
 
 async function disconnect(){
   const account = new VaultAccount({

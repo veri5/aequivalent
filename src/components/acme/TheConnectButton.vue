@@ -4,7 +4,7 @@
     element-loading-background='rgba(0, 0, 0, 0.5)'
     size="large"
     color="#42248a"
-    @click="connect"
+    @click="detourConnect"
   >
     <img class="vda-button"
       src="~@/assets/verida_logo.png"
@@ -24,7 +24,20 @@ const loading = ref(false)
 const store = useStore()
 const namespace = 'acme'
 const storeNamespace = store.state[namespace]
+// wallet detour
+const isConnected = computed(() => store.getters[`${namespace}/user/isConnected`])
+///
 const verida = computed(() => storeNamespace.verida)
+
+// wallet detour
+function detourConnect(){
+  loading.value = true
+  setTimeout(() => {
+    store.dispatch(`${namespace}/user/connect`)
+    loading.value = false
+  }, 2000)
+}
+///
 
 async function connect(){
   loading.value = true
@@ -41,12 +54,21 @@ async function connect(){
   loading.value = false
 }
 
+// wallet detour
 onMounted(() => {
-  if (hasSession(verida.value.contextName)) {
+  if (isConnected.value) {
     // we know we have a session already
-    connect(); // when logged in this will just setup a Verida Context
+    detourConnect();
   }
 })
+///
+// onMounted(() => {
+//   if (hasSession(verida.value.contextName)) {
+//     // we know we have a session already
+//     connect(); // when logged in this will just setup a Verida Context
+//   }
+// })
+
 </script>
 
 <style scoped>
