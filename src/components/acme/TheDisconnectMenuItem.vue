@@ -1,5 +1,5 @@
 <template>
-  <el-menu-item @click="detourDisconnect">
+  <el-menu-item @click="detouredDisconnect">
     <el-icon><Back /></el-icon>Disconnect
   </el-menu-item>
 </template>
@@ -17,8 +17,8 @@ const storeNamespace = store.state[namespace]
 
 const verida = computed(() => storeNamespace.verida)
 
-// wallet detour
-function detourDisconnect(){
+// wallet detoured
+function detouredDisconnect(){
   store.dispatch(`${namespace}/user/disconnect`)
 }
 ///

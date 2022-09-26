@@ -9,7 +9,7 @@ const initProfile = {
 const state = {
   profile: initProfile,
   isConnected: false,
-  // Wallet detour
+  // Wallet detoured
   localKey: '_verida_acme_is-authenticated'
 }
 
@@ -38,7 +38,7 @@ const actions = {
 
 const getters = {
   isConnected (state) {
-    // Wallet detour
+    // Wallet detoured
     // return state.isConnected === 'true'
     return localStorage.getItem(state.localKey) === 'true'
   },
