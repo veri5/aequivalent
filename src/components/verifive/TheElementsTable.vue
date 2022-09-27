@@ -48,7 +48,7 @@
       <el-table-column prop="validUntil" label="Valid Until"/>
       <el-table-column label="Status">
         <template #default="scope">
-          <el-tag v-if="scope.row.status"
+          <el-tag v-if="scope.row.parent"
             :type="elementsTagType(scope.row.status)"
             :effect="'plain'"
             style="min-width: 80px; text-transform: capitalize;"

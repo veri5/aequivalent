@@ -17,7 +17,9 @@
       <el-descriptions-item label="Name" :span="2">{{ selectedElement.name }}</el-descriptions-item>
       <el-descriptions-item label="Valid From">{{ selectedElement.validFrom }}</el-descriptions-item>
       <el-descriptions-item label="Valid Until">{{ selectedElement.validUntil }}</el-descriptions-item>
-      <el-descriptions-item label="Status">
+      <el-descriptions-item label="Status"
+        v-if="selectedElement.parent"
+      >
         <el-tag
           :type="elementsTagType(selectedElement.status)"
           :effect="'plain'"

@@ -107,7 +107,7 @@ function openVerifiveConfirmBox(){
     } else {
       ElNotification({
         title: 'Potential fake element',
-        message: 'Failed to verifived credential',
+        message: 'Failed to verifive credential',
         icon: markRaw(RemoveFilled),
         position: 'top-left',
         duration: 3000
